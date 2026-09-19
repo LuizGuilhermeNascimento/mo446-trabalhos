@@ -19,9 +19,8 @@ CSVs e `metricas.json`. As imagens (DNG/JPG/PNG) não estão no repositório.
 ## Verificar
 
 ```bash
-.venv/bin/pytest -q                              # testes numéricos das rotinas
 .venv/bin/python tools/validar_execucao.py       # 5 embaralhamentos de nomes (requer uma execução prévia)
 ```
 
-As funções vivem apenas no notebook, nas células marcadas `definicoes`; testes e validação
-carregam essas células, sem implementação paralela.
+As funções vivem apenas no notebook, nas células marcadas `definicoes`; a validação carrega
+essas células, sem implementação paralela.
