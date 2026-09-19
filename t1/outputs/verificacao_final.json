@@ -1,0 +1,21 @@
+{
+  "notebook_celulas": 51,
+  "notebook_celulas_codigo": 33,
+  "erros_notebook": 0,
+  "relatorio_paginas": 6,
+  "slides_paginas": 16,
+  "testes_numericos_aprovados": 8,
+  "embaralhamentos_aprovados": 5,
+  "arquivos": {
+    "panorama.ipynb": "d17addea7ae76c2d873301fe701e2bcebd2791bd73102eb2e30ac2c459a67d21",
+    "outputs/panorama.html": "166bc1ac2e82f64e73f0955da5ad5f38ca9dc483093685e5e96e21b9bd111ab0",
+    "outputs/panorama.png": "b83df603ee1b6358f3a322fb3c0e48701f526a9f77e9ce73503f7010c59b2fb2",
+    "output/pdf/relatorio.pdf": "8aca001600e6f6682b68feb886c1c7875e1af6f5050400991e29ba8d6ad52b31",
+    "outputs/slides.html": "b98c89e3ff3b66c7a237ca339cf20601c8a21cd556c7d6d2f09a928c0af1f296",
+    "output/pdf/slides.pdf": "48905eca2e8bbf4d2d708d759a05de6bac9df720b284b1af0f2a4b40e470b970",
+    "outputs/validacao.json": "39b345e3700286c5418105b88661ac7a195daa67e015a117260cdea5074b351d",
+    "outputs/metricas.json": "0900b1791c08bf6191e11affbd879fccc460737e7fab68302eb7b6f6f7460a66",
+    "README.md": "d64ab2db768c70ea43969f2b2612cae55c121cf056775870888a1bd2894adfa2",
+    "ROTEIRO.md": "eae28f15a5787188ab0f507ef9b32c2b0cd0881814c2bb2c721cec6b968471a8"
+  }
+}

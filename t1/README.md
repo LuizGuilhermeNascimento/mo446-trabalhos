@@ -14,7 +14,7 @@ python -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 
 `executar.py` roda o notebook num kernel novo e grava `outputs/panorama.png`, figuras,
-CSVs e `metricas.json`. As imagens (DNG/JPG/PNG) não estão no repositório.
+CSVs e `metricas.json`. As imagens estão em `images/v1` (sete DNG e a foto de controle da NASA) e os resultados em `outputs/`.
 
 ## Verificar
 
