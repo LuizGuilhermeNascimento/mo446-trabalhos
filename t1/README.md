@@ -24,7 +24,3 @@ CSVs e `metricas.json`. As imagens estão em `images/v1` (sete DNG e a foto de c
 
 As funções vivem apenas no notebook, nas células marcadas `definicoes`; a validação carrega
 essas células, sem implementação paralela.
-
-## Apresentação
-
-`outputs/slides.html` (setas para navegar, F tela cheia, N notas), cópia em `pdf/slides.pdf` e roteiro em `pdf/ROTEIRO.md`.
