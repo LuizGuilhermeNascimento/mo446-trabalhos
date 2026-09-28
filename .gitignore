@@ -218,8 +218,11 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# Intermediate outputs of each step (output/stepN_*/) are not versioned; output/final/ is.
-trabalho-1/output/step*/
+# Raw input images are distributed as trabalho-1/input.zip, not versioned.
+trabalho-1/input/*/
+
+# Pipeline outputs (intermediate steps and final panoramas) are not versioned.
+trabalho-1/output/
 
 # AI assistant generated code
 .claude/
