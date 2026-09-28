@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Intermediate outputs of each step (output/stepN_*/) are not versioned; output/final/ is.
+trabalho-1/output/step*/
+
+# AI assistant generated code
+.claude/
