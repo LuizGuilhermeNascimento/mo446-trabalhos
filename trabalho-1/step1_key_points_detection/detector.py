@@ -10,7 +10,7 @@ import numpy as np
 from matplotlib.collections import LineCollection, PatchCollection
 from matplotlib.patches import Circle
 
-from common import (IMAGE_SUPTITLE, IMAGE_TITLE, INK_SECONDARY, SERIES_COLORS, ImageSet, log, print_table,
+from common import (IMAGE_SUPTITLE, IMAGE_TITLE, INK, INK_SECONDARY, SERIES_COLORS, ImageSet, log, print_table,
                     save_figure, write_csv)
 
 STAGE = Path(__file__).resolve().parent.name
@@ -147,10 +147,10 @@ def compare_detectors(image_set: ImageSet, out_dir: Path, max_features: int = 30
 
     write_csv(summary, out_dir / "comparacao_detectores.csv")
     write_csv([r for rows in per_image.values() for r in rows], out_dir / "comparacao_detectores_por_imagem.csv")
-    plot_metrics(summary, len(image_set), out_dir / "comparacao_detectores.png")
+    plot_metrics(summary, image_set.group, out_dir / "comparacao_detectores.png")
     for i, name in enumerate(image_set.names):
         plot_detectors_on_image(name, image_set.images[i], [features[m][i] for m in methods],
-                                [per_image[m][i] for m in methods], out_dir / f"comparacao_detectores_{name}.jpg")
+                                out_dir / f"detectores_{name}.png")
     log("Passo 1", f"estudo comparativo salvo em {out_dir}")
     return features
 
@@ -169,45 +169,52 @@ def draw_keypoints(ax: plt.Axes, image: np.ndarray, features: Features) -> None:
                 for kp, r in zip(strongest, radii) if kp.angle >= 0]
     for color, width in (("black", 2.0), (KEYPOINT_COLOR, 1.0)):  # halo first, then the colored mark
         circles = [Circle(kp.pt, r) for kp, r in zip(strongest, radii)]
-        ax.add_collection(PatchCollection(circles, facecolor="none", edgecolor=color, linewidth=width))
-        ax.add_collection(LineCollection(segments, colors=color, linewidths=width))
+        ax.add_collection(PatchCollection(circles, facecolor="none", edgecolor=color, linewidth=width), autolim=False)
+        ax.add_collection(LineCollection(segments, colors=color, linewidths=width), autolim=False)
+    h, w = image.shape[:2]
+    ax.set_xlim(-0.5, w - 0.5)  # circles near the border must not enlarge the panel (keeps panels aligned)
+    ax.set_ylim(h - 0.5, -0.5)
     ax.axis("off")
 
 
-def plot_detectors_on_image(name: str, image: np.ndarray, features: list[Features], rows: list[dict],
-                            path: Path) -> None:
+def plot_detectors_on_image(name: str, image: np.ndarray, features: list[Features], path: Path) -> None:
+    """Keypoints of every detector over the same image (dots = all keypoints; circle = scale and
+    segment = orientation of the MAX_DRAW strongest; explained in the report caption)."""
     h, w = image.shape[:2]
     panel_w = 7.0
-    fig, axes = plt.subplots(1, len(features), figsize=(panel_w * len(features), panel_w * h / w + 1.3))
-    for ax, feats, row in zip(np.atleast_1d(axes), features, rows):
+    fig, axes = plt.subplots(1, len(features), figsize=(panel_w * len(features), panel_w * h / w + 1.2),
+                             layout="constrained")
+    for ax, feats in zip(np.atleast_1d(axes), features):
         draw_keypoints(ax, image, feats)
-        ax.set_title(f"{feats.method}: {len(feats)} keypoints · {feats.time_ms:.0f} ms\n"
-                     f"cobertura {row['cobertura_%']:.0f}% · uniformidade {row['uniformidade']:.2f} · "
-                     f"diâmetro médio {row['diametro_medio_px']:.1f} px", fontsize=IMAGE_TITLE)
-    fig.suptitle(f"Imagem {name}: todos os keypoints (pontos) e os {MAX_DRAW} mais fortes "
-                 f"(círculo = escala, segmento = orientação)", fontsize=IMAGE_SUPTITLE)
-    fig.tight_layout(rect=(0, 0, 1, 1 - 0.6 / fig.get_figheight()))  # room for the suptitle
+        ax.set_title(f"{feats.method}: {len(feats)} keypoints", fontsize=IMAGE_TITLE)
+    fig.suptitle(f"Imagem {name}: Keypoints Encontrados por Cada Detector", fontsize=IMAGE_SUPTITLE)
     save_figure(fig, path)
 
 
-def plot_metrics(summary: list[dict], n_images: int, path: Path) -> None:
-    """Small multiples, one metric per panel (different scales never share an axis)."""
-    panels = [("keypoints", "Keypoints por imagem", "{:.0f}"),
-              ("tempo_ms", "Tempo de detecção + descrição (ms)", "{:.1f}"),
-              ("cobertura_%", f"Cobertura da grade {GRID}×{GRID} (%)", "{:.0f}"),
-              ("uniformidade", "Uniformidade (entropia normalizada)", "{:.2f}")]
+def plot_metrics(summary: list[dict], group: str, path: Path) -> None:
+    """1 x 4 small multiples, one metric per panel with its own unit: bar = mean over the images,
+    whisker = standard deviation, value written above the bar."""
+    panels = [("keypoints", "Quantidade de Keypoints por Imagem", "keypoints por imagem", "{:.0f}", None),
+              ("tempo_ms", "Tempo de Detecção e Descrição", "tempo por imagem (ms)", "{:.1f} ms", None),
+              ("cobertura_%", f"Cobertura da Grade {GRID} × {GRID}", "células com keypoints (%)", "{:.0f}%", 100),
+              ("uniformidade", "Uniformidade (Entropia Normalizada)", "entropia normalizada (0 a 1)", "{:.2f}", 1)]
     names = [row["detector"] for row in summary]
-    fig, axes = plt.subplots(1, len(panels), figsize=(4 * len(panels), 3.8))
-    for ax, (key, title, fmt) in zip(axes, panels):
+    fig, axes = plt.subplots(1, len(panels), figsize=(18, 4.2), layout="constrained")
+    for ax, (key, title, ylabel, fmt, limit) in zip(axes, panels):
         means = [row[f"{key}_media"] for row in summary]
         stds = [row[f"{key}_desvio"] for row in summary]
-        ax.bar(names, means, yerr=stds, color=[DETECTOR_COLORS[n] for n in names], width=0.6, capsize=4,
-               error_kw={"elinewidth": 1, "ecolor": INK_SECONDARY})
-        top = max(m + s for m, s in zip(means, stds))
-        for x, (m, s) in enumerate(zip(means, stds)):
-            ax.text(x, m + s + 0.02 * top, fmt.format(m), ha="center", va="bottom", fontsize=10, color=INK_SECONDARY)
-        ax.set_ylim(0, top * 1.15)
-        ax.set_title(title, fontsize=11)
-    fig.suptitle(f"Comparação entre detectores: média ± desvio padrão sobre {n_images} imagens", fontsize=12)
-    fig.tight_layout(rect=(0, 0, 1, 1 - 0.6 / fig.get_figheight()))  # room for the suptitle
+        ax.bar(names, means, yerr=stds, width=0.6, color=[DETECTOR_COLORS[n] for n in names], capsize=5,
+               error_kw={"elinewidth": 1.2, "capthick": 1.2, "ecolor": INK_SECONDARY})
+        for x, (mean, std) in enumerate(zip(means, stds)):
+            ax.annotate(fmt.format(mean), (x, mean + std), xytext=(0, 4), textcoords="offset points",
+                        ha="center", va="bottom", fontsize=11, color=INK)
+        if limit:  # bounded metric: fixed axis up to its maximum, with room for the labels
+            ax.set_ylim(0, limit * 1.12)
+            ax.set_yticks(np.linspace(0, limit, 6))
+        else:
+            ax.set_ylim(0, max(m + s for m, s in zip(means, stds)) * 1.18)
+        ax.tick_params(axis="x", labelsize=11)
+        ax.set_ylabel(ylabel, fontsize=10)
+        ax.set_title(title, fontsize=12)
+    fig.suptitle(f"Métricas de Performance entre Detectores de Keypoints: Conjunto {group}", fontsize=14)
     save_figure(fig, path)

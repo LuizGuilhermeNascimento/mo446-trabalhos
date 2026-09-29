@@ -150,7 +150,7 @@ def finish(group: str, times: dict[int, float], panorama_path: Path | None = Non
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Gera o panorama de uma pasta de imagens fora de ordem.")
-    parser.add_argument("pasta", nargs="?", help="pasta do grupo de imagens, ex.: input/landscape_view")
+    parser.add_argument("pasta", nargs="?", help="pasta do grupo de imagens, ex.: input/landscape")
     parser.add_argument("--ate-passo", type=int, default=5, choices=sorted(STEPS),
                         help="executa os passos 1 até N (padrão: todos)")
     parser.add_argument("--todos", action="store_true", help="processa todas as pastas de input/")

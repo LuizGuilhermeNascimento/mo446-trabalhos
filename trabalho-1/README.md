@@ -32,9 +32,9 @@ python3 -m venv .venv
 ## Execução
 
 ```bash
-.venv/bin/python panorama.py input/landscape_view                # todos os passos de um grupo
-.venv/bin/python panorama.py input/landscape_view --ate-passo 3  # para depois do passo N (1 a 5)
-.venv/bin/python panorama.py --todos                             # todos os grupos de input/
+.venv/bin/python panorama.py input/landscape                # todos os passos de um grupo
+.venv/bin/python panorama.py input/landscape --ate-passo 3  # para depois do passo N (1 a 5)
+.venv/bin/python panorama.py --todos                        # todos os grupos de input/
 ```
 
 Cada grupo leva cerca de 1 minuto. O terminal mostra:
@@ -70,7 +70,7 @@ Cada passo gera as saídas do método escolhido e o estudo comparativo, em figur
 
 | passo | principais arquivos |
 |---|---|
-| 1. detecção | `comparacao_detectores_<imagem>.jpg` (keypoints com escala e orientação), `comparacao_detectores.png/.csv` |
+| 1. detecção | `detectores_<imagem>.png` (keypoints de cada detector; círculo = escala, segmento = orientação dos 300 mais fortes), `comparacao_detectores.png/.csv`, `comparacao_detectores_por_imagem.csv` |
 | 2. emparelhamento | `matches_<a>_<b>.jpg` (antes/depois do ratio test), `comparacao_matchers.png/.csv`, `curva_ratio_test.png/.csv`, `matches_sem_sobreposicao_*.jpg` |
 | 3. ordenação | `matriz_conectividade.png/.csv`, `matriz_adjacencia.csv`, `grafo_vizinhanca.png`, `sequencia_inferida.jpg`, `intrusa_<imagem>.jpg`, `decisao_por_imagem.csv` |
 | 4. homografia | `estatisticas_homografias.csv` (taxa de inliers e erro de reprojeção), `ransac_<a>_<b>.jpg`, `alinhamento_progressivo.jpg`, `contornos_imagens.jpg`, `comparacao_alinhamento.png` |
