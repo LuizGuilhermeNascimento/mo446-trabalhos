@@ -9,6 +9,7 @@ Usage (from trabalho-1/):
 from __future__ import annotations
 
 import argparse
+import json
 import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -57,6 +58,7 @@ def run(folder: str | Path, until: int = 5, config: Config = CONFIG) -> Path | N
     start = time.perf_counter()
     image_set = load_image_set(folder, config.max_side, config.shuffle_seed)
     group = image_set.group
+    print_capture_metadata(Path(folder), group)
     print_table([{"parâmetro": k, "valor": v} for k, v in asdict(config).items()], f"Parâmetros do pipeline ({group})")
 
     # Step 1: every detector is studied; the chosen one feeds the next steps.
@@ -120,6 +122,22 @@ def run(folder: str | Path, until: int = 5, config: Config = CONFIG) -> Path | N
         {"Item": "panorama", "valor": f"{w}x{h} px, {compositor.deghost} + {compositor.blend}"},
     ], f"Resumo do panorama ({group})")
     return finish(group, times, panorama_path)
+
+
+def print_capture_metadata(folder: Path, group: str) -> None:
+    """Shows input/<grupo>/metadados.json, when present. It is only displayed, never used."""
+    path = folder / "metadados.json"
+    if not path.exists():
+        return
+    rows = []
+    for key, value in json.loads(path.read_text(encoding="utf-8")).items():
+        if isinstance(value, dict):
+            rows += [{"campo": f"{key}.{k}", "valor": v} for k, v in value.items()]
+        elif isinstance(value, list):
+            rows += [{"campo": key if n == 0 else "", "valor": v} for n, v in enumerate(value)]
+        else:
+            rows.append({"campo": key, "valor": value})
+    print_table(rows, f"Metadados da coleta ({group})")
 
 
 def finish(group: str, times: dict[int, float], panorama_path: Path | None = None) -> Path | None:

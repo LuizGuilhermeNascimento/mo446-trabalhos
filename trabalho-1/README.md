@@ -9,7 +9,7 @@ trabalho-1/
 ├── panorama.py                   # orquestrador: executa os passos 1-5 (parâmetros no Config)
 ├── common.py                     # leitura das imagens, pastas de saída, CSV, tabelas e estilo das figuras
 ├── requirements.txt
-├── input/<grupo>/                # um grupo de fotos por pasta (.jpg, .jpeg ou .png)
+├── input/<grupo>/                # fotos de um grupo (.jpg, .jpeg ou .png) + metadados.json da coleta
 ├── output/
 │   ├── stepN_<nome>/<grupo>/     # figuras e CSVs de cada passo (não versionados)
 │   └── final/<grupo>/panorama.jpg
