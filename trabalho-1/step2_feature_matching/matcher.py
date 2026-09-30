@@ -16,7 +16,7 @@ from common import (IMAGE_SUPTITLE, IMAGE_TEXT, IMAGE_TITLE, INK_SECONDARY, Imag
 from step1_key_points_detection.detector import DETECTOR_COLORS, METHODS as DETECTORS, Features
 
 STAGE = Path(__file__).resolve().parent.name
-RATIO = 0.8  # Lowe's ratio threshold, as proposed by Lowe (2004) and widely used
+RATIO = 0.75  # Lowe's ratio threshold: highest precision before it drops, in both groups (ratio test curve)
 RATIOS = (0.5, 0.6, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95)  # thresholds of the ratio test curve
 RANSAC_THRESHOLD = 3.0  # px; OpenCV's default ransacReprojThreshold. Only used here to *evaluate* matches
 

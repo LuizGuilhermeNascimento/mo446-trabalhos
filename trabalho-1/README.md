@@ -7,6 +7,7 @@ Pipeline que recebe uma pasta de imagens **fora de ordem** (com uma imagem intru
 ```
 trabalho-1/
 ├── panorama.py                   # orquestrador: executa os passos 1-5 (parâmetros no Config)
+├── panorama.ipynb                # a mesma execução em notebook, com a justificativa de cada escolha
 ├── common.py                     # leitura das imagens, pastas de saída, CSV, tabelas e estilo das figuras
 ├── requirements.txt
 ├── input/<grupo>/                # fotos de um grupo (.jpg, .jpeg ou .png) + metadados.json da coleta
@@ -32,8 +33,8 @@ python3 -m venv .venv
 ## Execução
 
 ```bash
-.venv/bin/python panorama.py input/landscape                # todos os passos de um grupo
-.venv/bin/python panorama.py input/landscape --ate-passo 3  # para depois do passo N (1 a 5)
+.venv/bin/python panorama.py input/paisagem                # todos os passos de um grupo
+.venv/bin/python panorama.py input/paisagem --ate-passo 3  # para depois do passo N (1 a 5)
 .venv/bin/python panorama.py --todos                        # todos os grupos de input/
 ```
 
@@ -43,6 +44,10 @@ Cada grupo leva cerca de 1 minuto. O terminal mostra:
 - as tabelas de cada passo;
 - o resumo final: sequência inferida, intrusas rejeitadas, referência e tamanho do panorama;
 - o tempo de cada passo.
+
+### Execução pelo notebook
+
+`panorama.ipynb` executa os mesmos passos e explica as escolhas de cada um. Defina `GRUPO` na célula de configuração e execute todas as células (por exemplo, `.venv/bin/jupyter lab panorama.ipynb`). As saídas vão para as mesmas pastas do `panorama.py`.
 
 ## Adicionar um grupo próprio
 
@@ -58,13 +63,13 @@ Os métodos de cada passo ficam no `Config`, no topo de `panorama.py`. Cada camp
 | campo | padrão | opções |
 |---|---|---|
 | `detector` | `SIFT` | `SIFT`, `ORB`, `AKAZE` |
-| `ratio` | `0.8` | limiar do ratio test de Lowe (o emparelhamento usa sempre Brute Force) |
+| `ratio` | `0.75` | limiar do ratio test de Lowe (o emparelhamento usa sempre Brute Force); melhor que o 0.8 sugerido por Lowe nos dois conjuntos: precisão de 95.9% contra 93.3% (paisagem) e 74.4% contra 65.2% (igreja), perdendo poucos matches (ver `curva_ratio_test.png`) |
 | `matching_pair` | `("20260926_3", "20260926_4")` | par mostrado com os 3 detectores no passo 2; sem essas imagens no grupo, usa o par de inliers medianos |
 | `projection` | `cylindrical` | `cylindrical`, `planar` (a planar só serve para até ~120° de campo de visão) |
 | `alignment` | `pairwise` | `pairwise`, `bundle` (bundle adjustment) |
 | `deghost` / `blend` | `seam` / `feather` | `seam`, `none` / `feather`, `multiband`, `none` |
 | `max_side`, `max_features`, `shuffle_seed` | 1024, 3000, 0 | resolução, keypoints, semente do embaralhamento |
-| `zoom_regions` | `landscape`: parapente e galho | regiões (x, y, w, h) ampliadas no passo 5, por grupo; sem entrada, a região é escolhida automaticamente |
+| `zoom_regions` | `paisagem`: parapente e galho | regiões (x, y, w, h) ampliadas no passo 5, por grupo; sem entrada, a região é escolhida automaticamente |
 
 ## Saídas em `output/<passo>/<grupo>/`
 

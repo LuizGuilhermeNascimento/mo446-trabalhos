@@ -49,7 +49,7 @@ class Config:
     # Regions (x, y, w, h in the final cropped panorama) enlarged in step 5, per group; groups not listed
     # get the region with the strongest ghosts. "fantasma": moving object; "costura": seam through a nearby object.
     zoom_regions: dict = field(default_factory=lambda: {
-        "landscape": {"fantasma": (1110, 215, 160, 160), "costura": (620, 0, 260, 180)}})
+        "paisagem": {"fantasma": (1110, 215, 160, 160), "costura": (620, 0, 260, 180)}})
 
 
 CONFIG = Config()
@@ -134,8 +134,13 @@ def print_capture_metadata(folder: Path, group: str) -> None:
     path = folder / "metadados.json"
     if not path.exists():
         return
+    try:
+        metadata = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:  # only displayed: an invalid file must not stop the pipeline
+        log("Entrada", f"aviso: {path} não é um JSON válido ({error}); metadados não exibidos")
+        return
     rows = []
-    for key, value in json.loads(path.read_text(encoding="utf-8")).items():
+    for key, value in metadata.items():
         if isinstance(value, dict):
             rows += [{"campo": f"{key}.{k}", "valor": v} for k, v in value.items()]
         elif isinstance(value, list):
@@ -155,7 +160,7 @@ def finish(group: str, times: dict[int, float], panorama_path: Path | None = Non
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Gera o panorama de uma pasta de imagens fora de ordem.")
-    parser.add_argument("pasta", nargs="?", help="pasta do grupo de imagens, ex.: input/landscape")
+    parser.add_argument("pasta", nargs="?", help="pasta do grupo de imagens, ex.: input/paisagem")
     parser.add_argument("--ate-passo", type=int, default=5, choices=sorted(STEPS),
                         help="executa os passos 1 até N (padrão: todos)")
     parser.add_argument("--todos", action="store_true", help="processa todas as pastas de input/")
