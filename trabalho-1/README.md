@@ -63,7 +63,8 @@ Os métodos de cada passo ficam no `Config`, no topo de `panorama.py`. Cada camp
 | `projection` | `cylindrical` | `cylindrical`, `planar` (a planar só serve para até ~120° de campo de visão) |
 | `alignment` | `pairwise` | `pairwise`, `bundle` (bundle adjustment) |
 | `deghost` / `blend` | `seam` / `feather` | `seam`, `none` / `feather`, `multiband`, `none` |
-| `max_side`, `max_features`, `shuffle_seed`, `ghost_crop` | 1024, 3000, 0, `None` | resolução, keypoints, semente do embaralhamento, região extra na figura de fantasmas |
+| `max_side`, `max_features`, `shuffle_seed` | 1024, 3000, 0 | resolução, keypoints, semente do embaralhamento |
+| `zoom_regions` | `landscape`: parapente e galho | regiões (x, y, w, h) ampliadas no passo 5, por grupo; sem entrada, a região é escolhida automaticamente |
 
 ## Saídas em `output/<passo>/<grupo>/`
 
@@ -75,6 +76,6 @@ Cada passo gera as saídas do método escolhido e o estudo comparativo, em figur
 | 2. emparelhamento | `matches_<a>_<b>.jpg` (antes/depois do ratio test), `comparacao_emparelhamento.png/.csv`, `comparacao_emparelhamento_<a>_<b>.jpg`, `curva_ratio_test.png/.csv`, `matches_sem_sobreposicao_*.jpg` |
 | 3. ordenação | `matriz_conectividade.png/.csv`, `matriz_adjacencia.csv`, `grafo_vizinhanca.png`, `sequencia_inferida.jpg`, `intrusa_<imagem>.jpg`, `decisao_por_imagem.csv` |
 | 4. homografia | `estatisticas_homografias.csv` (taxa de inliers e erro de reprojeção), `ransac_<a>_<b>.jpg`, `alinhamento_progressivo.jpg`, `contornos_imagens.jpg`, `comparacao_alinhamento.png` |
-| 5. composição | `comparacao_deghosting.jpg` (mesmas regiões sem/com deghosting), `costuras.jpg`, `comparacao_metodos.jpg/.png/.csv`, `metricas_composicao.csv`, `distorcao_por_imagem.csv` |
+| 5. composição | `comparacao_deghosting.jpg` (mesma região sem/com remoção de fantasmas), `comparacao_metodos.jpg`, `metricas_metodos_composicao.png/.csv`, `costuras.jpg`, `metricas_composicao.csv`, `distorcao_por_imagem.csv` |
 
 O panorama final fica em `output/final/<grupo>/panorama.jpg`, recortado no maior retângulo sem bordas pretas.

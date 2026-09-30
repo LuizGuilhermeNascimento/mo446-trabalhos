@@ -11,7 +11,7 @@ from __future__ import annotations
 import argparse
 import json
 import time
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 from common import (INPUT_DIR, OUTPUT_DIR, list_image_files, load_image_set, log, print_table, save_image, set_seed,
@@ -46,7 +46,10 @@ class Config:
     alignment: str = "pairwise"  # pairwise or bundle (step 4 study)
     deghost: str = "seam"  # seam or none (step 5 study)
     blend: str = "feather"  # feather, multiband or none (step 5 study)
-    ghost_crop: tuple[int, int, int, int] | None = None  # extra region (x, y, w, h) in the ghost figure
+    # Regions (x, y, w, h in the final cropped panorama) enlarged in step 5, per group; groups not listed
+    # get the region with the strongest ghosts. "fantasma": moving object; "costura": seam through a nearby object.
+    zoom_regions: dict = field(default_factory=lambda: {
+        "landscape": {"fantasma": (1110, 215, 160, 160), "costura": (620, 0, 260, 180)}})
 
 
 CONFIG = Config()
@@ -106,9 +109,10 @@ def run(folder: str | Path, until: int = 5, config: Config = CONFIG) -> Path | N
     out_dir = stage_output_dir(step5_evaluation.STAGE, group)
     compositor = step5.PanoramaCompositor(config.deghost, config.blend)
     result = compositor.compose(alignment.aligned)
-    regions = step5_evaluation.save_composition_outputs(image_set.names, alignment, compositor.name, result,
-                                                        out_dir, config.ghost_crop)
-    step5_evaluation.compare_compositions(alignment, regions[0] if regions else None, out_dir)
+    regions = config.zoom_regions.get(group, {})
+    step5_evaluation.save_composition_outputs(image_set.names, alignment, compositor.name, result, group, out_dir,
+                                              regions.get("fantasma"))
+    step5_evaluation.compare_compositions(alignment, regions.get("costura"), group, out_dir)
     panorama_path = OUTPUT_DIR / "final" / group / "panorama.jpg"
     save_image(panorama_path, result.panorama)
     times[5] = time.perf_counter() - start

@@ -18,7 +18,7 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
-from common import (IMAGE_SUPTITLE, IMAGE_TEXT, IMAGE_TITLE, INK_SECONDARY, SERIES_COLORS, log, print_table,
+from common import (IMAGE_SUPTITLE, IMAGE_TEXT, IMAGE_TITLE, INK, INK_SECONDARY, SERIES_COLORS, log, print_table,
                     save_figure, save_image, write_csv)
 from step4_homography_connection.alignment import AlignedImages, AlignmentResult, image_corners
 from step5_panorama_composition.compositor import CompositionResult, PanoramaCompositor
@@ -34,9 +34,9 @@ MIN_CROP = 160  # px, smallest zoomed region
 GHOST_MERGE = 31  # default: px of dilation that joins the copies of the same moving object into one region
 
 STUDY = [("none", "none"), ("none", "feather"), ("seam", "none"), ("seam", "feather"), ("seam", "multiband")]
-METHOD_LABELS = {"none_none": "média (ingênua)", "none_feather": "feathering sem deghosting",
-                 "seam_none": "costura sem blending", "seam_feather": "costura + feathering",
-                 "seam_multiband": "costura + multibanda"}
+METHOD_LABELS = {"none_none": "Média simples", "none_feather": "Feathering",
+                 "seam_none": "Costura", "seam_feather": "Costura + feathering",
+                 "seam_multiband": "Costura + multibanda"}
 
 
 def gray(image: np.ndarray) -> np.ndarray:
@@ -169,34 +169,44 @@ def ghost_regions(result: CompositionResult, crop: tuple | None = None) -> list[
     return regions
 
 
-def plot_deghosting(result: CompositionResult, method: str, regions: list[tuple], path: Path) -> None:
-    """Requirement 6.4: ghost map of the naive composition and the same regions without / with deghosting."""
-    ph, pw = result.panorama.shape[:2]
-    ghosts, _ = ghost_mask(result.aligned, result.naive)
-    n_cols = max(len(regions), 1)
-    crop_w = 18 / n_cols
-    fig = plt.figure(figsize=(18, 18 * ph / pw + 2 * crop_w + 2.5), layout="constrained")
-    grid = fig.add_gridspec(3, n_cols, height_ratios=[18 * ph / pw, crop_w, crop_w])
+def label_inside(ax: plt.Axes, text: str) -> None:
+    """Label written inside the top-left corner of an image panel."""
+    ax.text(0.02, 0.97, text, transform=ax.transAxes, ha="left", va="top", fontsize=IMAGE_TEXT, color=INK,
+            bbox={"fc": "white", "ec": "none", "alpha": 0.85, "pad": 3})
+
+
+def plot_region_comparison(panorama: np.ndarray, crops: list[tuple[str, np.ndarray]], region: tuple, title: str,
+                           path: Path, ncols: int | None = None) -> None:
+    """Top: panorama with the region outlined. Below: the region of each version, enlarged, labeled inside."""
+    x, y, w, h = region
+    ph, pw = panorama.shape[:2]
+    ncols = ncols or len(crops)
+    nrows = -(-len(crops) // ncols)
+    crop_w = 18 / ncols
+    fig = plt.figure(figsize=(18, 18 * ph / pw + nrows * crop_w * h / w + 1.0), layout="constrained")
+    grid = fig.add_gridspec(1 + nrows, 2 * ncols, height_ratios=[18 * ph / pw] + [crop_w * h / w] * nrows)
     top = fig.add_subplot(grid[0, :])
-    top.imshow(rgb(result.panorama))
-    ys, xs = np.nonzero(ghosts)
-    top.scatter(xs, ys, s=0.2, c=GHOST_COLOR, linewidths=0, alpha=0.5)
-    for n, (x, y, w, h) in enumerate(regions):
-        top.add_patch(plt.Rectangle((x, y), w, h, fill=False, edgecolor=CROP_COLOR, lw=2))
-        top.text(x, y - 6, str(n + 1), color="black", fontsize=IMAGE_TEXT, fontweight="bold",
-                 bbox={"fc": CROP_COLOR, "ec": "none", "pad": 1.5})
-    top.set_title(f"Panorama final ({METHOD_LABELS.get(method, method)}); vermelho = pixels com fantasma na "
-                  f"composição ingênua; amarelo = regiões ampliadas abaixo", fontsize=IMAGE_TITLE)
+    top.imshow(rgb(panorama))
+    top.add_patch(plt.Rectangle((x, y), w, h, fill=False, edgecolor=CROP_COLOR, lw=2.5))
     top.axis("off")
-    for n, (x, y, w, h) in enumerate(regions):
-        for row, (image, label) in enumerate([(result.naive, "sem deghosting"), (result.panorama, "com deghosting")]):
-            ax = fig.add_subplot(grid[1 + row, n])
-            ax.imshow(rgb(image[y:y + h, x:x + w]), interpolation="nearest")
-            ax.set_title(f"Região {n + 1}: {label}", fontsize=IMAGE_TITLE)
-            ax.axis("off")
-    fig.suptitle(f"Remoção de fantasmas: mesmas regiões sem deghosting (média ingênua, meio) e com deghosting "
-                 f"({METHOD_LABELS.get(method, method)}, embaixo)", fontsize=IMAGE_SUPTITLE)
+    for n, (label, image) in enumerate(crops):
+        r, c = divmod(n, ncols)
+        start = 2 * c + (ncols - min(ncols, len(crops) - r * ncols))
+        ax = fig.add_subplot(grid[1 + r, start:start + 2])
+        ax.imshow(rgb(image[y:y + h, x:x + w]), interpolation="lanczos")
+        label_inside(ax, label)
+        ax.axis("off")
+    fig.suptitle(title, fontsize=IMAGE_SUPTITLE)
     save_figure(fig, path)
+
+
+def plot_deghosting(result: CompositionResult, method: str, region: tuple, group: str, path: Path) -> None:
+    """Requirement 6.4: the same region without and with ghost removal, enlarged side by side."""
+    name = METHOD_LABELS.get(method, method)
+    plot_region_comparison(result.panorama, [("Sem remoção de fantasmas (média simples)", result.naive),
+                                             (f"Com remoção de fantasmas ({name[0].lower() + name[1:]})",
+                                              result.panorama)],
+                           region, f"Remoção de Fantasmas: Conjunto {group}", path, ncols=3)  # 3 columns: smaller crops
 
 
 def seam_pixels(labels: np.ndarray) -> np.ndarray:
@@ -206,82 +216,64 @@ def seam_pixels(labels: np.ndarray) -> np.ndarray:
     return seams
 
 
-def plot_seams(names: list[str], result: CompositionResult, path: Path) -> None:
-    """Top: which image supplies each pixel. Bottom: panorama with the seams."""
+def plot_seams(names: list[str], result: CompositionResult, group: str, path: Path) -> None:
+    """Which image supplies each pixel after the optimal seams (number = composition order)."""
     labels, aligned = result.labels, result.aligned
     ph, pw = labels.shape
     colors = np.array([plt.cm.tab10(n % 10)[:3] for n in range(len(aligned.indices))]) * 255
     label_map = np.zeros((ph, pw, 3), np.float32)
     label_map[labels >= 0] = colors[labels[labels >= 0]]
     overlay = (0.45 * rgb(result.panorama) + 0.55 * label_map).astype(np.uint8)
-    fig, axes = plt.subplots(2, 1, figsize=(18, 2 * 18 * ph / pw + 2), layout="constrained")
-    axes[0].imshow(overlay)
+    fig, ax = plt.subplots(figsize=(18, 18 * ph / pw + 0.8), layout="constrained")
+    ax.imshow(overlay)
     for n, k in enumerate(aligned.indices):
-        ys, xs = np.nonzero(labels == n)
-        if len(xs):
-            axes[0].text(np.median(xs), np.median(ys), f"{n + 1}\n{names[k]}", ha="center", va="center",
-                         fontsize=IMAGE_TEXT, bbox={"fc": "white", "ec": "none", "alpha": 0.85, "pad": 2})
-    axes[0].set_title("Imagem-fonte de cada pixel após a costura ótima (número = ordem de composição)",
-                      fontsize=IMAGE_TITLE)
-    axes[1].imshow(rgb(result.panorama))
-    ys, xs = np.nonzero(seam_pixels(labels))
-    axes[1].scatter(xs, ys, s=0.4, c=SEAM_COLOR, linewidths=0)
-    axes[1].set_title("Costuras ótimas (vermelho) sobre o panorama final", fontsize=IMAGE_TITLE)
-    for ax in axes:
-        ax.axis("off")
+        region = (labels == n).astype(np.uint8)
+        if region.any():  # label at the most interior point of the region (never outside thin strips)
+            depth = cv2.distanceTransform(np.pad(region, 1), cv2.DIST_L2, 5)[1:-1, 1:-1]  # image border = limit
+            yy, xx = np.unravel_index(np.argmax(depth), depth.shape)
+            ax.text(xx, yy, f"{n + 1}\n{names[k]}", ha="center", va="center",
+                    fontsize=IMAGE_TEXT, bbox={"fc": "white", "ec": "none", "alpha": 0.85, "pad": 2})
+    ax.set_xlim(-0.5, pw - 0.5)
+    ax.set_ylim(ph - 0.5, -0.5)
+    ax.axis("off")
+    ax.set_title(f"Imagem de Origem de Cada Pixel após a Costura Ótima: Conjunto {group}", fontsize=IMAGE_SUPTITLE)
     save_figure(fig, path)
 
 
-def plot_methods(results: dict[str, CompositionResult], rows: list[dict], region: tuple, path: Path) -> None:
-    """Study: every method on the full panorama (left) and on the same zoomed region (right)."""
-    x, y, w, h = region
-    ph, pw = next(iter(results.values())).panorama.shape[:2]
-    n = len(results)
-    fig, axes = plt.subplots(n, 2, figsize=(20, n * 20 / (pw / ph + 1) + 1.5), layout="constrained",
-                             gridspec_kw={"width_ratios": [pw / ph, 1]})
-    for (name, result), row, (left, right) in zip(results.items(), rows, axes):
-        left.imshow(rgb(result.panorama))
-        left.add_patch(plt.Rectangle((x, y), w, h, fill=False, edgecolor=CROP_COLOR, lw=2))
-        discontinuity = row["descontinuidade_costura"]
-        left.set_title(f"{METHOD_LABELS.get(name, name)}: fantasmas {row['fantasmas_%']:.2f}%, descontinuidade "
-                       f"na costura {discontinuity:.2f}", fontsize=IMAGE_TITLE)
-        right.imshow(rgb(result.panorama[y:y + h, x:x + w]), interpolation="nearest")
-        right.set_title("região ampliada", fontsize=IMAGE_TITLE)
-        left.axis("off")
-        right.axis("off")
-    fig.suptitle("Métodos de composição: panorama completo (esquerda) e a mesma região ampliada (direita)",
-                 fontsize=IMAGE_SUPTITLE)
-    save_figure(fig, path)
+def plot_methods(results: dict[str, CompositionResult], region: tuple, group: str, path: Path) -> None:
+    """Study: the same region (a seam) in every composition method, enlarged."""
+    plot_region_comparison(results["seam_feather"].panorama,
+                           [(METHOD_LABELS.get(name, name), r.panorama) for name, r in results.items()],
+                           region, f"Métodos de Composição na Mesma Região: Conjunto {group}", path, ncols=3)
 
 
-def plot_metrics(rows: list[dict], path: Path) -> None:
-    """Small multiples, one metric per panel: ghosts and seam discontinuity per method."""
+def plot_metrics(rows: list[dict], group: str, path: Path) -> None:
+    """One panel per metric; one horizontal bar per composition method."""
     names = [r["metodo"] for r in rows]
     colors = [SERIES_COLORS[n % len(SERIES_COLORS)] for n in range(len(rows))]
-    panels = [("fantasmas_%", "Fantasmas (% dos pixels sobrepostos)\nmenor = menos fantasmas"),
-              ("descontinuidade_costura", "Descontinuidade na costura (níveis de cinza)\n0 = costura invisível")]
-    fig, axes = plt.subplots(1, 2, figsize=(14, 4.4), layout="constrained")
-    for ax, (key, title) in zip(axes, panels):
-        values = [r[key] for r in rows]
-        ax.barh(names, [0 if np.isnan(v) else v for v in values], color=colors, height=0.6)
-        for yy, v in enumerate(values):
-            ax.text(0 if np.isnan(v) else v, yy, "  -" if np.isnan(v) else f"  {v:.2f}", va="center",
-                    fontsize=10, color=INK_SECONDARY)
+    panels = [("fantasmas_%", "Pixels com Fantasma", "Pixels sobrepostos com fantasma (%)"),
+              ("descontinuidade_costura", "Descontinuidade na Costura", "Salto de intensidade (níveis de cinza)")]
+    fig, axes = plt.subplots(1, 2, figsize=(14, 4.2), layout="constrained")
+    for ax, (key, title, xlabel) in zip(axes, panels):
+        ax.barh(names, [0.0 if np.isnan(r[key]) else r[key] for r in rows], height=0.6, color=colors)
         ax.invert_yaxis()
         ax.grid(axis="x", color="#e1e0d9", lw=0.6)
         ax.grid(axis="y", visible=False)
-        ax.margins(x=0.25)
-        ax.set_title(title, fontsize=11)
+        ax.set_xlabel(xlabel, fontsize=10)
+        ax.set_title(title, fontsize=12)
+    axes[0].set_ylabel("Método de composição", fontsize=10)
     axes[1].tick_params(labelleft=False)
-    fig.suptitle("Métricas dos métodos de composição", fontsize=12)
+    fig.suptitle(f"Métricas dos Métodos de Composição: Conjunto {group}", fontsize=14)
     save_figure(fig, path)
 
 
 def save_composition_outputs(names: list[str], alignment: AlignmentResult, method: str, result: CompositionResult,
-                             out_dir: Path, crop: tuple[int, int, int, int] | None = None) -> list[tuple]:
+                             group: str, out_dir: Path, region: tuple[int, int, int, int] | None = None) -> None:
+    """`region` (x, y, w, h in the cropped panorama) is shown with and without ghost removal; without it,
+    the region with the strongest ghosts is chosen automatically."""
     naive = CompositionResult(result.naive, result.naive, None, result.mask, result.aligned, result.rect, 0.0)
     rows = [method_row("none_none", naive, result.labels), method_row(method, result, result.labels)]
-    print_table(rows, "Passo 5: composição sem e com deghosting")
+    print_table(rows, "Passo 5: composição sem e com remoção de fantasmas")
     overlaps = overlap_rows(names, result.aligned)
     print_table(overlaps, "Passo 5: erro fotométrico entre imagens vizinhas na sobreposição (níveis de cinza)")
     distortion = distortion_rows(names, alignment)
@@ -290,23 +282,27 @@ def save_composition_outputs(names: list[str], alignment: AlignmentResult, metho
     write_csv(overlaps, out_dir / "erro_fotometrico_sobreposicao.csv")
     write_csv(distortion, out_dir / "distorcao_por_imagem.csv")
 
-    regions = ghost_regions(result, crop)
-    plot_deghosting(result, method, regions, out_dir / "comparacao_deghosting.jpg")
-    save_image(out_dir / f"panorama_{method}.jpg", result.panorama)
+    plot_deghosting(result, method, region or default_region(result), group, out_dir / "comparacao_deghosting.jpg")
     if result.labels is not None:
-        plot_seams(names, result, out_dir / "costuras.jpg")
+        plot_seams(names, result, group, out_dir / "costuras.jpg")
     log("Passo 5", f"saídas salvas em {out_dir}")
-    return regions
 
 
-def compare_compositions(alignment: AlignmentResult, region: tuple[int, int, int, int] | None, out_dir: Path) -> None:
+def default_region(result: CompositionResult) -> tuple[int, int, int, int]:
+    regions = ghost_regions(result)
+    h, w = result.panorama.shape[:2]
+    return regions[0] if regions else (0, 0, min(h, w), min(h, w))
+
+
+def compare_compositions(alignment: AlignmentResult, region: tuple[int, int, int, int] | None, group: str,
+                         out_dir: Path) -> None:
     """Study: every deghosting x blending combination, measured across the same seams and shown on the
-    same zoomed region (the first region of the deghosting figure)."""
+    same enlarged region (`region`, e.g. a seam through a nearby object; automatic when None)."""
     results = {f"{d}_{b}": PanoramaCompositor(d, b).compose(alignment.aligned) for d, b in STUDY}
     seams = results["seam_feather"].labels  # every method is measured across the same seams
     rows = [method_row(name, r, seams) for name, r in results.items()]
     print_table(rows, "Passo 5: comparação dos métodos de composição")
-    write_csv(rows, out_dir / "comparacao_metodos.csv")
-    plot_metrics(rows, out_dir / "comparacao_metodos.png")
-    h, w = results["seam_feather"].panorama.shape[:2]
-    plot_methods(results, rows, region or (0, 0, min(h, w), min(h, w)), out_dir / "comparacao_metodos.jpg")
+    write_csv(rows, out_dir / "metricas_metodos_composicao.csv")
+    plot_metrics(rows, group, out_dir / "metricas_metodos_composicao.png")
+    plot_methods(results, region or default_region(results["seam_feather"]), group,
+                 out_dir / "comparacao_metodos.jpg")
