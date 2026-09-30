@@ -14,7 +14,7 @@ trabalho-1/
 │   ├── stepN_<nome>/<grupo>/     # figuras e CSVs de cada passo (não versionados)
 │   └── final/<grupo>/panorama.jpg
 ├── step1_key_points_detection/   # SIFT x ORB x AKAZE
-├── step2_feature_matching/       # BF x FLANN + ratio test de Lowe
+├── step2_feature_matching/       # Brute Force + ratio test de Lowe, comparando os 3 detectores
 ├── step3_image_sorting/          # matriz de conectividade, grafo, ordem e intrusa
 ├── step4_homography_connection/  # RANSAC, projeção cilíndrica, par a par x bundle adjustment
 └── step5_panorama_composition/   # costura ótima, feathering/multibanda, fantasmas, recorte
@@ -58,7 +58,8 @@ Os métodos de cada passo ficam no `Config`, no topo de `panorama.py`. Cada camp
 | campo | padrão | opções |
 |---|---|---|
 | `detector` | `SIFT` | `SIFT`, `ORB`, `AKAZE` |
-| `matcher` / `ratio` | `BF` / `0.75` | `BF`, `FLANN` |
+| `ratio` | `0.8` | limiar do ratio test de Lowe (o emparelhamento usa sempre Brute Force) |
+| `matching_pair` | `("20260926_3", "20260926_4")` | par mostrado com os 3 detectores no passo 2; sem essas imagens no grupo, usa o par de inliers medianos |
 | `projection` | `cylindrical` | `cylindrical`, `planar` (a planar só serve para até ~120° de campo de visão) |
 | `alignment` | `pairwise` | `pairwise`, `bundle` (bundle adjustment) |
 | `deghost` / `blend` | `seam` / `feather` | `seam`, `none` / `feather`, `multiband`, `none` |
@@ -71,7 +72,7 @@ Cada passo gera as saídas do método escolhido e o estudo comparativo, em figur
 | passo | principais arquivos |
 |---|---|
 | 1. detecção | `detectores_<imagem>.png` (keypoints de cada detector; círculo = escala, segmento = orientação dos 300 mais fortes), `comparacao_detectores.png/.csv`, `comparacao_detectores_por_imagem.csv` |
-| 2. emparelhamento | `matches_<a>_<b>.jpg` (antes/depois do ratio test), `comparacao_matchers.png/.csv`, `curva_ratio_test.png/.csv`, `matches_sem_sobreposicao_*.jpg` |
+| 2. emparelhamento | `matches_<a>_<b>.jpg` (antes/depois do ratio test), `comparacao_emparelhamento.png/.csv`, `comparacao_emparelhamento_<a>_<b>.jpg`, `curva_ratio_test.png/.csv`, `matches_sem_sobreposicao_*.jpg` |
 | 3. ordenação | `matriz_conectividade.png/.csv`, `matriz_adjacencia.csv`, `grafo_vizinhanca.png`, `sequencia_inferida.jpg`, `intrusa_<imagem>.jpg`, `decisao_por_imagem.csv` |
 | 4. homografia | `estatisticas_homografias.csv` (taxa de inliers e erro de reprojeção), `ransac_<a>_<b>.jpg`, `alinhamento_progressivo.jpg`, `contornos_imagens.jpg`, `comparacao_alinhamento.png` |
 | 5. composição | `comparacao_deghosting.jpg` (mesmas regiões sem/com deghosting), `costuras.jpg`, `comparacao_metodos.jpg/.png/.csv`, `metricas_composicao.csv`, `distorcao_por_imagem.csv` |

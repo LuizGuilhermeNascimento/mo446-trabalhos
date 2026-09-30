@@ -10,7 +10,7 @@ import numpy as np
 from matplotlib.collections import LineCollection, PatchCollection
 from matplotlib.patches import Circle
 
-from common import (IMAGE_SUPTITLE, IMAGE_TITLE, INK, INK_SECONDARY, SERIES_COLORS, ImageSet, log, print_table,
+from common import (IMAGE_SUPTITLE, IMAGE_TITLE, SERIES_COLORS, ImageSet, log, plot_metric_bars, print_table,
                     save_figure, write_csv)
 
 STAGE = Path(__file__).resolve().parent.name
@@ -192,29 +192,9 @@ def plot_detectors_on_image(name: str, image: np.ndarray, features: list[Feature
 
 
 def plot_metrics(summary: list[dict], group: str, path: Path) -> None:
-    """1 x 4 small multiples, one metric per panel with its own unit: bar = mean over the images,
-    whisker = standard deviation, value written above the bar."""
     panels = [("keypoints", "Quantidade de Keypoints por Imagem", "keypoints por imagem", "{:.0f}", None),
               ("tempo_ms", "Tempo de Detecção e Descrição", "tempo por imagem (ms)", "{:.1f} ms", None),
               ("cobertura_%", f"Cobertura da Grade {GRID} × {GRID}", "células com keypoints (%)", "{:.0f}%", 100),
               ("uniformidade", "Uniformidade (Entropia Normalizada)", "entropia normalizada (0 a 1)", "{:.2f}", 1)]
-    names = [row["detector"] for row in summary]
-    fig, axes = plt.subplots(1, len(panels), figsize=(18, 4.2), layout="constrained")
-    for ax, (key, title, ylabel, fmt, limit) in zip(axes, panels):
-        means = [row[f"{key}_media"] for row in summary]
-        stds = [row[f"{key}_desvio"] for row in summary]
-        ax.bar(names, means, yerr=stds, width=0.6, color=[DETECTOR_COLORS[n] for n in names], capsize=5,
-               error_kw={"elinewidth": 1.2, "capthick": 1.2, "ecolor": INK_SECONDARY})
-        for x, (mean, std) in enumerate(zip(means, stds)):
-            ax.annotate(fmt.format(mean), (x, mean + std), xytext=(0, 4), textcoords="offset points",
-                        ha="center", va="bottom", fontsize=11, color=INK)
-        if limit:  # bounded metric: fixed axis up to its maximum, with room for the labels
-            ax.set_ylim(0, limit * 1.12)
-            ax.set_yticks(np.linspace(0, limit, 6))
-        else:
-            ax.set_ylim(0, max(m + s for m, s in zip(means, stds)) * 1.18)
-        ax.tick_params(axis="x", labelsize=11)
-        ax.set_ylabel(ylabel, fontsize=10)
-        ax.set_title(title, fontsize=12)
-    fig.suptitle(f"Métricas de Performance entre Detectores de Keypoints: Conjunto {group}", fontsize=14)
-    save_figure(fig, path)
+    plot_metric_bars(summary, "detector", DETECTOR_COLORS, panels,
+                     f"Métricas de Performance entre Detectores de Keypoints: Conjunto {group}", path)

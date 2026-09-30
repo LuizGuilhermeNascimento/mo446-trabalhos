@@ -128,6 +128,49 @@ def save_figure(fig: plt.Figure, path: Path) -> None:
     plt.close(fig)
 
 
+def plot_metric_bars(rows: list[dict], label_key: str, colors: dict[str, str], panels: list[tuple], title: str,
+                     path: Path, ncols: int | None = None) -> None:
+    """Bar charts, one metric per panel with its own unit (scales never share an axis), `ncols` panels per
+    row (default: all in one row; an incomplete last row is centered).
+
+    `rows` hold `<key>_media` and `<key>_desvio` for every metric; each panel is
+    (key, title, y label, value format, upper limit or None). Bar = mean, whisker = standard deviation,
+    value written above the bar.
+    """
+    names = [row[label_key] for row in rows]
+    ncols = ncols or len(panels)
+    nrows = -(-len(panels) // ncols)
+    width, height = (4.5, 4.2) if nrows == 1 else (3.9, 3.4)  # grids use smaller panels
+    fig = plt.figure(figsize=(width * ncols, height * nrows), layout="constrained")
+    if nrows > 1:  # extra room between panels (points and figure fractions)
+        fig.get_layout_engine().set(w_pad=0.15, h_pad=0.2, wspace=0.12, hspace=0.12)
+    grid = fig.add_gridspec(nrows, 2 * ncols)  # half-columns, so an incomplete last row can be centered
+    axes = []
+    for n in range(len(panels)):
+        r, c = divmod(n, ncols)
+        in_row = min(ncols, len(panels) - r * ncols)
+        start = 2 * c + (ncols - in_row)
+        axes.append(fig.add_subplot(grid[r, start:start + 2]))
+    for ax, (key, panel_title, ylabel, fmt, limit) in zip(axes, panels):
+        means = [row[f"{key}_media"] for row in rows]
+        stds = [row[f"{key}_desvio"] for row in rows]
+        ax.bar(names, means, yerr=stds, width=0.6, color=[colors[n] for n in names], capsize=5,
+               error_kw={"elinewidth": 1.2, "capthick": 1.2, "ecolor": INK_SECONDARY})
+        for x, (mean, std) in enumerate(zip(means, stds)):
+            ax.annotate(fmt.format(mean), (x, mean + std), xytext=(0, 4), textcoords="offset points",
+                        ha="center", va="bottom", fontsize=11, color=INK)
+        if limit:  # bounded metric: fixed axis up to its maximum, with room for the labels
+            ax.set_ylim(0, limit * 1.12)
+            ax.set_yticks(np.linspace(0, limit, 6))
+        else:
+            ax.set_ylim(0, max(max(m + s for m, s in zip(means, stds)), 1e-9) * 1.18)
+        ax.tick_params(axis="x", labelsize=11)
+        ax.set_ylabel(ylabel, fontsize=10)
+        ax.set_title(panel_title, fontsize=12)
+    fig.suptitle(title, fontsize=14)
+    save_figure(fig, path)
+
+
 def format_value(value) -> str:
     if isinstance(value, (float, np.floating)):
         return f"{value:.2f}"

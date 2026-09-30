@@ -38,8 +38,9 @@ class Config:
     shuffle_seed: int | None = 0  # input order shuffled with this seed (requirement 4.1); None = alphabetical
     max_features: int = 3000  # keypoints kept per image (step 1)
     detector: str = "SIFT"  # SIFT, ORB or AKAZE (step 1 study)
-    matcher: str = "BF"  # BF or FLANN (step 2 study: BF is faster and exact with 3000 descriptors)
     ratio: float = step2.RATIO  # Lowe's ratio test threshold (step 2 ratio curve)
+    matching_pair: tuple[str, str] | None = ("20260926_3", "20260926_4")  # pair seen by every detector in step 2
+    #   (it shows the paraglider); groups without these images fall back to the pair with the median inliers
     min_inliers: int = step3.MIN_INLIERS  # minimum inliers for two images to overlap (step 3)
     projection: str = "cylindrical"  # cylindrical or planar (step 4; the groups span ~170-220 degrees)
     alignment: str = "pairwise"  # pairwise or bundle (step 4 study)
@@ -70,17 +71,17 @@ def run(folder: str | Path, until: int = 5, config: Config = CONFIG) -> Path | N
 
     # Step 3 runs before the step 2 outputs: the matching study needs its graph (overlaps and neighbors).
     start = time.perf_counter()
-    sorting = step3.ImageSorter(step2.FeatureMatcher(config.matcher, config.ratio), config.min_inliers).sort(
+    sorting = step3.ImageSorter(step2.FeatureMatcher(config.ratio), config.min_inliers).sort(
         image_set, features[config.detector])
     times[3] = time.perf_counter() - start
 
     start = time.perf_counter()
     log("Pipeline", f"passo 2: {STEPS[2]}")
-    neighbors = [tuple(sorted(pair)) for pair in zip(sorting.order, sorting.order[1:])]
-    step2.compare_matchers(image_set, stage_output_dir(step2.STAGE, group), features, sorting.overlap_edges,
-                           neighbors, config.ratio, config.detector, config.matcher)
+    step2.compare_matching(image_set, stage_output_dir(step2.STAGE, group), features, sorting.overlap_edges,
+                           sorting.order, config.ratio, config.detector, config.matching_pair)
     times[2] = time.perf_counter() - start
     if until == 2:
+        times[2] += times.pop(3)  # the sorting only ran to support the step 2 study
         return finish(group, times)
 
     start = time.perf_counter()
