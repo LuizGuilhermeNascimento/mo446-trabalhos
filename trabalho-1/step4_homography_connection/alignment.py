@@ -136,6 +136,9 @@ def edge_errors(pairs: dict, edges: list[tuple[int, int]], transforms: dict[int,
     errors = []
     for i, j in edges:
         pair = pairs[i, j]
+        if pair.n_inliers == 0:  # nothing to measure
+            errors.append(float("nan"))
+            continue
         H = np.linalg.inv(transforms[j]) @ transforms[i]
         errors.append(float(reprojection_errors(H, pair.pts_i[pair.inlier_mask], pair.pts_j[pair.inlier_mask]).mean()))
     return errors
@@ -228,15 +231,18 @@ def align(images: list[np.ndarray], pairs: dict, tree_edges: list, overlap_edges
     return AlignmentResult(aligned, images, pairs, transforms, projection, focal)
 
 
-def sequence_pairs(order: list[int]) -> list[tuple[int, int]]:
-    """Consecutive pairs of the inferred sequence (the pairs used to chain the homographies)."""
-    return [(min(a, b), max(a, b)) for a, b in zip(order, order[1:])]
+def chained_pairs(result: AlignmentResult, order: list[int]) -> list[tuple[int, int]]:
+    """Pairs actually used to chain the homographies (each image with the one it was linked to), in sequence
+    order. They are the consecutive pairs when the neighborhood tree is a line, but not when it branches."""
+    position = {k: n for n, k in enumerate(order)}
+    pairs = [(min(k, p), max(k, p)) for k, p in result.aligned.parents.items() if p is not None]
+    return sorted(pairs, key=lambda e: sorted((position[e[0]], position[e[1]])))
 
 
 def error_rows(names: list[str], result: AlignmentResult, order: list[int], overlap_edges: list) -> list[dict]:
     """One row per overlapping pair (pairs of the sequence first, in order): RANSAC statistics of the pair
     and its mean reprojection error under each global alignment."""
-    used = sequence_pairs(order)
+    used = chained_pairs(result, order)
     edges = used + [e for e in overlap_edges if e not in used]
     errors = {mode: edge_errors(result.pairs, edges, G) for mode, G in result.transforms.items()}
     position = {k: n + 1 for n, k in enumerate(order)}
@@ -255,9 +261,9 @@ def error_rows(names: list[str], result: AlignmentResult, order: list[int], over
 def summary_row(mode: str, rows: list[dict]) -> dict:
     used = [r[f"erro_{mode}_px"] for r in rows if r["vizinhos_na_sequencia"] == "sim"]
     every = [r[f"erro_{mode}_px"] for r in rows]
-    return {"modo": MODE_LABELS[mode], "erro_pares_vizinhos_px": float(np.mean(used)),
-            "erro_todas_sobreposicoes_px": float(np.mean(every)),
-            "erro_todas_sobreposicoes_desvio_px": float(np.std(every)), "erro_maximo_px": float(np.max(every))}
+    return {"modo": MODE_LABELS[mode], "erro_pares_vizinhos_px": float(np.nanmean(used)),
+            "erro_todas_sobreposicoes_px": float(np.nanmean(every)),
+            "erro_todas_sobreposicoes_desvio_px": float(np.nanstd(every)), "erro_maximo_px": float(np.nanmax(every))}
 
 
 def save_alignment_outputs(names: list[str], result: AlignmentResult, order: list[int], overlap_edges: list,
