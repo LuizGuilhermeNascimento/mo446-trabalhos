@@ -95,7 +95,7 @@ def run(folder: str | Path, until: int = 5, config: Config = CONFIG) -> Path | N
     log("Pipeline", f"passo 4: {STEPS[4]}")
     alignment = step4.align(image_set.images, sorting.pairs, sorting.tree_edges, sorting.overlap_edges,
                             sorting.reference, config.alignment, config.projection, compare_modes=True)
-    step4.save_alignment_outputs(image_set.names, alignment, sorting.tree_edges, sorting.overlap_edges,
+    step4.save_alignment_outputs(image_set.names, alignment, sorting.order, sorting.overlap_edges, group,
                                  stage_output_dir(step4.STAGE, group))
     times[4] = time.perf_counter() - start
     if until == 4:

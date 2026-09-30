@@ -10,9 +10,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import least_squares
 
-from common import (IMAGE_SUPTITLE, IMAGE_TEXT, IMAGE_TITLE, INK_SECONDARY, SERIES_COLORS, log, pair_name,
-                    print_table, save_figure, write_csv)
-from step4_homography_connection.homography import PairHomography, fit_homography, plot_ransac, reprojection_errors
+from common import (IMAGE_SUPTITLE, IMAGE_TITLE, INK, INK_SECONDARY, SERIES_COLORS, log, print_table, save_figure,
+                    write_csv)
+from step4_homography_connection.homography import PairHomography, fit_homography, reprojection_errors
 
 STAGE = Path(__file__).resolve().parent.name
 MODES = ("pairwise", "bundle")
@@ -228,68 +228,104 @@ def align(images: list[np.ndarray], pairs: dict, tree_edges: list, overlap_edges
     return AlignmentResult(aligned, images, pairs, transforms, projection, focal)
 
 
-def error_rows(names: list[str], result: AlignmentResult, tree_edges: list, overlap_edges: list) -> list[dict]:
-    """One row per overlapping pair: RANSAC statistics + reprojection error under each global alignment."""
-    errors = {mode: edge_errors(result.pairs, overlap_edges, G) for mode, G in result.transforms.items()}
+def sequence_pairs(order: list[int]) -> list[tuple[int, int]]:
+    """Consecutive pairs of the inferred sequence (the pairs used to chain the homographies)."""
+    return [(min(a, b), max(a, b)) for a, b in zip(order, order[1:])]
+
+
+def error_rows(names: list[str], result: AlignmentResult, order: list[int], overlap_edges: list) -> list[dict]:
+    """One row per overlapping pair (pairs of the sequence first, in order): RANSAC statistics of the pair
+    and its mean reprojection error under each global alignment."""
+    used = sequence_pairs(order)
+    edges = used + [e for e in overlap_edges if e not in used]
+    errors = {mode: edge_errors(result.pairs, edges, G) for mode, G in result.transforms.items()}
+    position = {k: n + 1 for n, k in enumerate(order)}
     rows = []
-    for n, (i, j) in enumerate(overlap_edges):
+    for n, (i, j) in enumerate(edges):
         pair = result.pairs[i, j]
-        row = {"par": f"{names[i]} x {names[j]}", "na_arvore": "sim" if (i, j) in tree_edges else "não",
-               "matches": pair.n_matches, "inliers": pair.n_inliers, "taxa_inliers_%": 100 * pair.inlier_ratio,
-               "erro_ransac_px": pair.mean_reproj_error}
+        a, b = sorted((i, j), key=position.get)
+        row = {"par": f"{position[a]}-{position[b]}", "imagens": f"{names[a]} x {names[b]}",
+               "vizinhos_na_sequencia": "sim" if (i, j) in used else "não", "matches": pair.n_matches,
+               "inliers": pair.n_inliers, "taxa_inliers_%": 100 * pair.inlier_ratio}
         row.update({f"erro_{mode}_px": errors[mode][n] for mode in result.transforms})
         rows.append(row)
     return rows
 
 
 def summary_row(mode: str, rows: list[dict]) -> dict:
-    tree = [r[f"erro_{mode}_px"] for r in rows if r["na_arvore"] == "sim"]
-    other = [r[f"erro_{mode}_px"] for r in rows if r["na_arvore"] == "não"]
-    every = tree + other
-    return {"modo": MODE_LABELS[mode], "erro_arestas_arvore_px": float(np.mean(tree)),
-            "erro_outras_sobreposicoes_px": float(np.mean(other)) if other else float("nan"),
-            "erro_todos_os_pares_px": float(np.mean(every)), "erro_maximo_px": float(np.max(every))}
+    used = [r[f"erro_{mode}_px"] for r in rows if r["vizinhos_na_sequencia"] == "sim"]
+    every = [r[f"erro_{mode}_px"] for r in rows]
+    return {"modo": MODE_LABELS[mode], "erro_pares_vizinhos_px": float(np.mean(used)),
+            "erro_todas_sobreposicoes_px": float(np.mean(every)),
+            "erro_todas_sobreposicoes_desvio_px": float(np.std(every)), "erro_maximo_px": float(np.max(every))}
 
 
-def save_alignment_outputs(names: list[str], result: AlignmentResult, tree_edges: list, overlap_edges: list,
-                           out_dir: Path) -> None:
-    rows = error_rows(names, result, tree_edges, overlap_edges)
+def save_alignment_outputs(names: list[str], result: AlignmentResult, order: list[int], overlap_edges: list,
+                           group: str, out_dir: Path) -> None:
+    """Requirement 5.3 (inlier rate and mean reprojection error of every pair used), 5.4 (progressive
+    alignment) and the pairwise x bundle adjustment comparison (extra X1)."""
+    rows = error_rows(names, result, order, overlap_edges)
+    used = [r for r in rows if r["vizinhos_na_sequencia"] == "sim"]
     summary = [summary_row(mode, rows) for mode in result.transforms]
     projection = f"projeção {result.projection}" + (f", focal {result.focal:.0f} px" if result.focal else "")
-    print_table(rows, f"Passo 4: homografias por par (RANSAC, {projection}) e erro de reprojeção médio sob o "
-                      f"alinhamento global")
-    print_table(summary, "Passo 4: erro médio de reprojeção por modo de alinhamento (px)")
+    print_table(used, f"Passo 4: homografias dos pares vizinhos na sequência ({projection})")
+    print_table(summary, f"Passo 4: erro de reprojeção médio por modo de alinhamento (px; {len(rows)} pares com "
+                         f"sobreposição, {len(used)} vizinhos)")
     write_csv(rows, out_dir / "estatisticas_homografias.csv")
     write_csv(summary, out_dir / "erro_por_modo.csv")
 
-    for i, j in tree_edges:
-        pair = result.pairs[i, j]
-        plot_ransac(result.images[i], result.images[j], pair,
-                    f"{names[i]} x {names[j]}: {pair.n_inliers} de {pair.n_matches} matches são inliers "
-                    f"({100 * pair.inlier_ratio:.1f}%), erro de reprojeção médio {pair.mean_reproj_error:.2f} px",
-                    out_dir / f"ransac_{pair_name(names, i, j)}.jpg")
-    if len(result.transforms) > 1:
-        plot_errors(rows, list(result.transforms), out_dir / "comparacao_alinhamento.png")
-    plot_progressive(names, result, out_dir / "alinhamento_progressivo.jpg")
-    plot_outlines(names, result, out_dir / "contornos_imagens.jpg")
+    plot_pair_metrics(used, summary, list(result.transforms), group, out_dir / "metricas_homografias.png")
+    plot_progressive(result, group, out_dir / "alinhamento_progressivo.jpg")
+    plot_outlines(result, group, out_dir / "contornos_imagens.jpg")
     log("Passo 4", f"saídas salvas em {out_dir}")
 
 
-def plot_errors(rows: list[dict], modes: list[str], path: Path) -> None:
-    """Reprojection error of every overlapping pair under each global alignment (grouped bars)."""
-    rows = sorted(rows, key=lambda r: r["na_arvore"] != "sim")  # tree edges first
-    fig, ax = plt.subplots(figsize=(max(10, 0.55 * len(rows)), 4.5))
-    x = np.arange(len(rows))
+def plot_pair_metrics(used: list[dict], summary: list[dict], modes: list[str], group: str, path: Path) -> None:
+    """Inlier rate and reprojection error of every pair of the sequence (x = positions, as in step 3), plus
+    the mean error over every overlapping pair, where the gain of bundle adjustment shows up."""
+    fig = plt.figure(figsize=(17, 4.8), layout="constrained")
+    grid = fig.add_gridspec(1, 3, width_ratios=[1.3, 1.7, 0.8])
+    ax_rate, ax_err, ax_all = (fig.add_subplot(grid[0, c]) for c in range(3))
+    labels = [r["par"] for r in used]
+    x = np.arange(len(used))
+
+    rates = [r["taxa_inliers_%"] for r in used]
+    ax_rate.bar(x, rates, width=0.6, color=SERIES_COLORS[0])
+    for xi, v in zip(x, rates):
+        ax_rate.annotate(f"{v:.0f}%", (xi, v), xytext=(0, 3), textcoords="offset points", ha="center",
+                         va="bottom", fontsize=9, color=INK)
+    ax_rate.set_ylim(0, 112)
+    ax_rate.set_yticks(np.linspace(0, 100, 6))
+    ax_rate.set_ylabel("inliers / matches (%)", fontsize=10)
+    ax_rate.set_title("Taxa de Inliers por Par (RANSAC)", fontsize=12)
+
     width = 0.8 / len(modes)
     for n, mode in enumerate(modes):
-        ax.bar(x + (n - (len(modes) - 1) / 2) * width, [r[f"erro_{mode}_px"] for r in rows], width,
-               color=MODE_COLORS[mode], label=MODE_LABELS[mode])
-    ax.set_xticks(x, [r["par"] for r in rows], rotation=70, ha="right", fontsize=8)
-    for tick, r in zip(ax.get_xticklabels(), rows):
-        tick.set_fontweight("bold" if r["na_arvore"] == "sim" else "normal")
-    ax.set_ylabel("erro de reprojeção médio (px)")
-    ax.legend(fontsize=10)
-    ax.set_title("Erro de reprojeção de cada par sob o alinhamento global (em negrito, à esquerda: arestas da árvore)", fontsize=11)
+        ax_err.bar(x + (n - (len(modes) - 1) / 2) * width, [r[f"erro_{mode}_px"] for r in used], width,
+                   color=MODE_COLORS[mode], label=MODE_LABELS[mode])
+    ax_err.set_ylabel("erro de reprojeção médio (px)", fontsize=10)
+    ax_err.set_title("Erro de Reprojeção Médio por Par", fontsize=12)
+
+    for ax in (ax_rate, ax_err):
+        ax.set_xticks(x, labels, fontsize=10)
+        ax.set_xlabel("par de imagens vizinhas (posições na sequência)", fontsize=10)
+
+    means = [r["erro_todas_sobreposicoes_px"] for r in summary]
+    stds = [r["erro_todas_sobreposicoes_desvio_px"] for r in summary]
+    ax_all.bar(range(len(modes)), means, yerr=stds, width=0.6, color=[MODE_COLORS[m] for m in modes], capsize=5,
+               error_kw={"elinewidth": 1.2, "capthick": 1.2, "ecolor": INK_SECONDARY})
+    for xi, (m, sd) in enumerate(zip(means, stds)):
+        ax_all.annotate(f"{m:.2f} px", (xi, m + sd), xytext=(0, 4), textcoords="offset points", ha="center",
+                        va="bottom", fontsize=10, color=INK)
+    ax_all.set_ylim(0, max(m + sd for m, sd in zip(means, stds)) * 1.2)
+    ax_all.set_xticks(range(len(modes)), [MODE_LABELS[m] for m in modes], fontsize=10)
+    ax_all.set_ylabel("erro de reprojeção médio (px)", fontsize=10)
+    ax_all.set_title("Erro em Todas as Sobreposições", fontsize=12)
+
+    if len(modes) > 1:
+        fig.legend(*ax_err.get_legend_handles_labels(), loc="outside lower center", ncols=len(modes), fontsize=10,
+                   frameon=False)
+    fig.suptitle(f"Métricas das Homografias entre Imagens Vizinhas: Conjunto {group}", fontsize=14)
     save_figure(fig, path)
 
 
@@ -313,45 +349,41 @@ def composite(aligned: AlignedImages, upto: int) -> np.ndarray:
     return cv2.cvtColor(canvas, cv2.COLOR_BGR2RGB)
 
 
-def plot_progressive(names: list[str], result: AlignmentResult, path: Path) -> None:
-    """Requirement 5.4: the canvas after each image is added (newest image outlined)."""
+def plot_progressive(result: AlignmentResult, group: str, path: Path) -> None:
+    """Requirement 5.4: the canvas after each image is added (newest image outlined in yellow).
+    Panels in rows of `cols`; an incomplete last row is centered."""
     aligned = result.aligned
     n = len(aligned.indices)
     w, h = aligned.canvas_size
     cols = 2 if w / h > 2 else 3
-    rows = int(np.ceil(n / cols))
-    fig, axes = plt.subplots(rows, cols, figsize=(18, rows * (18 / cols) * h / w + rows * 0.5))
-    for step, ax in enumerate(np.atleast_1d(axes).flat):
-        ax.axis("off")
-        if step >= n:
-            continue
+    rows = -(-n // cols)
+    fig = plt.figure(figsize=(18, rows * (18 / cols) * h / w + 0.9), layout="constrained")
+    fig.get_layout_engine().set(h_pad=0.03, hspace=0.02)
+    grid = fig.add_gridspec(rows, 2 * cols)  # half-columns, so the last row can be centered
+    for step in range(n):
+        r, c = divmod(step, cols)
+        start = 2 * c + (cols - min(cols, n - r * cols))
+        ax = fig.add_subplot(grid[r, start:start + 2])
         ax.imshow(composite(aligned, step + 1))
         for prev in range(step):
             draw_outline(ax, mask_outline(aligned.masks[prev]), PREVIOUS_OUTLINE_COLOR, 0.6)
-        k = aligned.indices[step]
         draw_outline(ax, mask_outline(aligned.masks[step]), OUTLINE_COLOR, 1.5)
-        parent = aligned.parents[k]
-        suffix = " (referência)" if parent is None else f", ligada a {names[parent]}"
-        ax.set_title(f"Passo {step + 1}: + {names[k]}{suffix}", fontsize=IMAGE_TITLE)
-    fig.suptitle("Alinhamento progressivo (contorno amarelo = imagem adicionada no passo)", fontsize=IMAGE_SUPTITLE)
-    fig.tight_layout(rect=(0, 0, 1, 1 - 0.6 / fig.get_figheight()))  # room for the suptitle
+        ax.set_title(f"Passo {step + 1}", fontsize=IMAGE_TITLE)
+        ax.axis("off")
+    fig.suptitle(f"Alinhamento Progressivo: Conjunto {group}", fontsize=IMAGE_SUPTITLE)
     save_figure(fig, path)
 
 
-def plot_outlines(names: list[str], result: AlignmentResult, path: Path) -> None:
-    """Final canvas with the outline of every warped image and its composition step."""
+def plot_outlines(result: AlignmentResult, group: str, path: Path) -> None:
+    """Final canvas with the outline of every warped image."""
     aligned = result.aligned
     w, h = aligned.canvas_size
-    fig, ax = plt.subplots(figsize=(18, 18 * h / w + 0.8))
+    fig, ax = plt.subplots(figsize=(18, 18 * h / w + 0.8), layout="constrained")
     ax.imshow(composite(aligned, len(aligned.indices)))
-    for step, k in enumerate(aligned.indices):
-        outline = mask_outline(aligned.masks[step])
-        draw_outline(ax, outline, OUTLINE_COLOR, 1.2)
-        (x0, y0), (x1, y1) = outline.min(axis=0), outline.max(axis=0)
-        cx, cy = (x0 + x1) / 2, y0 + (y1 - y0) * (0.3 if step % 2 else 0.7)  # alternate heights: no overlap
-        ax.text(cx, cy, f"{step + 1}\n{names[k]}", ha="center", va="center", fontsize=IMAGE_TEXT, color="black",
-                bbox={"fc": OUTLINE_COLOR, "ec": "black", "alpha": 0.85, "pad": 2})
+    for step in range(len(aligned.indices)):
+        draw_outline(ax, mask_outline(aligned.masks[step]), OUTLINE_COLOR, 1.2)
+    ax.set_xlim(-0.5, w - 0.5)
+    ax.set_ylim(h - 0.5, -0.5)
     ax.axis("off")
-    ax.set_title(f"Imagens alinhadas no canvas ({w}x{h} px, projeção {result.projection}); "
-                 f"número = ordem de composição a partir da referência", fontsize=IMAGE_TITLE, color=INK_SECONDARY)
+    ax.set_title(f"Contornos das Imagens Alinhadas: Conjunto {group}", fontsize=IMAGE_SUPTITLE)
     save_figure(fig, path)
