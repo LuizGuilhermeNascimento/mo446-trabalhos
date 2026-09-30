@@ -21,6 +21,8 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.lines import Line2D
+from matplotlib.patches import FancyArrowPatch, Patch
 
 from common import (CRITICAL, IMAGE_SUPTITLE, IMAGE_TEXT, INK, INK_MUTED, INK_SECONDARY, ImageSet, log,
                     print_table, save_figure, write_csv)
@@ -33,8 +35,7 @@ MIN_INLIERS = 20  # default heuristic: minimum inliers for a pair to overlap
 ALPHA, BETA = 8.0, 0.3  # Brown & Lowe (2007) verification: n_inliers > ALPHA + BETA * n_matches
 
 HEATMAP = LinearSegmentedColormap.from_list("inliers", ["#f7f7f5", "#cde2fb", "#6da7ec", "#256abf", "#0d366b"])
-TREE_COLOR = "#256abf"  # edges of the maximum spanning tree (the inferred sequence)
-EDGE_COLOR = "#c3c2b7"  # other accepted overlaps
+TREE_COLOR = "#256abf"  # nodes and edges of the inferred sequence (maximum spanning tree)
 
 
 @dataclass
@@ -154,103 +155,129 @@ def save_sorting_outputs(image_set: ImageSet, result: SortingResult, out_dir: Pa
     write_csv(pair_rows, out_dir / "pares.csv")
     write_csv(decision, out_dir / "decisao_por_imagem.csv")
 
-    plot_matrix(result, display, out_dir / "matriz_conectividade.png")
-    plot_graph(result, out_dir / "grafo_vizinhanca.png")
+    group = image_set.group
+    plot_matrix(result, display, group, out_dir / "matriz_conectividade.png")
+    plot_graph(result, group, out_dir / "grafo_vizinhanca.png")
     plot_sequence(image_set, result, out_dir / "sequencia_inferida.jpg")
     for k in result.rejected:  # evidence of the rejection: RANSAC on the intruder's best pair
-        best = max((m for m in range(n) if m != k), key=lambda m: result.inlier_matrix[k, m])
+        best = best_partner(result, k)
         pair = result.homography(k, best)
+        found = ("Nenhuma Correspondência Consistente" if pair.n_inliers == 0 else
+                 f"Apenas {pair.n_inliers} Correspondências Consistentes (Mínimo {result.required[k, best]})")
         plot_ransac(image_set.images[k], image_set.images[best], pair,
-                    f"Intrusa {names[k]} x melhor candidata {names[best]}: {pair.n_matches} matches, "
-                    f"{pair.n_inliers} inliers (limiar {result.required[k, best]}): rejeitada",
+                    f"Imagem Intrusa {names[k]} e Melhor Candidata {names[best]}: {found}",
                     out_dir / f"intrusa_{names[k]}.jpg")
     log("Passo 3", f"saídas salvas em {out_dir}")
 
 
-def plot_matrix(result: SortingResult, display: list[int], path: Path) -> None:
-    """Heatmap of the connectivity matrix; outlined cells = pairs that overlap (as in Figure 4)."""
+def best_partner(result: SortingResult, k: int) -> int:
+    return max((m for m in range(len(result.names)) if m != k), key=lambda m: result.inlier_matrix[k, m])
+
+
+def plot_matrix(result: SortingResult, display: list[int], group: str, path: Path) -> None:
+    """Heatmap of the connectivity matrix in the inferred order; outlined cells = pairs that overlap
+    (as in Figure 4 of the assignment); intruders labeled in red."""
     m = result.inlier_matrix[np.ix_(display, display)]
     labels = [result.names[k] for k in display]
-    size = max(6.0, 0.75 * len(display) + 2)
-    fig, ax = plt.subplots(figsize=(size + 1.5, size))
+    size = max(6.0, 0.85 * len(display) + 2)
+    fig, ax = plt.subplots(figsize=(size + 1.5, size + 1.2), layout="constrained")
     image = ax.imshow(m, cmap=HEATMAP)
     for r, c in itertools.product(range(len(display)), repeat=2):
         if r == c:
-            ax.text(c, r, "—", ha="center", va="center", color=INK_MUTED, fontsize=9)
+            ax.text(c, r, "—", ha="center", va="center", color=INK_MUTED, fontsize=11)
             continue
         dark = m[r, c] > 0.55 * m.max()
-        ax.text(c, r, str(m[r, c]), ha="center", va="center", fontsize=8, color="white" if dark else INK)
-        if result.adjacency[display[r], display[c]]:
-            ax.add_patch(plt.Rectangle((c - 0.5, r - 0.5), 1, 1, fill=False, edgecolor=INK, lw=1.2))
-    ax.set_xticks(range(len(labels)), labels, rotation=60, ha="right", fontsize=9)
-    ax.set_yticks(range(len(labels)), labels, fontsize=9)
+        ax.text(c, r, str(m[r, c]), ha="center", va="center", fontsize=11, color="white" if dark else INK)
+        if result.adjacency[display[r], display[c]]:  # clip_on=False: border cells keep their whole outline
+            ax.add_patch(plt.Rectangle((c - 0.5, r - 0.5), 1, 1, fill=False, edgecolor=INK, lw=1.2, clip_on=False))
+    ax.set_xticks(range(len(labels)), labels, rotation=90, fontsize=11)
+    ax.set_yticks(range(len(labels)), labels, fontsize=11)
     for tick in (*ax.get_xticklabels(), *ax.get_yticklabels()):
         if result.names.index(tick.get_text()) in result.rejected:
             tick.set_color(CRITICAL)
     ax.grid(False)
+    for spine in ax.spines.values():
+        spine.set_visible(False)
     fig.colorbar(image, ax=ax, fraction=0.046, pad=0.04, label="inliers RANSAC")
-    ax.set_title("Matriz de conectividade na ordem inferida\n(contorno = pares que se sobrepõem; "
-                 "em vermelho = intrusas)", fontsize=11)
+    fig.legend(handles=[Patch(facecolor="none", edgecolor=INK, lw=1.2, label="par com sobreposição"),
+                        Line2D([], [], color=CRITICAL, lw=0, marker="s", label="imagem intrusa (rótulo em vermelho)")],
+               loc="outside lower center", ncols=2, fontsize=10, frameon=False)
+    fig.suptitle(f"Matriz de Conectividade (Inliers RANSAC por Par): Conjunto {group}", fontsize=13)
     save_figure(fig, path)
 
 
-def plot_graph(result: SortingResult, path: Path) -> None:
-    """Neighborhood graph: sequence on an arc, tree edges in blue, other overlaps in gray,
-    intruders isolated below with a dashed red border."""
+def plot_graph(result: SortingResult, group: str, path: Path) -> None:
+    """Neighborhood graph (Figure 4 of the assignment): the inferred sequence on a line, each edge of the
+    maximum spanning tree labeled with its inliers; each intruder right below its best candidate, linked by
+    a dashed red line crossed out and labeled with its (too few) inliers."""
     names, order = result.names, result.order
-    angles = np.linspace(np.pi * 0.95, np.pi * 0.05, len(order))
-    pos = {k: (np.cos(a), np.sin(a)) for k, a in zip(order, angles)}
-    for s, k in enumerate(result.rejected):
-        pos[k] = ((s - (len(result.rejected) - 1) / 2) * 0.5, -0.45)
+    pos = {k: (float(n), 0.0) for n, k in enumerate(order)}
+    below: dict[int, int] = {}
+    for k in result.rejected:  # below the best candidate (side by side when several share it)
+        best = best_partner(result, k)
+        x = pos[best][0] if best in pos else (len(order) - 1) / 2
+        pos[k] = (x + 0.9 * below.get(best, 0), -1.3)
+        below[best] = below.get(best, 0) + 1
 
-    max_w = max(result.inlier_matrix[e] for e in result.overlap_edges)
-    fig, ax = plt.subplots(figsize=(max(9, 1.3 * len(order)), 6))
-    for i, j in result.overlap_edges:
-        in_tree = (i, j) in result.tree_edges
+    fig, ax = plt.subplots(figsize=(1.4 * len(order) + 1.0, 3.8), layout="constrained")
+    for i, j in result.tree_edges:
         (x1, y1), (x2, y2) = pos[i], pos[j]
-        ax.plot([x1, x2], [y1, y2], color=TREE_COLOR if in_tree else EDGE_COLOR, zorder=1.5 if in_tree else 1,
-                lw=1 + 4 * result.inlier_matrix[i, j] / max_w, solid_capstyle="round")
-        if in_tree:
-            ax.text((x1 + x2) / 2, (y1 + y2) / 2 + 0.06, str(result.inlier_matrix[i, j]), ha="center",
-                    fontsize=9, color=TREE_COLOR, bbox={"fc": "white", "ec": "none", "pad": 1})
+        adjacent = abs(order.index(i) - order.index(j)) == 1
+        ax.add_patch(FancyArrowPatch((x1, y1), (x2, y2), arrowstyle="-", color=TREE_COLOR, lw=3, zorder=1,
+                                     connectionstyle="arc3" if adjacent else "arc3,rad=-0.35",
+                                     shrinkA=0, shrinkB=0))
+        ax.text((x1 + x2) / 2, 0.12 if adjacent else 0.5, str(result.inlier_matrix[i, j]), ha="center",
+                va="bottom", fontsize=11, color=INK)
+    for k in result.rejected:
+        best = best_partner(result, k)
+        (x1, y1), (x2, y2) = pos[k], pos[best]
+        y1 += 0.22  # from the top of the intruder node...
+        y2 -= 0.85 if best == result.reference else 0.62  # ...to just below the candidate's name
+        ax.plot([x1, x2], [y1, y2], color=CRITICAL, lw=2, ls="--", zorder=1)
+        xm, ym = (x1 + x2) / 2, (y1 + y2) / 2
+        ax.scatter(xm, ym, s=160, marker="x", color=CRITICAL, linewidths=3, zorder=2)
+        ax.text(xm + 0.12, ym, str(result.inlier_matrix[k, best]), ha="left", va="center", fontsize=11,
+                color=CRITICAL)
     for k, (x, y) in pos.items():
-        rejected = k in result.rejected
-        ax.scatter(x, y, s=900, zorder=2, c="white", linewidths=2,
-                   edgecolors=CRITICAL if rejected else INK if k == result.reference else TREE_COLOR,
-                   linestyle="--" if rejected else "-")
-        ax.text(x, y, "X" if rejected else str(order.index(k) + 1), ha="center", va="center", zorder=3,
-                fontsize=11, fontweight="bold", color=CRITICAL if rejected else INK)
-        label = names[k] + ("\nintrusa rejeitada" if rejected else "\n(referência)" if k == result.reference else "")
-        if rejected:
-            ax.text(x, y - 0.13, label, ha="center", va="top", fontsize=8, color=INK_SECONDARY)
-        else:  # sequence labels outside the arc, aligned away from the node
-            ha = "right" if x < -0.3 else "left" if x > 0.3 else "center"
-            ax.text(1.14 * x, 1.14 * y + 0.04, label, ha=ha, va="bottom", fontsize=8, color=INK_SECONDARY)
-    ax.set_xlim(-1.45, 1.45)
-    ax.set_ylim(-0.8, 1.35)
-    ax.set_aspect("equal")
+        rejected, reference = k in result.rejected, k == result.reference
+        color = CRITICAL if rejected else INK if reference else TREE_COLOR
+        ax.scatter(x, y, s=1100, color=color, edgecolors="white", linewidths=2, zorder=3)
+        ax.text(x, y, "X" if rejected else str(order.index(k) + 1), ha="center", va="center", fontsize=13,
+                color="white", zorder=4)
+        extra = "\nintrusa rejeitada" if rejected else "\nreferência" if reference else ""
+        ax.text(x, y - 0.3, names[k] + extra, ha="center", va="top", fontsize=10,
+                color=CRITICAL if rejected else INK_SECONDARY)
+    ax.set_xlim(-0.7, len(order) - 0.3)
+    ax.set_ylim(-2.0, 0.9 if any(abs(order.index(i) - order.index(j)) > 1 for i, j in result.tree_edges) else 0.5)
     ax.axis("off")
-    ax.set_title("Grafo de vizinhança: número = posição na sequência inferida; espessura = inliers\n"
-                 "azul = árvore geradora máxima (sequência), cinza = outras sobreposições", fontsize=11)
-    save_figure(fig, path)
+    fig.legend(handles=[Line2D([], [], color=TREE_COLOR, lw=3, label="par vizinho (número = inliers)"),
+                        Line2D([], [], color=CRITICAL, lw=2, ls="--", marker="x", ms=9, mew=2.5,
+                               label="intrusa rejeitada")],
+               loc="outside lower center", ncols=2, fontsize=11, frameon=False)
+    fig.suptitle(f"Grafo de Vizinhança e Sequência Inferida: Conjunto {group}", fontsize=14)
+    save_figure(fig, path, dpi=220)
 
 
 def plot_sequence(image_set: ImageSet, result: SortingResult, path: Path) -> None:
     """Thumbnails in the inferred order, intruders at the end crossed out."""
     shown = result.order + result.rejected
-    fig, axes = plt.subplots(1, len(shown), figsize=(2.6 * len(shown), 2.6))
+    h, w = image_set.images[result.order[0]].shape[:2]
+    panel = 3.3
+    fig, axes = plt.subplots(1, len(shown), figsize=(panel * len(shown), panel * h / w + 1.3), layout="constrained")
+    fig.get_layout_engine().set(w_pad=0.01, wspace=0.005)  # images close together
     for ax, k in zip(np.atleast_1d(axes), shown):
         ax.imshow(cv2.cvtColor(image_set.images[k], cv2.COLOR_BGR2RGB))
         if k in result.rejected:
-            h, w = image_set.images[k].shape[:2]
-            ax.plot([0, w], [0, h], color=CRITICAL, lw=3)
-            ax.plot([0, w], [h, 0], color=CRITICAL, lw=3)
+            ih, iw = image_set.images[k].shape[:2]
+            ax.plot([0, iw - 1], [0, ih - 1], color=CRITICAL, lw=3)
+            ax.plot([0, iw - 1], [ih - 1, 0], color=CRITICAL, lw=3)
+            ax.set_xlim(-0.5, iw - 0.5)  # same extent as the other panels
+            ax.set_ylim(ih - 0.5, -0.5)
             title, color = f"intrusa\n{result.names[k]}", CRITICAL
         else:
-            ref = " (ref.)" if k == result.reference else ""
+            ref = " (referência)" if k == result.reference else ""
             title, color = f"{result.order.index(k) + 1}{ref}\n{result.names[k]}", INK
         ax.set_title(title, fontsize=IMAGE_TEXT, color=color)
         ax.axis("off")
-    fig.suptitle("Sequência inferida sem EXIF (da esquerda para a direita)", fontsize=IMAGE_SUPTITLE)
-    fig.tight_layout(rect=(0, 0, 1, 1 - 0.6 / fig.get_figheight()))  # room for the suptitle
+    fig.suptitle(f"Sequência Inferida: Conjunto {image_set.group}", fontsize=IMAGE_SUPTITLE)
     save_figure(fig, path)

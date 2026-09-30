@@ -122,9 +122,9 @@ def save_image(path: Path, image: np.ndarray) -> None:
     cv2.imwrite(str(path), image, [cv2.IMWRITE_JPEG_QUALITY, 92])
 
 
-def save_figure(fig: plt.Figure, path: Path) -> None:
+def save_figure(fig: plt.Figure, path: Path, dpi: int = 150) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(path, dpi=150, bbox_inches="tight", pil_kwargs={"quality": 92} if path.suffix == ".jpg" else None)
+    fig.savefig(path, dpi=dpi, bbox_inches="tight", pil_kwargs={"quality": 92} if path.suffix == ".jpg" else None)
     plt.close(fig)
 
 

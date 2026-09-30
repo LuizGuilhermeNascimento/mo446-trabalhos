@@ -17,8 +17,8 @@ RANSAC_THRESHOLD = 3.0  # px; OpenCV's default ransacReprojThreshold
 RANSAC_MAX_ITERS = 2000  # OpenCV's default maxIters
 RANSAC_CONFIDENCE = 0.995  # OpenCV's default confidence
 
-INLIER_COLOR = "lime"  # RANSAC inliers (filled dots + lines)
-OUTLIER_COLOR = "red"  # RANSAC outliers (x markers)
+INLIER_COLOR = "lime"  # RANSAC inliers (solid lines)
+OUTLIER_COLOR = "red"  # RANSAC outliers (dashed lines)
 
 
 @dataclass
@@ -100,25 +100,26 @@ def fit_homography(i: int, j: int, pts_i: np.ndarray, pts_j: np.ndarray) -> Pair
 
 
 def plot_ransac(img_i: np.ndarray, img_j: np.ndarray, pair: PairHomography, title: str, path: Path) -> None:
-    """As in Figure 5 of the assignment: inliers = filled dots (joined by lines), outliers = x."""
+    """Matches of the pair after RANSAC (as in Figure 5 of the assignment), in the style of step 2:
+    consistent with the homography (inlier) = green solid line, inconsistent (outlier) = red dashed line."""
     canvas, offset = pair_canvas(img_i, img_j)
     h, w = canvas.shape[:2]
-    fig, ax = plt.subplots(figsize=(14, 14 * h / w + 1.0))
+    fig, ax = plt.subplots(figsize=(14, 14 * h / w + 1.0), layout="constrained")
     ax.imshow(canvas)
-    inliers = sample(list(np.flatnonzero(pair.inlier_mask)))
-    outliers = np.flatnonzero(~pair.inlier_mask)
     pi, pj = pair.pts_i, pair.pts_j + [offset, 0]
-    if inliers:
-        ax.add_collection(LineCollection(np.stack([pi[inliers], pj[inliers]], axis=1), colors=INLIER_COLOR,
-                                         linewidths=0.8, alpha=0.8))
-        for pts in (pi[inliers], pj[inliers]):
-            ax.scatter(pts[:, 0], pts[:, 1], s=14, c=INLIER_COLOR, edgecolors="black", linewidths=0.3, zorder=3)
-    for pts in (pi[outliers], pj[outliers]):
-        ax.scatter(pts[:, 0], pts[:, 1], s=28, c=OUTLIER_COLOR, marker="x", linewidths=1.2, zorder=3)
-    ax.legend(handles=[Line2D([], [], color=INLIER_COLOR, marker="o", mec="black", ls="-", label="inlier"),
-                       Line2D([], [], color=OUTLIER_COLOR, marker="x", ls="", label="outlier")],
-              loc="upper center", bbox_to_anchor=(0.5, -0.01), ncols=2, fontsize=IMAGE_TEXT, frameon=False)
+    for idx, color, style in ((np.flatnonzero(~pair.inlier_mask), OUTLIER_COLOR, "--"),
+                              (np.array(sample(list(np.flatnonzero(pair.inlier_mask))), int), INLIER_COLOR, "-")):
+        if len(idx) == 0:
+            continue
+        ax.add_collection(LineCollection(np.stack([pi[idx], pj[idx]], axis=1), colors=color, linestyles=style,
+                                         linewidths=1.2), autolim=False)
+        ax.scatter(np.r_[pi[idx, 0], pj[idx, 0]], np.r_[pi[idx, 1], pj[idx, 1]], s=14, c=color,
+                   edgecolors="black", linewidths=0.3, zorder=3)
+    fig.legend(handles=[Line2D([], [], color=INLIER_COLOR, lw=2, label="consistente com a homografia (inlier)"),
+                        Line2D([], [], color=OUTLIER_COLOR, lw=2, ls="--", label="inconsistente (outlier)")],
+               loc="outside lower center", ncols=2, fontsize=IMAGE_TEXT, frameon=False)
+    ax.set_xlim(-0.5, w - 0.5)
+    ax.set_ylim(h - 0.5, -0.5)
     ax.set_title(title, fontsize=IMAGE_TITLE)
     ax.axis("off")
-    fig.tight_layout()
     save_figure(fig, path)
