@@ -84,3 +84,7 @@ Cada passo gera as saídas do método escolhido e o estudo comparativo, em figur
 | 5. composição | `comparacao_deghosting.jpg` (mesma região sem/com remoção de fantasmas), `comparacao_metodos.jpg`, `metricas_metodos_composicao.png/.csv`, `costuras.jpg`, `metricas_composicao.csv`, `distorcao_por_imagem.csv` |
 
 O panorama final fica em `output/final/<grupo>/panorama.jpg`, recortado no maior retângulo sem bordas pretas.
+
+## Experimento 360°
+
+A coleta de Bragança Paulista usa um módulo separado, com ajuste global de rotações e composição esférica periódica. Comandos, parâmetros, resultados e limitações em [PANORAMA_360.md](PANORAMA_360.md).

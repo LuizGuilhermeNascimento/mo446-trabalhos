@@ -1,0 +1,31 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Panorama 360° — Bragança Paulista</title>
+<style>body{height:100dvh;display:flex;flex-direction:column;margin:0;background:#172029;color:#fff;font:16px system-ui}header{padding:14px 20px}h1{font-size:20px;margin:0 0 6px}p{margin:0;color:#cbd5df}canvas{display:block;width:100vw;flex:1;min-height:0;height:0;touch-action:none;cursor:grab}footer{flex-shrink:0;padding:8px 20px;font-size:13px}button{margin-left:14px;padding:5px 12px;cursor:pointer}</style>
+<header><h1>Bragança Paulista · panorama 360°</h1><p>Arraste para olhar ao redor. Use a roda do mouse para aproximar.<button id="reset">Reiniciar</button></p></header>
+<canvas id="view" aria-label="Visualizador interativo do panorama 360 graus"></canvas>
+<footer>22 fotos · Samsung Galaxy S24 Ultra · 360° horizontais; recorte vertical limitado à área fotografada.</footer>
+<script>
+const meta=__META__, canvas=document.getElementById('view'), gl=canvas.getContext('webgl');
+if(!gl) throw new Error('Este navegador não oferece WebGL. Abra panorama_360.jpg.');
+function shader(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s;}
+const program=gl.createProgram();
+gl.attachShader(program,shader(gl.VERTEX_SHADER,'attribute vec2 pos;varying vec2 screen;void main(){screen=pos;gl_Position=vec4(pos,0.,1.);}'));
+gl.attachShader(program,shader(gl.FRAGMENT_SHADER,`precision highp float;
+varying vec2 screen;uniform sampler2D image;uniform float aspect,yaw,pitch,fov,top,height;
+void main(){vec3 d=normalize(vec3(screen.x*aspect*tan(fov/2.),-screen.y*tan(fov/2.),1.));
+d=vec3(d.x,cos(pitch)*d.y+sin(pitch)*d.z,-sin(pitch)*d.y+cos(pitch)*d.z);
+d=vec3(cos(yaw)*d.x+sin(yaw)*d.z,d.y,-sin(yaw)*d.x+cos(yaw)*d.z);
+float u=fract(atan(d.x,d.z)/6.28318530718+.5);float v=(asin(clamp(d.y,-1.,1.))/3.14159265359+.5-top)/height;
+if(v<0.||v>1.)gl_FragColor=vec4(.09,.12,.16,1.);else gl_FragColor=texture2D(image,vec2(u,1.-v));}`));
+gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(program));gl.useProgram(program);
+const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+const pos=gl.getAttribLocation(program,'pos');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
+const texture=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,texture);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+const uniforms=Object.fromEntries(['aspect','yaw','pitch','fov','top','height'].map(k=>[k,gl.getUniformLocation(program,k)]));
+let yaw=1.05,pitch=0,fov=.85,ready=false;
+function draw(){if(!ready)return;const scale=Math.min(devicePixelRatio,2);canvas.width=Math.round(canvas.clientWidth*scale);canvas.height=Math.round(canvas.clientHeight*scale);gl.viewport(0,0,canvas.width,canvas.height);const values={aspect:canvas.width/canvas.height,yaw,pitch,fov,top:meta.crop_top/meta.full_sphere_height,height:meta.height/meta.full_sphere_height};for(const [key,value]of Object.entries(values))gl.uniform1f(uniforms[key],value);gl.drawArrays(gl.TRIANGLES,0,6);}
+const image=new Image();image.onload=()=>{if(image.width>gl.getParameter(gl.MAX_TEXTURE_SIZE))throw new Error('Imagem maior que o limite WebGL deste dispositivo.');gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,image);ready=true;draw();document.body.dataset.ready='true';};image.src='data:image/jpeg;base64,__JPEG__';
+let drag=null;canvas.onpointerdown=e=>{drag=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);};canvas.onpointermove=e=>{if(!drag)return;yaw-=(e.clientX-drag[0])*.004;pitch=Math.max(-.16,Math.min(.16,pitch-(e.clientY-drag[1])*.003));drag=[e.clientX,e.clientY];draw();};canvas.onpointerup=canvas.onpointercancel=()=>drag=null;
+canvas.addEventListener('wheel',e=>{e.preventDefault();fov=Math.max(.35,Math.min(.95,fov+e.deltaY*.001));draw();},{passive:false});
+document.getElementById('reset').onclick=()=>{yaw=1.05;pitch=0;fov=.85;draw();};window.onresize=draw;
+</script></html>
