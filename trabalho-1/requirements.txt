@@ -1,0 +1,7 @@
+# OpenCV 5 moved AKAZE out of the main package, so we stay on the 4.x series.
+opencv-python>=4.12,<5
+numpy>=2.0
+scipy>=1.14
+matplotlib>=3.9
+networkx>=3.3
+jupyter>=1.0  # only for panorama.ipynb
