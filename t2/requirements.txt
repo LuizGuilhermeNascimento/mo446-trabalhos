@@ -1,0 +1,7 @@
+# Python 3.12 runtime for the T2 reconstruction workflow.
+numpy==2.5.2
+opencv-python-headless==4.14.0.94
+scipy==1.18.1
+matplotlib==3.11.1
+open3d==0.20.0
+ipykernel==7.3.0
