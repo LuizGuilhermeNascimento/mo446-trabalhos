@@ -2,7 +2,7 @@
   "imagens": 42,
   "imagens_registradas": 42,
   "reprojecao_px": {
-    "media": 1.2130449156552738,
+    "media": 1.213044915655274,
     "mediana": 1.0401831670339705
   },
   "pontos_esparsos": 9065,
@@ -33,16 +33,28 @@
   },
   "dimensoes": {
     "comprimento_mm": {
-      "estimado": 119.109130859375
+      "estimado": 119.109130859375,
+      "medido": 119.0,
+      "desvio_medidas": 0.0,
+      "erro_abs": 0.109130859375,
+      "erro_rel_pct": 0.09170660451680672
     },
     "largura_mm": {
-      "estimado": 65.81505584716797
+      "estimado": 65.81505584716797,
+      "medido": 64.0,
+      "desvio_medidas": 0.0,
+      "erro_abs": 1.8150558471679688,
+      "erro_rel_pct": 2.836024761199951
     },
     "altura_mm": {
-      "estimado": 81.59868798404932
+      "estimado": 81.59868798404932,
+      "medido": 81.0,
+      "desvio_medidas": 0.0,
+      "erro_abs": 0.5986879840493202,
+      "erro_rel_pct": 0.7391209679621237
     },
     "volume_cm3": {
-      "estimado": 215.83382515148165
+      "estimado": 215.83382515148162
     }
   }
 }
