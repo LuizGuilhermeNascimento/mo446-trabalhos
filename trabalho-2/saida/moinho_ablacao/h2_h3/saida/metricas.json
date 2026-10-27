@@ -1,0 +1,48 @@
+{
+  "imagens": 49,
+  "imagens_registradas": 49,
+  "reprojecao_px": {
+    "media": 1.2441428809427764,
+    "mediana": 1.0640904495835426
+  },
+  "pontos_esparsos": 12016,
+  "pontos_densos": 470425,
+  "pontos_densos_objeto": 45505,
+  "area_objeto_m2": 0.02801384462899551,
+  "densidade_pontos_m2": 1624375.3973312327,
+  "tabuleiro_z_mm": {
+    "mediana": 0.09479964897036552,
+    "desvio": 0.6443463619501053
+  },
+  "escala": {
+    "quadrado_mm": 39.6,
+    "mm_por_unidade": 105.23329390436447,
+    "cantos_usados": 30,
+    "cantos_descartados": 0,
+    "vistas_por_canto_mediana": 27.0,
+    "residuo_alinhamento_mm": {
+      "rms": 0.3525364764411448,
+      "mediana": 0.30347315801623076,
+      "max": 0.661965564424938
+    },
+    "reprojecao_cantos_px": {
+      "media": 0.9021535236988831,
+      "mediana": 0.8467493636924448
+    },
+    "pontos_esparsos_roi": 10688
+  },
+  "dimensoes": {
+    "comprimento_mm": {
+      "estimado": 118.7533187866211
+    },
+    "largura_mm": {
+      "estimado": 66.36736297607422
+    },
+    "altura_mm": {
+      "estimado": 81.96333633735776
+    },
+    "volume_cm3": {
+      "estimado": 186.9958127264964
+    }
+  }
+}

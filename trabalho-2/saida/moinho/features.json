@@ -1,0 +1,102 @@
+{
+  "h2/20261026_180233.jpg x h2/20261026_180236.jpg": {
+    "SIFT": {
+      "keypoints": [
+        1588,
+        1660
+      ],
+      "deteccao_ms_por_imagem": 46.69766704319045,
+      "matches": 371,
+      "inliers_F": 285,
+      "inliers_F_pct": 76.81940700808624,
+      "sampson_mediana_px": 0.2418095979986154,
+      "inliers_E": 287,
+      "erro_R_graus": 0.7394924152351285,
+      "erro_t_graus": 4.5196018942573435,
+      "triangulados_frente": 287,
+      "reprojecao_tri_px": 0.34120637804097925
+    },
+    "ORB": {
+      "keypoints": [
+        8000,
+        7840
+      ],
+      "deteccao_ms_por_imagem": 29.083770990837365,
+      "matches": 556,
+      "inliers_F": 322,
+      "inliers_F_pct": 57.9136690647482,
+      "sampson_mediana_px": 0.2890629400457755,
+      "inliers_E": 344,
+      "erro_R_graus": 1.253318290513795,
+      "erro_t_graus": 1.6242213977627988,
+      "triangulados_frente": 344,
+      "reprojecao_tri_px": 0.7975133386246763
+    },
+    "AKAZE": {
+      "keypoints": [
+        3372,
+        3191
+      ],
+      "deteccao_ms_por_imagem": 59.991062444169074,
+      "matches": 432,
+      "inliers_F": 320,
+      "inliers_F_pct": 74.07407407407408,
+      "sampson_mediana_px": 0.17597247685967057,
+      "inliers_E": 352,
+      "erro_R_graus": 1.0235898796037446,
+      "erro_t_graus": 6.425353402169795,
+      "triangulados_frente": 352,
+      "reprojecao_tri_px": 0.5348164347311459
+    }
+  },
+  "h2/20261026_180233.jpg x h2/20261026_180239.jpg": {
+    "SIFT": {
+      "keypoints": [
+        1588,
+        1634
+      ],
+      "deteccao_ms_por_imagem": 43.42699999688193,
+      "matches": 60,
+      "inliers_F": 13,
+      "inliers_F_pct": 21.666666666666668,
+      "sampson_mediana_px": 2.1964259501416164e-13,
+      "inliers_E": 5,
+      "erro_R_graus": 20.414927169043512,
+      "erro_t_graus": 47.68095521796496,
+      "triangulados_frente": 5,
+      "reprojecao_tri_px": 2.451675527347442e-12
+    },
+    "ORB": {
+      "keypoints": [
+        8000,
+        7348
+      ],
+      "deteccao_ms_por_imagem": 13.043145532719791,
+      "matches": 81,
+      "inliers_F": 11,
+      "inliers_F_pct": 13.580246913580247,
+      "sampson_mediana_px": 1.1212001698191835e-13,
+      "inliers_E": 11,
+      "erro_R_graus": 143.68272359726035,
+      "erro_t_graus": 38.095033629022026,
+      "triangulados_frente": 11,
+      "reprojecao_tri_px": 0.0067095600256826425
+    },
+    "AKAZE": {
+      "keypoints": [
+        3372,
+        2649
+      ],
+      "deteccao_ms_por_imagem": 59.12120803259313,
+      "matches": 44,
+      "inliers_F": 10,
+      "inliers_F_pct": 22.727272727272727,
+      "sampson_mediana_px": 1.193046550609731e-13,
+      "inliers_E": 8,
+      "erro_R_graus": 6.182514959320715,
+      "erro_t_graus": 7.728806212266684,
+      "triangulados_frente": 8,
+      "reprojecao_tri_px": 0.08209127561425586
+    }
+  }
+}

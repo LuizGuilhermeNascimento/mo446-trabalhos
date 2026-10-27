@@ -225,5 +225,14 @@ trabalho-1/input/*/*
 trabalho-1/output/*
 !trabalho-1/output/.gitkeep
 
+# T2: SfM/MVS intermediates (database, depth maps, dense cloud) take ~12 GB; only the final results are versioned.
+trabalho-2/saida/**/database.db
+trabalho-2/saida/**/esparso/
+trabalho-2/saida/**/metrico/
+trabalho-2/saida/**/modelos/
+trabalho-2/saida/**/mvs/
+trabalho-2/saida/**/roi/
+trabalho-2/saida/*_ablacao/*/dados/
+
 # AI assistant generated code
 .claude/
