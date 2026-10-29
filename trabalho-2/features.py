@@ -25,19 +25,19 @@ def matcher(name):
     return cv2.BFMatcher(cv2.NORM_HAMMING)
 
 
-def ratio_matches(m, d1, d2):
+def ratio_matches(m, d1, d2, ratio):
     return {p[0].queryIdx: p[0].trainIdx for p in m.knnMatch(d1, d2, k=2)
-            if len(p) == 2 and p[0].distance < RATIO * p[1].distance}
+            if len(p) == 2 and p[0].distance < ratio * p[1].distance}
 
 
-def mutual_matches(m, d1, d2):
-    forward, backward = ratio_matches(m, d1, d2), ratio_matches(m, d2, d1)
+def mutual_matches(m, d1, d2, ratio=RATIO):
+    forward, backward = ratio_matches(m, d1, d2, ratio), ratio_matches(m, d2, d1, ratio)
     return np.array([(i, j) for i, j in forward.items() if backward.get(j) == i]).reshape(-1, 2)
 
 
-def load(path):
+def load(path, max_side=MAX_SIDE):
     img = cv2.imread(str(path), cv2.IMREAD_COLOR | cv2.IMREAD_IGNORE_ORIENTATION)
-    s = MAX_SIDE / max(img.shape[:2])
+    s = max_side / max(img.shape[:2])
     return cv2.resize(img, None, fx=s, fy=s, interpolation=cv2.INTER_AREA), s
 
 
@@ -51,20 +51,20 @@ def sampson(F, p1, p2):
     return (np.sum(x2 * Fx1, 1) ** 2) / (Fx1[:, 0] ** 2 + Fx1[:, 1] ** 2 + Ftx2[:, 0] ** 2 + Ftx2[:, 1] ** 2)
 
 
-def two_view(name, det, im1, im2, img1, img2, s):
+def two_view(name, det, im1, im2, img1, img2, s, ratio=RATIO, threshold=F_THRESHOLD_PX):
     t0 = time.perf_counter()
     k1, d1 = det.detectAndCompute(cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY), None)
     k2, d2 = det.detectAndCompute(cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY), None)
     detect_ms = (time.perf_counter() - t0) * 500
-    pairs = mutual_matches(matcher(name), d1, d2)
+    pairs = mutual_matches(matcher(name), d1, d2, ratio)
     p1 = np.float64([k1[i].pt for i in pairs[:, 0]])
     p2 = np.float64([k2[j].pt for j in pairs[:, 1]])
-    F, mask_f = cv2.findFundamentalMat(p1, p2, cv2.FM_RANSAC, F_THRESHOLD_PX, 0.999)
+    F, mask_f = cv2.findFundamentalMat(p1, p2, cv2.FM_RANSAC, threshold, 0.999)
     inl = mask_f.ravel() > 0
 
     cam = im1.camera
     n1, n2 = cam.cam_from_img((p1 + 0.5) / s), cam.cam_from_img((p2 + 0.5) / s)
-    E, mask_e = cv2.findEssentialMat(n1, n2, np.eye(3), cv2.RANSAC, 0.999, F_THRESHOLD_PX / (cam.mean_focal_length() * s))
+    E, mask_e = cv2.findEssentialMat(n1, n2, np.eye(3), cv2.RANSAC, 0.999, threshold / (cam.mean_focal_length() * s))
     _, R, t, mask_pose = cv2.recoverPose(E, n1, n2, np.eye(3), mask=mask_e.copy())
     good = mask_pose.ravel() > 0
     T1, T2 = im1.cam_from_world().matrix(), im2.cam_from_world().matrix()
@@ -89,7 +89,7 @@ def two_view(name, det, im1, im2, img1, img2, s):
 
 def draw_keypoints(img, results, path):
     fig, axes = plt.subplots(1, len(results), figsize=(6 * len(results), 4.5))
-    for ax, (name, (stats, r)) in zip(axes, results.items()):
+    for ax, (name, (stats, r)) in zip(np.atleast_1d(axes), results.items()):
         ax.imshow(cv2.cvtColor(cv2.drawKeypoints(img, r["k1"], None, (0, 255, 0)), cv2.COLOR_BGR2RGB))
         ax.set_title(f"{name}: {stats['keypoints'][0]} keypoints, {stats['deteccao_ms_por_imagem']:.0f} ms")
         ax.axis("off")
@@ -146,7 +146,14 @@ def main(data, out, names=None):
     table = {}
     for n1, n2 in pairs:
         (img1, s), (img2, _) = load(data / n1), load(data / n2)
-        results = {name: two_view(name, det, by_name[n1], by_name[n2], img1, img2, s) for name, det in detectors().items()}
+        results = {}
+        for name, det in detectors().items():
+            try:
+                results[name] = two_view(name, det, by_name[n1], by_name[n2], img1, img2, s)
+            except (cv2.error, TypeError, ValueError, AttributeError) as e:  # too few matches for F, E or triangulation
+                print(f"{n1} x {n2}: {name} falhou ({e})")
+        if "SIFT" not in results:
+            continue
         tag = f"{Path(n1).stem}_{Path(n2).stem}"
         draw_keypoints(img1, results, figures / f"keypoints_{tag}.png")
         for name, (_, r) in results.items():

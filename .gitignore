@@ -233,6 +233,14 @@ trabalho-2/saida/**/modelos/
 trabalho-2/saida/**/mvs/
 trabalho-2/saida/**/roi/
 trabalho-2/saida/*_ablacao/*/dados/
+# Original videos (hundreds of MB) stay on Drive; the extracted frames are versioned.
+trabalho-2/dados/*/video/
+# The full-scene GLB (158 MB for the duck) and modelo.glb are left out: modelo.html embeds the same GLB.
+trabalho-2/saida/*/cena.glb
+trabalho-2/saida/*/modelo.glb
+trabalho-2/saida/grm_web/
+trabalho-2/saida/*_logs/
+trabalho-2/saida/*.done
 
 # AI assistant generated code
 .claude/

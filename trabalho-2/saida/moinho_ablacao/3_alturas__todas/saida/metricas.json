@@ -29,7 +29,17 @@
       "media": 0.9719915462293545,
       "mediana": 0.9301560811448834
     },
-    "pontos_esparsos_roi": 21795
+    "pontos_esparsos_roi": 21795,
+    "area_xy_mm": [
+      [
+        0.0,
+        -237.6
+      ],
+      [
+        356.40000000000003,
+        0.0
+      ]
+    ]
   },
   "dimensoes": {
     "comprimento_mm": {

@@ -2,7 +2,7 @@
   "3 alturas, todas": {
     "fotos": 96,
     "ok": true,
-    "minutos": 0.030510147412618,
+    "minutos": 0.030213220914204916,
     "registradas": 96,
     "reprojecao_px": 1.0979676957553763,
     "dimensoes": {
@@ -17,6 +17,7 @@
       "altura_mm": 81.40771001577377,
       "volume_cm3": 180.5367647246903
     },
+    "icp_translacao_mm": 0.0,
     "acuracia_1mm_pct": 100.0,
     "completude_1mm_pct": 100.0,
     "acuracia_2mm_pct": 100.0,
@@ -26,7 +27,7 @@
   "3 alturas, 1/2": {
     "fotos": 60,
     "ok": true,
-    "minutos": 0.022968244552612305,
+    "minutos": 0.02236106793085734,
     "registradas": 60,
     "reprojecao_px": 1.0862637134158892,
     "dimensoes": {
@@ -41,16 +42,17 @@
       "altura_mm": 81.71986982226372,
       "volume_cm3": 202.19384392825071
     },
-    "acuracia_1mm_pct": 86.60887377007207,
-    "completude_1mm_pct": 81.45155791913821,
-    "acuracia_2mm_pct": 93.50378580050477,
-    "completude_2mm_pct": 88.59685007158929,
-    "chamfer_mm": 0.8424655199050903
+    "icp_translacao_mm": 0.5512641920104985,
+    "acuracia_1mm_pct": 86.67471377885073,
+    "completude_1mm_pct": 81.59814549669325,
+    "acuracia_2mm_pct": 93.51110135703574,
+    "completude_2mm_pct": 88.63094020590441,
+    "chamfer_mm": 0.8228868246078491
   },
   "3 alturas, 1/3": {
     "fotos": 48,
     "ok": true,
-    "minutos": 0.02007357676823934,
+    "minutos": 0.01938474973042806,
     "registradas": 48,
     "reprojecao_px": 1.067563293390138,
     "dimensoes": {
@@ -65,16 +67,17 @@
       "altura_mm": 81.71098448336124,
       "volume_cm3": 212.52935965289032
     },
-    "acuracia_1mm_pct": 81.89759388527084,
-    "completude_1mm_pct": 73.20174541487694,
-    "acuracia_2mm_pct": 91.22567562297704,
-    "completude_2mm_pct": 82.2935842367219,
-    "chamfer_mm": 1.1284277439117432
+    "icp_translacao_mm": 0.49248604383476974,
+    "acuracia_1mm_pct": 82.20567016339741,
+    "completude_1mm_pct": 73.31424285811686,
+    "acuracia_2mm_pct": 91.33876691494754,
+    "completude_2mm_pct": 82.38562759937274,
+    "chamfer_mm": 1.122389793395996
   },
   "3 alturas, 1/4": {
     "fotos": 42,
     "ok": true,
-    "minutos": 0.018680322170257568,
+    "minutos": 0.019049406051635742,
     "registradas": 42,
     "reprojecao_px": 1.0401831670339705,
     "dimensoes": {
@@ -89,16 +92,42 @@
       "altura_mm": 81.59868798404932,
       "volume_cm3": 215.83382515148162
     },
-    "acuracia_1mm_pct": 76.65235362574742,
-    "completude_1mm_pct": 67.39960455444195,
-    "acuracia_2mm_pct": 88.241903768209,
-    "completude_2mm_pct": 78.79934546942114,
-    "chamfer_mm": 1.2721401453018188
+    "icp_translacao_mm": 0.36018723701847616,
+    "acuracia_1mm_pct": 77.1579918937357,
+    "completude_1mm_pct": 67.63141746778483,
+    "acuracia_2mm_pct": 88.2378907660821,
+    "completude_2mm_pct": 78.64593986500307,
+    "chamfer_mm": 1.2398353815078735
+  },
+  "3 alturas, sem extra": {
+    "fotos": 74,
+    "ok": true,
+    "minutos": 0.024905192852020263,
+    "registradas": 74,
+    "reprojecao_px": 1.061791239153695,
+    "dimensoes": {
+      "comprimento_mm": 0.34220123291015625,
+      "largura_mm": 1.372955322265625,
+      "altura_mm": 0.832976046949625,
+      "volume_cm3": null
+    },
+    "estimado": {
+      "comprimento_mm": 118.65779876708984,
+      "largura_mm": 65.37295532226562,
+      "altura_mm": 81.83297604694963,
+      "volume_cm3": 181.4802011793539
+    },
+    "icp_translacao_mm": 0.42580558047583256,
+    "acuracia_1mm_pct": 93.36006524398532,
+    "completude_1mm_pct": 93.26719847276198,
+    "acuracia_2mm_pct": 98.05967106157402,
+    "completude_2mm_pct": 98.19322288129814,
+    "chamfer_mm": 0.3148764967918396
   },
   "h1+h2": {
     "fotos": 53,
     "ok": true,
-    "minutos": 0.020931784311930338,
+    "minutos": 0.02067744731903076,
     "registradas": 53,
     "reprojecao_px": 1.024942171342919,
     "dimensoes": {
@@ -113,16 +142,17 @@
       "altura_mm": 81.44397670030594,
       "volume_cm3": 179.6111332412044
     },
-    "acuracia_1mm_pct": 87.9638039492717,
-    "completude_1mm_pct": 88.16049635235564,
-    "acuracia_2mm_pct": 94.89016718807818,
-    "completude_2mm_pct": 95.09442967205291,
-    "chamfer_mm": 0.5036318302154541
+    "icp_translacao_mm": 0.421862983467447,
+    "acuracia_1mm_pct": 88.11518148484542,
+    "completude_1mm_pct": 88.47753460148633,
+    "acuracia_2mm_pct": 95.06845628553167,
+    "completude_2mm_pct": 95.44555805549874,
+    "chamfer_mm": 0.4972992539405823
   },
   "h2+h3": {
     "fotos": 49,
     "ok": true,
-    "minutos": 0.020485921700795492,
+    "minutos": 0.019924203554789226,
     "registradas": 49,
     "reprojecao_px": 1.0640904495835426,
     "dimensoes": {
@@ -137,16 +167,17 @@
       "altura_mm": 81.96333633735776,
       "volume_cm3": 186.99581272649638
     },
-    "acuracia_1mm_pct": 87.92346410595081,
-    "completude_1mm_pct": 85.91736551442013,
-    "acuracia_2mm_pct": 95.4735301467176,
-    "completude_2mm_pct": 93.91491102474944,
-    "chamfer_mm": 0.5412130951881409
+    "icp_translacao_mm": 0.5895785041628929,
+    "acuracia_1mm_pct": 87.9127547924178,
+    "completude_1mm_pct": 85.99577282334494,
+    "acuracia_2mm_pct": 95.44140220611858,
+    "completude_2mm_pct": 93.92513806504398,
+    "chamfer_mm": 0.5257323980331421
   },
   "só h2": {
     "fotos": 28,
     "ok": true,
-    "minutos": 0.015624936421712239,
+    "minutos": 0.016021251678466797,
     "registradas": 28,
     "reprojecao_px": 1.0292405083388643,
     "dimensoes": {
@@ -161,10 +192,11 @@
       "altura_mm": 81.71373865008354,
       "volume_cm3": 192.84828442826426
     },
-    "acuracia_1mm_pct": 84.01994796183868,
-    "completude_1mm_pct": 80.88566168950706,
-    "acuracia_2mm_pct": 91.85819601040764,
-    "completude_2mm_pct": 89.69796140996795,
-    "chamfer_mm": 0.7529566287994385
+    "icp_translacao_mm": 0.6316909737961981,
+    "acuracia_1mm_pct": 84.24038739520093,
+    "completude_1mm_pct": 80.96406899843186,
+    "acuracia_2mm_pct": 91.75701069673316,
+    "completude_2mm_pct": 89.42864934887844,
+    "chamfer_mm": 0.7235515117645264
   }
 }

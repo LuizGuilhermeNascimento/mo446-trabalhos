@@ -1,0 +1,79 @@
+{
+  "dispositivo": "Apple iPhone 15, 5712x4284",
+  "regua_descricao": "régua transparente de 20 cm ao lado do objeto; marcas = bolinhas de meio centímetro (mm ao longo da régua), em pixels da imagem sem rotação EXIF",
+  "regua": {
+    "5": {
+      "h3/A3_270.jpeg": [
+        3653.0,
+        3370.6
+      ],
+      "h3/A3_090.jpeg": [
+        3084.7,
+        1084.1
+      ],
+      "detalhe/D300_7.jpeg": [
+        4438.2,
+        3008.5
+      ]
+    },
+    "55": {
+      "h3/A3_090.jpeg": [
+        3081.1,
+        1615.5
+      ]
+    },
+    "95": {
+      "h3/A3_270.jpeg": [
+        3649.3,
+        2159.1
+      ],
+      "h3/A3_180.jpeg": [
+        3343.5,
+        2435.7
+      ],
+      "detalhe/D300_7.jpeg": [
+        3824.3,
+        1908.1
+      ]
+    },
+    "145": {
+      "h3/A3_270.jpeg": [
+        3652.2,
+        1488.3
+      ],
+      "h3/A3_090.jpeg": [
+        3079.9,
+        2555.2
+      ],
+      "h3/A3_180.jpeg": [
+        3852.0,
+        2461.2
+      ],
+      "detalhe/D300_7.jpeg": [
+        3512.6,
+        1350.0
+      ]
+    },
+    "195": {
+      "h3/A3_270.jpeg": [
+        3655.2,
+        814.9
+      ],
+      "h3/A3_090.jpeg": [
+        3081.8,
+        3082.1
+      ],
+      "h3/A3_180.jpeg": [
+        4450.9,
+        2490.2
+      ]
+    }
+  },
+  "comprimento_mm": [],
+  "largura_mm": [],
+  "altura_mm": [],
+  "volume_cm3": [
+    180
+  ],
+  "notas": "coleta do Vitor (28/10/2026): h1-h3 = arcos A1-A3 a cada 15 graus, detalhe = posições D30/D150/D240/D300 x7; GPS removido; D300_* giradas para paisagem (re-salvas q95) para ter as mesmas dimensões das demais; volume por deslocamento de água (dados/pato_agua)"
+}

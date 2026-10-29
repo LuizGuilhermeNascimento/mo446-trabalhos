@@ -107,6 +107,8 @@ def export_glb(rec, textured, path):
     scene.add_geometry(trimesh.load(textured, process=False, force="mesh"), node_name="modelo")
     for im in rec.images.values():
         scene.add_geometry(frustum(im), node_name=im.name.replace("/", "_"))
+    pts = rec.points3D.values()
+    scene.add_geometry(trimesh.PointCloud([p.xyz for p in pts], colors=[list(p.color) + [255] for p in pts]), node_name="esparsa")
     scene.export(path)
 
 
@@ -131,20 +133,88 @@ def photo_vs_render(render, mvs_rec, mvs_dir, figures, scale=0.5):
     return stats
 
 
-def navigation_video(render, center, radius, path):
+def splat(points, colors, K, T, w, h, background=235):
+    X = points @ T[:3, :3].T + T[:3, 3]
+    front = X[:, 2] > 1
+    uv = (X[front] @ K.T)[:, :2] / X[front, 2:]
+    u, v = uv[:, 0].astype(int), uv[:, 1].astype(int)
+    inside = (u >= 0) & (u < w - 1) & (v >= 0) & (v < h - 1)
+    order = np.argsort(-X[front, 2][inside])  # far to near, so nearer points are written last
+    u, v, c = u[inside][order], v[inside][order], colors[front][inside][order]
+    image = np.full((h, w, 3), background, np.uint8)
+    for du, dv in ((0, 0), (1, 0), (0, 1), (1, 1)):
+        image[v + dv, u + du] = c
+    return image
+
+
+def draw_cameras(image, rec, K, T):
+    for im in rec.images.values():
+        f = frustum(im, 25.0)
+        X = f.vertices @ T[:3, :3].T + T[:3, 3]
+        if (X[:, 2] < 1).any():
+            continue
+        uv = ((X @ K.T)[:, :2] / X[:, 2:]).astype(int)
+        color = tuple(int(c) for c in RING_COLORS.get(ring(im.name), (120, 120, 120))[::-1])
+        for i, j in ((0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (2, 3), (3, 4), (4, 1)):
+            cv2.line(image, tuple(uv[i]), tuple(uv[j]), color, 1, cv2.LINE_AA)
+    return image
+
+
+def navigation_video(render, rec, dense, center, radius, path):
+    # Three acts, one orbit each: sparse cloud with the cameras, dense cloud, textured mesh.
     w, h = VIDEO_SIZE
     K = np.array([[w, 0, w / 2], [0, w, h / 2], [0, 0, 1.0]])
+    sparse = np.array([p.xyz for p in rec.points3D.values()]), np.array([p.color for p in rec.points3D.values()])
+    reach = np.percentile([np.linalg.norm(im.projection_center() - center) for im in rec.images.values()], 90)
+    lift = 0.4 * np.median([im.projection_center()[2] for im in rec.images.values()])  # aim between object and rings
+    acts = [("nuvem esparsa e cameras", 2.4 * reach, lift), ("nuvem densa", 2.6 * radius, 0.0), ("malha texturizada", 2.6 * radius, 0.0)]
     n = VIDEO_FPS * VIDEO_SECONDS
-    writer = imageio_ffmpeg.write_frames(str(path), (w, h), fps=VIDEO_FPS, codec="libx264", quality=6, macro_block_size=8)
+    writer = imageio_ffmpeg.write_frames(str(path), (w, h), fps=VIDEO_FPS, codec="libx264", quality=5, macro_block_size=8)
     writer.send(None)
     for k in range(n):
-        az = 4 * np.pi * k / n
-        el = np.deg2rad(42 + 22 * np.sin(2 * np.pi * k / n))
-        dist = radius * (2.6 - 0.5 * np.sin(4 * np.pi * k / n))
-        eye = center + dist * np.array([np.cos(el) * np.cos(az), np.cos(el) * np.sin(az), np.sin(el)])
-        frame, _ = render(K, look_at(eye, center), w, h)
-        writer.send(np.ascontiguousarray(frame))
+        t = 3 * k / n
+        act = min(int(t), 2)
+        blend = np.clip((t - act) * 3, 0, 1) if act else 1.0  # ease the zoom over the first third of each act
+        ease = 3 * blend ** 2 - 2 * blend ** 3
+        dist, z = (np.array(acts[act - 1][1:]) * (1 - ease) + np.array(acts[act][1:]) * ease) if act else acts[0][1:]
+        target = center + [0, 0, z]
+        az = 2 * np.pi * t
+        el = np.deg2rad(38 + 18 * np.sin(2 * np.pi * t / 3))
+        eye = target + dist * np.array([np.cos(el) * np.cos(az), np.cos(el) * np.sin(az), np.sin(el)])
+        T = look_at(eye, target)
+        if act == 0:
+            frame = cv2.cvtColor(draw_cameras(cv2.cvtColor(splat(*sparse, K, T, w, h), cv2.COLOR_RGB2BGR), rec, K, T), cv2.COLOR_BGR2RGB)
+        elif act == 1:
+            frame = splat(*dense, K, T, w, h)
+        else:
+            frame, _ = render(K, T, w, h)
+        frame = np.ascontiguousarray(frame)
+        cv2.putText(frame, acts[act][0], (24, 44), cv2.FONT_HERSHEY_SIMPLEX, 1.1, (40, 40, 40), 2, cv2.LINE_AA)
+        writer.send(frame)
     writer.close()
+
+
+def portraits(render, center, radius, figures, size=(2400, 1600)):
+    w, h = size
+    K = np.array([[1.1 * w, 0, w / 2], [0, 1.1 * w, h / 2], [0, 0, 1.0]])
+
+    def shot(az, el=30, dist=2.2):
+        el, az = np.radians(el), np.radians(az)
+        eye = center + dist * radius * np.array([np.cos(el) * np.cos(az), np.cos(el) * np.sin(az), np.sin(el)])
+        return cv2.cvtColor(render(K, look_at(eye, center), w, h)[0], cv2.COLOR_RGB2BGR)
+
+    cv2.imwrite(str(figures / "modelo_3d.jpg"), shot(-60), [cv2.IMWRITE_JPEG_QUALITY, 92])
+    views = [cv2.resize(shot(az, dist=2.6), (w // 2, h // 2), interpolation=cv2.INTER_AREA) for az in (0, 90, 180, 270)]
+    cv2.imwrite(str(figures / "modelo_3d_4vistas.jpg"), np.vstack([np.hstack(views[:2]), np.hstack(views[2:])]), [cv2.IMWRITE_JPEG_QUALITY, 92])
+
+
+def dense_points(path, center, radius, limit=2_000_000):
+    cloud = o3d.io.read_point_cloud(str(path))
+    pts, colors = np.asarray(cloud.points), (np.asarray(cloud.colors) * 255).astype(np.uint8)
+    near = np.linalg.norm(pts - center, axis=1) < 1.5 * radius
+    idx = np.flatnonzero(near)
+    idx = np.random.default_rng(0).permutation(idx)[:limit]
+    return pts[idx], colors[idx]
 
 
 def main(data, out):
@@ -160,7 +230,9 @@ def main(data, out):
     print(json.dumps(stats, indent=2))
     obj = np.asarray(o3d.io.read_triangle_mesh(str(out / "objeto.ply")).vertices)
     center = np.r_[(obj[:, :2].min(0) + obj[:, :2].max(0)) / 2, obj[:, 2].max() / 2]
-    navigation_video(render, center, np.linalg.norm(np.ptp(obj, 0)), out / "navegacao.mp4")
+    radius = np.linalg.norm(np.ptp(obj, 0))
+    portraits(render, center, radius, figures)
+    navigation_video(render, rec, dense_points(out / "mvs/scene_dense.ply", center, radius), center, radius, out / "navegacao.mp4")
 
 
 if __name__ == "__main__":

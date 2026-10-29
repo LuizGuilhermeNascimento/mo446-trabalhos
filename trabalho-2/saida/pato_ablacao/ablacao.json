@@ -1,0 +1,202 @@
+{
+  "3 alturas, todas": {
+    "fotos": 100,
+    "ok": true,
+    "minutos": 0.049441925684611004,
+    "registradas": 100,
+    "reprojecao_px": 1.2384287423829718,
+    "dimensoes": {
+      "comprimento_mm": null,
+      "largura_mm": null,
+      "altura_mm": null,
+      "volume_cm3": 5.273375228668044
+    },
+    "estimado": {
+      "comprimento_mm": 87.70375061035156,
+      "largura_mm": 70.90657806396484,
+      "altura_mm": 82.91300040483475,
+      "volume_cm3": 174.72662477133196
+    },
+    "icp_translacao_mm": 0.0,
+    "acuracia_1mm_pct": 100.0,
+    "completude_1mm_pct": 100.0,
+    "acuracia_2mm_pct": 100.0,
+    "completude_2mm_pct": 100.0,
+    "chamfer_mm": 8.198803698178381e-07
+  },
+  "3 alturas, 1/2": {
+    "fotos": 67,
+    "ok": true,
+    "minutos": 0.033092812697092695,
+    "registradas": 67,
+    "reprojecao_px": 1.3048636953010688,
+    "dimensoes": {
+      "comprimento_mm": null,
+      "largura_mm": null,
+      "altura_mm": null,
+      "volume_cm3": 4.756420592899332
+    },
+    "estimado": {
+      "comprimento_mm": 87.97760009765625,
+      "largura_mm": 70.62684631347656,
+      "altura_mm": 82.59092682600021,
+      "volume_cm3": 175.24357940710067
+    },
+    "icp_translacao_mm": 1.5600299460790592,
+    "acuracia_1mm_pct": 89.35356942102305,
+    "completude_1mm_pct": 88.00709377078253,
+    "acuracia_2mm_pct": 97.35244519392917,
+    "completude_2mm_pct": 96.51961870982045,
+    "chamfer_mm": 0.48341649770736694
+  },
+  "3 alturas, 1/3": {
+    "fotos": 55,
+    "ok": true,
+    "minutos": 0.028454415003458657,
+    "registradas": 55,
+    "reprojecao_px": 1.2795703791613122,
+    "dimensoes": {
+      "comprimento_mm": null,
+      "largura_mm": null,
+      "altura_mm": null,
+      "volume_cm3": 5.08835096423411
+    },
+    "estimado": {
+      "comprimento_mm": 87.3026123046875,
+      "largura_mm": 72.53958892822266,
+      "altura_mm": 82.69747570902109,
+      "volume_cm3": 174.9116490357659
+    },
+    "icp_translacao_mm": 2.744332432773022,
+    "acuracia_1mm_pct": 87.41842120197492,
+    "completude_1mm_pct": 85.92884061183773,
+    "acuracia_2mm_pct": 97.15680154361273,
+    "completude_2mm_pct": 96.40323653291954,
+    "chamfer_mm": 0.524328351020813
+  },
+  "3 alturas, 1/4": {
+    "fotos": 49,
+    "ok": true,
+    "minutos": 0.02686989704767863,
+    "registradas": 49,
+    "reprojecao_px": 1.2461130270078025,
+    "dimensoes": {
+      "comprimento_mm": null,
+      "largura_mm": null,
+      "altura_mm": null,
+      "volume_cm3": 4.937533083662572
+    },
+    "estimado": {
+      "comprimento_mm": 88.80400085449219,
+      "largura_mm": 70.91466522216797,
+      "altura_mm": 82.70303004980087,
+      "volume_cm3": 175.06246691633743
+    },
+    "icp_translacao_mm": 3.2238465968988743,
+    "acuracia_1mm_pct": 85.39603960396039,
+    "completude_1mm_pct": 85.28042562624695,
+    "acuracia_2mm_pct": 96.96219621962197,
+    "completude_2mm_pct": 96.02637996009754,
+    "chamfer_mm": 0.5381945371627808
+  },
+  "3 alturas, sem extra": {
+    "fotos": 73,
+    "ok": true,
+    "minutos": 0.03894996245702108,
+    "registradas": 73,
+    "reprojecao_px": 1.1327441578463784,
+    "dimensoes": {
+      "comprimento_mm": null,
+      "largura_mm": null,
+      "altura_mm": null,
+      "volume_cm3": 4.236623517491381
+    },
+    "estimado": {
+      "comprimento_mm": 88.14193725585938,
+      "largura_mm": 69.44615936279297,
+      "altura_mm": 82.75654909014702,
+      "volume_cm3": 175.76337648250862
+    },
+    "icp_translacao_mm": 3.0889743716879567,
+    "acuracia_1mm_pct": 90.80951565976382,
+    "completude_1mm_pct": 88.76080691642652,
+    "acuracia_2mm_pct": 98.64224998573792,
+    "completude_2mm_pct": 96.80226113943692,
+    "chamfer_mm": 0.45019060373306274
+  },
+  "h1+h2": {
+    "fotos": 52,
+    "ok": true,
+    "minutos": 0.026819217205047607,
+    "registradas": 52,
+    "reprojecao_px": 1.088957305392234,
+    "dimensoes": {
+      "comprimento_mm": null,
+      "largura_mm": null,
+      "altura_mm": null,
+      "volume_cm3": 7.665840676528973
+    },
+    "estimado": {
+      "comprimento_mm": 87.18611907958984,
+      "largura_mm": 69.91693878173828,
+      "altura_mm": 82.88989531993866,
+      "volume_cm3": 172.33415932347103
+    },
+    "icp_translacao_mm": 0.9054761069465064,
+    "acuracia_1mm_pct": 85.32286311507823,
+    "completude_1mm_pct": 83.64553314121036,
+    "acuracia_2mm_pct": 97.4351731540591,
+    "completude_2mm_pct": 95.87120372422966,
+    "chamfer_mm": 0.5488622188568115
+  },
+  "h2+h3": {
+    "fotos": 49,
+    "ok": true,
+    "minutos": 0.03344759941101074,
+    "registradas": 49,
+    "reprojecao_px": 1.1090748647455733,
+    "dimensoes": {
+      "comprimento_mm": null,
+      "largura_mm": null,
+      "altura_mm": null,
+      "volume_cm3": 3.370202823636447
+    },
+    "estimado": {
+      "comprimento_mm": 89.2491455078125,
+      "largura_mm": 68.98467254638672,
+      "altura_mm": 82.72128847241402,
+      "volume_cm3": 176.62979717636355
+    },
+    "icp_translacao_mm": 3.9490544702864945,
+    "acuracia_1mm_pct": 89.39585730724971,
+    "completude_1mm_pct": 86.74905785856795,
+    "acuracia_2mm_pct": 97.84810126582279,
+    "completude_2mm_pct": 95.13965861228108,
+    "chamfer_mm": 0.4937359094619751
+  },
+  "só h2": {
+    "fotos": 28,
+    "ok": true,
+    "minutos": 0.022218159834543862,
+    "registradas": 28,
+    "reprojecao_px": 0.9950748366382196,
+    "dimensoes": {
+      "comprimento_mm": null,
+      "largura_mm": null,
+      "altura_mm": null,
+      "volume_cm3": 5.438208828467793
+    },
+    "estimado": {
+      "comprimento_mm": 87.21800231933594,
+      "largura_mm": 70.65904235839844,
+      "altura_mm": 82.88211262598634,
+      "volume_cm3": 174.5617911715322
+    },
+    "icp_translacao_mm": 1.3029952458369194,
+    "acuracia_1mm_pct": 85.71428571428571,
+    "completude_1mm_pct": 81.25138550210596,
+    "acuracia_2mm_pct": 96.6250960458656,
+    "completude_2mm_pct": 92.65683883839503,
+    "chamfer_mm": 0.6151779890060425
+  }
+}

@@ -7,7 +7,6 @@ import numpy as np
 import open3d as o3d
 import pycolmap
 
-import escala
 import sfm
 
 CUT_MM, MARGIN_MM, NEAR_MM = 2.0, 10.0, 1.0
@@ -56,7 +55,7 @@ def main(data, out):
     rec = pycolmap.Reconstruction(out / "metrico")
     errors = reprojection_errors(rec)
     dense = np.asarray(o3d.io.read_point_cloud(str(out / "mvs/scene_dense.ply")).points)
-    lo, hi = escala.board_region(data, MARGIN_MM)
+    lo, hi = np.array(json.loads((out / "escala.json").read_text())["area_xy_mm"]) + [[-MARGIN_MM], [MARGIN_MM]]
     on_board = np.all(dense[:, :2] > lo, 1) & np.all(dense[:, :2] < hi, 1)
     plane = dense[on_board & (np.abs(dense[:, 2]) < 3), 2]
     z0 = float(np.median(plane))

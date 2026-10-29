@@ -16,11 +16,11 @@ def main(data, out):
     out.mkdir(parents=True, exist_ok=True)
     database = out / "database.db"
     database.unlink(missing_ok=True)
-    reader = pycolmap.ImageReaderOptions(camera_model="RADIAL")
-    # CPU SIFT needs up to ~2 GB per thread on 9-12 MP photos; all 12 cores ran a 16 GB laptop out of memory.
+    reader = pycolmap.ImageReaderOptions(camera_model=os.environ.get("CAMERA", "RADIAL"))
+    # CPU SIFT needs ~2 GB per thread on 9-12 MP photos and ~3 GB on 24 MP ones; 8 threads got a 16 GB Mac killed.
     ram_gb = os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES") / 2**30
-    threads = max(1, min(os.cpu_count(), int(ram_gb // 2)))
-    extraction = pycolmap.FeatureExtractionOptions(max_image_size=3200, num_threads=threads)
+    threads = max(1, min(os.cpu_count(), int(ram_gb // 3)))
+    extraction = pycolmap.FeatureExtractionOptions(max_image_size=int(os.environ.get("SIFT_MAX", 3200)), num_threads=threads)
     pycolmap.extract_features(database, data, image_names(data), pycolmap.CameraMode.SINGLE, reader, extraction)
     pycolmap.match_exhaustive(database)
     models = pycolmap.incremental_mapping(database, data, out / "modelos")
