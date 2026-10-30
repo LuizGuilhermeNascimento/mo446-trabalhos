@@ -244,3 +244,4 @@ trabalho-2/saida/*.done
 
 # AI assistant generated code
 .claude/
+trabalho-2/saida/*_minimac/

@@ -11,7 +11,7 @@
         1153,
         1157
       ],
-      "deteccao_ms_por_imagem": 25.31061597983353,
+      "deteccao_ms_por_imagem": 26.656815316528082,
       "matches": 315,
       "inliers_F": 279,
       "inliers_F_pct": 88.57142857142857,
@@ -33,7 +33,7 @@
         5315,
         5172
       ],
-      "deteccao_ms_por_imagem": 8.41705349739641,
+      "deteccao_ms_por_imagem": 10.754372924566269,
       "matches": 357,
       "inliers_F": 235,
       "inliers_F_pct": 65.82633053221288,
@@ -55,7 +55,7 @@
         1611,
         1490
       ],
-      "deteccao_ms_por_imagem": 24.909729982027784,
+      "deteccao_ms_por_imagem": 26.496891863644123,
       "matches": 229,
       "inliers_F": 175,
       "inliers_F_pct": 76.41921397379913,
@@ -77,7 +77,7 @@
         1113,
         1065
       ],
-      "deteccao_ms_por_imagem": 19.801508489763364,
+      "deteccao_ms_por_imagem": 25.901757180690765,
       "matches": 307,
       "inliers_F": 274,
       "inliers_F_pct": 89.25081433224756,
@@ -99,7 +99,7 @@
         4514,
         4628
       ],
-      "deteccao_ms_por_imagem": 7.433045509969816,
+      "deteccao_ms_por_imagem": 9.635907597839832,
       "matches": 383,
       "inliers_F": 254,
       "inliers_F_pct": 66.31853785900783,
@@ -121,14 +121,14 @@
         1355,
         1397
       ],
-      "deteccao_ms_por_imagem": 22.635961475316435,
+      "deteccao_ms_por_imagem": 24.956268956884742,
       "matches": 260,
       "inliers_F": 218,
       "inliers_F_pct": 83.84615384615385,
       "sampson_mediana_px": 0.1962822907646794,
       "inliers_E": 240,
       "erro_R_graus": 0.187907419372444,
-      "erro_t_graus": 1.6856118885526878,
+      "erro_t_graus": 1.6856118885531202,
       "triangulados_frente": 240,
       "reprojecao_tri_px": 0.6163186036280202
     },
@@ -143,7 +143,7 @@
         1126,
         1149
       ],
-      "deteccao_ms_por_imagem": 20.990962511859834,
+      "deteccao_ms_por_imagem": 24.319860618561506,
       "matches": 185,
       "inliers_F": 134,
       "inliers_F_pct": 72.43243243243244,
@@ -165,7 +165,7 @@
         4855,
         4858
       ],
-      "deteccao_ms_por_imagem": 7.4436280119698495,
+      "deteccao_ms_por_imagem": 9.818480582907796,
       "matches": 156,
       "inliers_F": 77,
       "inliers_F_pct": 49.358974358974365,
@@ -187,7 +187,7 @@
         1275,
         1439
       ],
-      "deteccao_ms_por_imagem": 22.139239503303543,
+      "deteccao_ms_por_imagem": 25.78908554278314,
       "matches": 108,
       "inliers_F": 66,
       "inliers_F_pct": 61.111111111111114,
@@ -209,7 +209,7 @@
         1129,
         1082
       ],
-      "deteccao_ms_por_imagem": 19.671087007736787,
+      "deteccao_ms_por_imagem": 24.024951504543424,
       "matches": 427,
       "inliers_F": 376,
       "inliers_F_pct": 88.05620608899297,
@@ -231,7 +231,7 @@
         4861,
         4847
       ],
-      "deteccao_ms_por_imagem": 7.6569869997911155,
+      "deteccao_ms_por_imagem": 9.78589616715908,
       "matches": 586,
       "inliers_F": 411,
       "inliers_F_pct": 70.13651877133105,
@@ -253,7 +253,7 @@
         1417,
         1334
       ],
-      "deteccao_ms_por_imagem": 21.87317900825292,
+      "deteccao_ms_por_imagem": 24.960573529824615,
       "matches": 421,
       "inliers_F": 354,
       "inliers_F_pct": 84.08551068883611,
@@ -275,7 +275,7 @@
         956,
         982
       ],
-      "deteccao_ms_por_imagem": 20.506185479462147,
+      "deteccao_ms_por_imagem": 24.252626579254866,
       "matches": 248,
       "inliers_F": 204,
       "inliers_F_pct": 82.25806451612904,
@@ -297,14 +297,14 @@
         4256,
         4502
       ],
-      "deteccao_ms_por_imagem": 6.972758012125269,
+      "deteccao_ms_por_imagem": 9.092762833461165,
       "matches": 273,
       "inliers_F": 195,
       "inliers_F_pct": 71.42857142857143,
       "sampson_mediana_px": 0.2711873637794865,
       "inliers_E": 134,
       "erro_R_graus": 20.158882379968535,
-      "erro_t_graus": 69.84184275879,
+      "erro_t_graus": 69.84184275879001,
       "triangulados_frente": 134,
       "reprojecao_tri_px": 1.1630167627415893
     },
@@ -319,7 +319,7 @@
         1274,
         1229
       ],
-      "deteccao_ms_por_imagem": 22.16669000335969,
+      "deteccao_ms_por_imagem": 24.98017903417349,
       "matches": 200,
       "inliers_F": 158,
       "inliers_F_pct": 79.0,
@@ -341,7 +341,7 @@
         986,
         933
       ],
-      "deteccao_ms_por_imagem": 19.63222149061039,
+      "deteccao_ms_por_imagem": 24.63988959789276,
       "matches": 350,
       "inliers_F": 310,
       "inliers_F_pct": 88.57142857142857,
@@ -363,7 +363,7 @@
         4262,
         4303
       ],
-      "deteccao_ms_por_imagem": 6.786235491745174,
+      "deteccao_ms_por_imagem": 8.883447386324406,
       "matches": 499,
       "inliers_F": 356,
       "inliers_F_pct": 71.34268537074149,
@@ -385,7 +385,7 @@
         1184,
         1148
       ],
-      "deteccao_ms_por_imagem": 21.74840250518173,
+      "deteccao_ms_por_imagem": 24.16192484088242,
       "matches": 324,
       "inliers_F": 282,
       "inliers_F_pct": 87.03703703703704,
@@ -407,14 +407,14 @@
         1153,
         1163
       ],
-      "deteccao_ms_por_imagem": 19.96871249866672,
+      "deteccao_ms_por_imagem": 24.214879143983126,
       "matches": 164,
       "inliers_F": 116,
       "inliers_F_pct": 70.73170731707317,
       "sampson_mediana_px": 0.18023280222523302,
       "inliers_E": 119,
       "erro_R_graus": 0.7806591339488436,
-      "erro_t_graus": 2.984106214403048,
+      "erro_t_graus": 2.9841062144032926,
       "triangulados_frente": 119,
       "reprojecao_tri_px": 0.8284245114199295
     },
@@ -429,7 +429,7 @@
         5315,
         5002
       ],
-      "deteccao_ms_por_imagem": 7.938510505482554,
+      "deteccao_ms_por_imagem": 10.379583342000842,
       "matches": 119,
       "inliers_F": 70,
       "inliers_F_pct": 58.82352941176471,
@@ -451,7 +451,7 @@
         1611,
         1468
       ],
-      "deteccao_ms_por_imagem": 23.46598097938113,
+      "deteccao_ms_por_imagem": 24.487758986651897,
       "matches": 87,
       "inliers_F": 55,
       "inliers_F_pct": 63.2183908045977,
@@ -473,7 +473,7 @@
         1113,
         1102
       ],
-      "deteccao_ms_por_imagem": 20.858432515524328,
+      "deteccao_ms_por_imagem": 24.55453365109861,
       "matches": 180,
       "inliers_F": 145,
       "inliers_F_pct": 80.55555555555556,
@@ -495,7 +495,7 @@
         4514,
         4569
       ],
-      "deteccao_ms_por_imagem": 7.261994993314147,
+      "deteccao_ms_por_imagem": 9.477885672822595,
       "matches": 149,
       "inliers_F": 95,
       "inliers_F_pct": 63.758389261744966,
@@ -517,7 +517,7 @@
         1355,
         1375
       ],
-      "deteccao_ms_por_imagem": 22.566639992874116,
+      "deteccao_ms_por_imagem": 25.619490537792444,
       "matches": 80,
       "inliers_F": 54,
       "inliers_F_pct": 67.5,
@@ -539,14 +539,14 @@
         1126,
         1062
       ],
-      "deteccao_ms_por_imagem": 21.32064101169817,
+      "deteccao_ms_por_imagem": 24.761186679825187,
       "matches": 43,
       "inliers_F": 20,
       "inliers_F_pct": 46.51162790697674,
       "sampson_mediana_px": 0.14130884893665502,
       "inliers_E": 19,
       "erro_R_graus": 3.9227502920533803,
-      "erro_t_graus": 2.5726734670428666,
+      "erro_t_graus": 2.5726734670427245,
       "triangulados_frente": 19,
       "reprojecao_tri_px": 0.7951862495326834
     },
@@ -561,7 +561,7 @@
         4855,
         4820
       ],
-      "deteccao_ms_por_imagem": 7.671280007343739,
+      "deteccao_ms_por_imagem": 9.985218988731503,
       "matches": 50,
       "inliers_F": 12,
       "inliers_F_pct": 24.0,
@@ -583,7 +583,7 @@
         1275,
         1421
       ],
-      "deteccao_ms_por_imagem": 22.24465800100006,
+      "deteccao_ms_por_imagem": 23.660450940951705,
       "matches": 33,
       "inliers_F": 10,
       "inliers_F_pct": 30.303030303030305,
@@ -605,14 +605,14 @@
         1129,
         1104
       ],
-      "deteccao_ms_por_imagem": 19.649580994155258,
+      "deteccao_ms_por_imagem": 24.087041150778532,
       "matches": 212,
       "inliers_F": 145,
       "inliers_F_pct": 68.39622641509435,
       "sampson_mediana_px": 0.28058378580683546,
       "inliers_E": 169,
       "erro_R_graus": 1.5651863674165798,
-      "erro_t_graus": 5.835267740916318,
+      "erro_t_graus": 5.835267740916317,
       "triangulados_frente": 169,
       "reprojecao_tri_px": 1.063614797908252
     },
@@ -627,7 +627,7 @@
         4861,
         5045
       ],
-      "deteccao_ms_por_imagem": 7.687392499065027,
+      "deteccao_ms_por_imagem": 9.829007321968675,
       "matches": 128,
       "inliers_F": 74,
       "inliers_F_pct": 57.8125,
@@ -649,7 +649,7 @@
         1417,
         1295
       ],
-      "deteccao_ms_por_imagem": 22.177131002536044,
+      "deteccao_ms_por_imagem": 24.268298177048564,
       "matches": 97,
       "inliers_F": 63,
       "inliers_F_pct": 64.94845360824742,
@@ -671,14 +671,14 @@
         956,
         1062
       ],
-      "deteccao_ms_por_imagem": 19.4335569976829,
+      "deteccao_ms_por_imagem": 23.390163434669375,
       "matches": 30,
       "inliers_F": 13,
       "inliers_F_pct": 43.333333333333336,
       "sampson_mediana_px": 7.048970509576287e-14,
       "inliers_E": 12,
       "erro_R_graus": 116.00144813564823,
-      "erro_t_graus": 52.46232397144975,
+      "erro_t_graus": 52.46232397144974,
       "triangulados_frente": 12,
       "reprojecao_tri_px": 1.7539882676016214e-12
     },
@@ -693,7 +693,7 @@
         4256,
         4856
       ],
-      "deteccao_ms_por_imagem": 7.09045899566263,
+      "deteccao_ms_por_imagem": 9.49518894776702,
       "matches": 39,
       "inliers_F": 13,
       "inliers_F_pct": 33.33333333333333,
@@ -715,14 +715,14 @@
         1274,
         1204
       ],
-      "deteccao_ms_por_imagem": 22.6644339854829,
+      "deteccao_ms_por_imagem": 23.23243347927928,
       "matches": 20,
       "inliers_F": 10,
       "inliers_F_pct": 50.0,
       "sampson_mediana_px": 1.1561887405833184e-13,
       "inliers_E": 9,
       "erro_R_graus": 101.98569945079453,
-      "erro_t_graus": 47.08224392659941,
+      "erro_t_graus": 47.0822439265994,
       "triangulados_frente": 9,
       "reprojecao_tri_px": 5.0253990958444985e-12
     },
@@ -737,7 +737,7 @@
         1046,
         933
       ],
-      "deteccao_ms_por_imagem": 23.466132988687605,
+      "deteccao_ms_por_imagem": 23.93596596084535,
       "matches": 48,
       "inliers_F": 24,
       "inliers_F_pct": 50.0,
@@ -759,7 +759,7 @@
         4582,
         4303
       ],
-      "deteccao_ms_por_imagem": 7.799810991855338,
+      "deteccao_ms_por_imagem": 9.211001917719841,
       "matches": 44,
       "inliers_F": 19,
       "inliers_F_pct": 43.18181818181818,
@@ -781,7 +781,7 @@
         1260,
         1148
       ],
-      "deteccao_ms_por_imagem": 22.384190990123898,
+      "deteccao_ms_por_imagem": 23.705058498308063,
       "matches": 19,
       "inliers_F": 11,
       "inliers_F_pct": 57.89473684210527,
@@ -803,7 +803,7 @@
         1588,
         1660
       ],
-      "deteccao_ms_por_imagem": 95.59261749382131,
+      "deteccao_ms_por_imagem": 77.96913851052523,
       "matches": 247,
       "inliers_F": 194,
       "inliers_F_pct": 78.54251012145748,
@@ -825,7 +825,7 @@
         1588,
         1660
       ],
-      "deteccao_ms_por_imagem": 93.81752848275937,
+      "deteccao_ms_por_imagem": 72.26385502144694,
       "matches": 333,
       "inliers_F": 253,
       "inliers_F_pct": 75.97597597597597,
@@ -847,7 +847,7 @@
         1588,
         1660
       ],
-      "deteccao_ms_por_imagem": 92.8794275096152,
+      "deteccao_ms_por_imagem": 71.40955305658281,
       "matches": 372,
       "inliers_F": 271,
       "inliers_F_pct": 72.84946236559139,
@@ -869,7 +869,7 @@
         1588,
         1660
       ],
-      "deteccao_ms_por_imagem": 94.02648350805975,
+      "deteccao_ms_por_imagem": 72.9070461820811,
       "matches": 414,
       "inliers_F": 295,
       "inliers_F_pct": 71.25603864734299,
@@ -891,7 +891,7 @@
         1588,
         1660
       ],
-      "deteccao_ms_por_imagem": 93.65643799537793,
+      "deteccao_ms_por_imagem": 72.77904101647437,
       "matches": 539,
       "inliers_F": 346,
       "inliers_F_pct": 64.19294990723562,
@@ -913,7 +913,7 @@
         1588,
         1660
       ],
-      "deteccao_ms_por_imagem": 95.7789834938012,
+      "deteccao_ms_por_imagem": 78.2041719648987,
       "matches": 368,
       "inliers_F": 158,
       "inliers_F_pct": 42.934782608695656,
@@ -935,7 +935,7 @@
         1588,
         1660
       ],
-      "deteccao_ms_por_imagem": 91.72425550059415,
+      "deteccao_ms_por_imagem": 73.91493394970894,
       "matches": 370,
       "inliers_F": 213,
       "inliers_F_pct": 57.567567567567565,
@@ -957,7 +957,7 @@
         1588,
         1660
       ],
-      "deteccao_ms_por_imagem": 91.70415447442792,
+      "deteccao_ms_por_imagem": 73.90929549001157,
       "matches": 370,
       "inliers_F": 296,
       "inliers_F_pct": 80.0,
@@ -979,7 +979,7 @@
         1588,
         1660
       ],
-      "deteccao_ms_por_imagem": 92.3432745039463,
+      "deteccao_ms_por_imagem": 71.69455848634243,
       "matches": 369,
       "inliers_F": 326,
       "inliers_F_pct": 88.34688346883469,
@@ -1001,7 +1001,7 @@
         8000,
         7840
       ],
-      "deteccao_ms_por_imagem": 15.838625491596758,
+      "deteccao_ms_por_imagem": 21.23505645431578,
       "matches": 142,
       "inliers_F": 94,
       "inliers_F_pct": 66.19718309859155,
@@ -1023,7 +1023,7 @@
         8000,
         7840
       ],
-      "deteccao_ms_por_imagem": 15.735015971586108,
+      "deteccao_ms_por_imagem": 20.91907151043415,
       "matches": 381,
       "inliers_F": 236,
       "inliers_F_pct": 61.942257217847775,
@@ -1045,7 +1045,7 @@
         8000,
         7840
       ],
-      "deteccao_ms_por_imagem": 15.680297976359725,
+      "deteccao_ms_por_imagem": 20.552853820845485,
       "matches": 556,
       "inliers_F": 337,
       "inliers_F_pct": 60.61151079136691,
@@ -1067,7 +1067,7 @@
         8000,
         7840
       ],
-      "deteccao_ms_por_imagem": 15.705732017522678,
+      "deteccao_ms_por_imagem": 20.75372007675469,
       "matches": 821,
       "inliers_F": 467,
       "inliers_F_pct": 56.881851400730824,
@@ -1089,13 +1089,13 @@
         8000,
         7840
       ],
-      "deteccao_ms_por_imagem": 15.756070002680644,
+      "deteccao_ms_por_imagem": 20.443103974685073,
       "matches": 1579,
       "inliers_F": 735,
       "inliers_F_pct": 46.54844838505383,
       "sampson_mediana_px": 0.2957647168397571,
       "inliers_E": 903,
-      "erro_R_graus": 1.1860474154027916,
+      "erro_R_graus": 1.1860474154027913,
       "erro_t_graus": 7.011652259174158,
       "triangulados_frente": 903,
       "reprojecao_tri_px": 0.6732847945007784
@@ -1111,7 +1111,7 @@
         8000,
         7840
       ],
-      "deteccao_ms_por_imagem": 15.853929508011788,
+      "deteccao_ms_por_imagem": 21.53622265905142,
       "matches": 556,
       "inliers_F": 115,
       "inliers_F_pct": 20.68345323741007,
@@ -1133,7 +1133,7 @@
         8000,
         7840
       ],
-      "deteccao_ms_por_imagem": 15.899455494945869,
+      "deteccao_ms_por_imagem": 20.99808445200324,
       "matches": 556,
       "inliers_F": 201,
       "inliers_F_pct": 36.15107913669065,
@@ -1155,7 +1155,7 @@
         8000,
         7840
       ],
-      "deteccao_ms_por_imagem": 15.698549512308091,
+      "deteccao_ms_por_imagem": 20.641571143642068,
       "matches": 556,
       "inliers_F": 456,
       "inliers_F_pct": 82.01438848920863,
@@ -1177,7 +1177,7 @@
         8000,
         7840
       ],
-      "deteccao_ms_por_imagem": 15.625240484951064,
+      "deteccao_ms_por_imagem": 20.39018110372126,
       "matches": 556,
       "inliers_F": 485,
       "inliers_F_pct": 87.23021582733813,
@@ -1199,7 +1199,7 @@
         3372,
         3191
       ],
-      "deteccao_ms_por_imagem": 101.08952899463475,
+      "deteccao_ms_por_imagem": 90.35795112140477,
       "matches": 171,
       "inliers_F": 136,
       "inliers_F_pct": 79.53216374269006,
@@ -1221,7 +1221,7 @@
         3372,
         3191
       ],
-      "deteccao_ms_por_imagem": 87.89228199748322,
+      "deteccao_ms_por_imagem": 83.23970157653093,
       "matches": 332,
       "inliers_F": 254,
       "inliers_F_pct": 76.50602409638554,
@@ -1243,7 +1243,7 @@
         3372,
         3191
       ],
-      "deteccao_ms_por_imagem": 88.44089051126502,
+      "deteccao_ms_por_imagem": 88.4433495812118,
       "matches": 432,
       "inliers_F": 320,
       "inliers_F_pct": 74.07407407407408,
@@ -1265,7 +1265,7 @@
         3372,
         3191
       ],
-      "deteccao_ms_por_imagem": 89.70902499277145,
+      "deteccao_ms_por_imagem": 84.4377928879112,
       "matches": 566,
       "inliers_F": 392,
       "inliers_F_pct": 69.25795053003534,
@@ -1287,7 +1287,7 @@
         3372,
         3191
       ],
-      "deteccao_ms_por_imagem": 99.4469329889398,
+      "deteccao_ms_por_imagem": 83.60884734429419,
       "matches": 885,
       "inliers_F": 536,
       "inliers_F_pct": 60.564971751412436,
@@ -1309,14 +1309,14 @@
         3372,
         3191
       ],
-      "deteccao_ms_por_imagem": 92.30403351830319,
+      "deteccao_ms_por_imagem": 82.70891150459647,
       "matches": 432,
       "inliers_F": 163,
       "inliers_F_pct": 37.73148148148148,
       "sampson_mediana_px": 0.0679368084905617,
       "inliers_E": 211,
       "erro_R_graus": 0.5063670244850116,
-      "erro_t_graus": 3.493801972710345,
+      "erro_t_graus": 3.4938019727103446,
       "triangulados_frente": 211,
       "reprojecao_tri_px": 0.1753754024442686
     },
@@ -1331,7 +1331,7 @@
         3372,
         3191
       ],
-      "deteccao_ms_por_imagem": 87.7487585239578,
+      "deteccao_ms_por_imagem": 82.71581213921309,
       "matches": 432,
       "inliers_F": 242,
       "inliers_F_pct": 56.018518518518526,
@@ -1353,14 +1353,14 @@
         3372,
         3191
       ],
-      "deteccao_ms_por_imagem": 96.93621151382104,
+      "deteccao_ms_por_imagem": 80.80773497931659,
       "matches": 432,
       "inliers_F": 352,
       "inliers_F_pct": 81.48148148148148,
       "sampson_mediana_px": 0.3281755719428576,
       "inliers_E": 376,
       "erro_R_graus": 1.129886420301847,
-      "erro_t_graus": 2.5216436482992033,
+      "erro_t_graus": 2.521643648299203,
       "triangulados_frente": 376,
       "reprojecao_tri_px": 0.41570600356656273
     },
@@ -1375,14 +1375,14 @@
         3372,
         3191
       ],
-      "deteccao_ms_por_imagem": 91.21027949731797,
+      "deteccao_ms_por_imagem": 79.81490716338158,
       "matches": 432,
       "inliers_F": 392,
       "inliers_F_pct": 90.74074074074075,
       "sampson_mediana_px": 0.38982406264640274,
       "inliers_E": 385,
       "erro_R_graus": 1.129886420301847,
-      "erro_t_graus": 2.5216436482992033,
+      "erro_t_graus": 2.521643648299203,
       "triangulados_frente": 385,
       "reprojecao_tri_px": 0.4302602726466279
     },
@@ -1397,7 +1397,7 @@
         1533,
         1874
       ],
-      "deteccao_ms_por_imagem": 94.38846301054582,
+      "deteccao_ms_por_imagem": 75.65632299520075,
       "matches": 249,
       "inliers_F": 216,
       "inliers_F_pct": 86.74698795180723,
@@ -1419,7 +1419,7 @@
         1533,
         1874
       ],
-      "deteccao_ms_por_imagem": 91.00959499482997,
+      "deteccao_ms_por_imagem": 72.98654713667929,
       "matches": 341,
       "inliers_F": 297,
       "inliers_F_pct": 87.09677419354838,
@@ -1441,7 +1441,7 @@
         1533,
         1874
       ],
-      "deteccao_ms_por_imagem": 91.99072149931453,
+      "deteccao_ms_por_imagem": 73.06808955036104,
       "matches": 382,
       "inliers_F": 307,
       "inliers_F_pct": 80.36649214659685,
@@ -1463,7 +1463,7 @@
         1533,
         1874
       ],
-      "deteccao_ms_por_imagem": 89.56656249938533,
+      "deteccao_ms_por_imagem": 74.08702396787703,
       "matches": 415,
       "inliers_F": 308,
       "inliers_F_pct": 74.21686746987952,
@@ -1485,13 +1485,13 @@
         1533,
         1874
       ],
-      "deteccao_ms_por_imagem": 94.78896801010706,
+      "deteccao_ms_por_imagem": 74.43036744371057,
       "matches": 533,
       "inliers_F": 371,
       "inliers_F_pct": 69.60600375234522,
       "sampson_mediana_px": 0.20198101188409406,
       "inliers_E": 183,
-      "erro_R_graus": 17.26218984745955,
+      "erro_R_graus": 17.262189847459545,
       "erro_t_graus": 79.05431413911685,
       "triangulados_frente": 183,
       "reprojecao_tri_px": 0.4591789702838448
@@ -1507,7 +1507,7 @@
         1533,
         1874
       ],
-      "deteccao_ms_por_imagem": 92.05314549035393,
+      "deteccao_ms_por_imagem": 73.2669560238719,
       "matches": 384,
       "inliers_F": 185,
       "inliers_F_pct": 48.17708333333333,
@@ -1529,14 +1529,14 @@
         1533,
         1874
       ],
-      "deteccao_ms_por_imagem": 92.00261349906214,
+      "deteccao_ms_por_imagem": 73.51974840275943,
       "matches": 382,
       "inliers_F": 267,
       "inliers_F_pct": 69.89528795811518,
       "sampson_mediana_px": 0.11082829508375495,
       "inliers_E": 288,
       "erro_R_graus": 0.32629247730765026,
-      "erro_t_graus": 0.2621760716121502,
+      "erro_t_graus": 0.26217607161493045,
       "triangulados_frente": 288,
       "reprojecao_tri_px": 0.27069150010902054
     },
@@ -1551,7 +1551,7 @@
         1533,
         1874
       ],
-      "deteccao_ms_por_imagem": 92.54417050397024,
+      "deteccao_ms_por_imagem": 73.36361659690738,
       "matches": 379,
       "inliers_F": 327,
       "inliers_F_pct": 86.2796833773087,
@@ -1573,7 +1573,7 @@
         1533,
         1874
       ],
-      "deteccao_ms_por_imagem": 91.43337799469009,
+      "deteccao_ms_por_imagem": 72.62804568745196,
       "matches": 384,
       "inliers_F": 355,
       "inliers_F_pct": 92.44791666666666,
@@ -1595,7 +1595,7 @@
         7113,
         7599
       ],
-      "deteccao_ms_por_imagem": 16.05010952334851,
+      "deteccao_ms_por_imagem": 19.855635473504663,
       "matches": 219,
       "inliers_F": 150,
       "inliers_F_pct": 68.4931506849315,
@@ -1617,7 +1617,7 @@
         7113,
         7599
       ],
-      "deteccao_ms_por_imagem": 17.105796985561028,
+      "deteccao_ms_por_imagem": 19.873016513884068,
       "matches": 522,
       "inliers_F": 344,
       "inliers_F_pct": 65.90038314176245,
@@ -1639,7 +1639,7 @@
         7113,
         7599
       ],
-      "deteccao_ms_por_imagem": 15.390599495731294,
+      "deteccao_ms_por_imagem": 19.93547542952001,
       "matches": 717,
       "inliers_F": 462,
       "inliers_F_pct": 64.43514644351464,
@@ -1661,7 +1661,7 @@
         7113,
         7599
       ],
-      "deteccao_ms_por_imagem": 15.77992452075705,
+      "deteccao_ms_por_imagem": 21.293745609000325,
       "matches": 930,
       "inliers_F": 558,
       "inliers_F_pct": 60.0,
@@ -1683,7 +1683,7 @@
         7113,
         7599
       ],
-      "deteccao_ms_por_imagem": 16.209087014431134,
+      "deteccao_ms_por_imagem": 20.02732502296567,
       "matches": 1635,
       "inliers_F": 868,
       "inliers_F_pct": 53.088685015290515,
@@ -1705,7 +1705,7 @@
         7113,
         7599
       ],
-      "deteccao_ms_por_imagem": 16.851981490617618,
+      "deteccao_ms_por_imagem": 20.695500541478395,
       "matches": 717,
       "inliers_F": 178,
       "inliers_F_pct": 24.825662482566248,
@@ -1727,7 +1727,7 @@
         7113,
         7599
       ],
-      "deteccao_ms_por_imagem": 20.258603006368503,
+      "deteccao_ms_por_imagem": 19.889327930286527,
       "matches": 717,
       "inliers_F": 298,
       "inliers_F_pct": 41.56206415620641,
@@ -1749,7 +1749,7 @@
         7113,
         7599
       ],
-      "deteccao_ms_por_imagem": 16.523525497177616,
+      "deteccao_ms_por_imagem": 19.59393243305385,
       "matches": 717,
       "inliers_F": 567,
       "inliers_F_pct": 79.07949790794979,
@@ -1771,7 +1771,7 @@
         7113,
         7599
       ],
-      "deteccao_ms_por_imagem": 15.468848985619843,
+      "deteccao_ms_por_imagem": 19.00340709835291,
       "matches": 717,
       "inliers_F": 629,
       "inliers_F_pct": 87.72663877266388,
@@ -1793,7 +1793,7 @@
         2856,
         3133
       ],
-      "deteccao_ms_por_imagem": 102.09069598931819,
+      "deteccao_ms_por_imagem": 103.37942303158343,
       "matches": 280,
       "inliers_F": 244,
       "inliers_F_pct": 87.14285714285714,
@@ -1815,7 +1815,7 @@
         2856,
         3133
       ],
-      "deteccao_ms_por_imagem": 111.97073850780725,
+      "deteccao_ms_por_imagem": 101.90956015139818,
       "matches": 477,
       "inliers_F": 403,
       "inliers_F_pct": 84.48637316561845,
@@ -1837,7 +1837,7 @@
         2856,
         3133
       ],
-      "deteccao_ms_por_imagem": 107.25445198477246,
+      "deteccao_ms_por_imagem": 101.31974285468459,
       "matches": 578,
       "inliers_F": 467,
       "inliers_F_pct": 80.79584775086505,
@@ -1859,7 +1859,7 @@
         2856,
         3133
       ],
-      "deteccao_ms_por_imagem": 107.04778600484133,
+      "deteccao_ms_por_imagem": 101.86346853151917,
       "matches": 693,
       "inliers_F": 545,
       "inliers_F_pct": 78.64357864357865,
@@ -1881,7 +1881,7 @@
         2856,
         3133
       ],
-      "deteccao_ms_por_imagem": 105.28607800370082,
+      "deteccao_ms_por_imagem": 99.26065756008029,
       "matches": 1012,
       "inliers_F": 677,
       "inliers_F_pct": 66.89723320158103,
@@ -1903,7 +1903,7 @@
         2856,
         3133
       ],
-      "deteccao_ms_por_imagem": 105.58846648200415,
+      "deteccao_ms_por_imagem": 100.1464833971113,
       "matches": 578,
       "inliers_F": 241,
       "inliers_F_pct": 41.69550173010381,
@@ -1925,7 +1925,7 @@
         2856,
         3133
       ],
-      "deteccao_ms_por_imagem": 107.71882347762585,
+      "deteccao_ms_por_imagem": 101.94749059155583,
       "matches": 578,
       "inliers_F": 363,
       "inliers_F_pct": 62.80276816608996,
@@ -1947,7 +1947,7 @@
         2856,
         3133
       ],
-      "deteccao_ms_por_imagem": 109.00028998730704,
+      "deteccao_ms_por_imagem": 101.64392343722284,
       "matches": 578,
       "inliers_F": 515,
       "inliers_F_pct": 89.10034602076125,
@@ -1969,7 +1969,7 @@
         2856,
         3133
       ],
-      "deteccao_ms_por_imagem": 104.34894848731346,
+      "deteccao_ms_por_imagem": 109.70727354288101,
       "matches": 578,
       "inliers_F": 531,
       "inliers_F_pct": 91.86851211072664,
@@ -1991,7 +1991,7 @@
         1741,
         1947
       ],
-      "deteccao_ms_por_imagem": 94.88635850721039,
+      "deteccao_ms_por_imagem": 78.19438842125237,
       "matches": 93,
       "inliers_F": 59,
       "inliers_F_pct": 63.44086021505376,
@@ -2013,7 +2013,7 @@
         1741,
         1947
       ],
-      "deteccao_ms_por_imagem": 93.98222650634125,
+      "deteccao_ms_por_imagem": 72.53105007112026,
       "matches": 155,
       "inliers_F": 103,
       "inliers_F_pct": 66.45161290322581,
@@ -2035,7 +2035,7 @@
         1741,
         1947
       ],
-      "deteccao_ms_por_imagem": 94.11420050309971,
+      "deteccao_ms_por_imagem": 72.75554467923939,
       "matches": 200,
       "inliers_F": 117,
       "inliers_F_pct": 58.5,
@@ -2057,7 +2057,7 @@
         1741,
         1947
       ],
-      "deteccao_ms_por_imagem": 94.2883649840951,
+      "deteccao_ms_por_imagem": 71.75044505856931,
       "matches": 253,
       "inliers_F": 147,
       "inliers_F_pct": 58.10276679841897,
@@ -2079,7 +2079,7 @@
         1741,
         1947
       ],
-      "deteccao_ms_por_imagem": 94.07766550430097,
+      "deteccao_ms_por_imagem": 70.63960493542254,
       "matches": 403,
       "inliers_F": 174,
       "inliers_F_pct": 43.17617866004963,
@@ -2101,7 +2101,7 @@
         1741,
         1947
       ],
-      "deteccao_ms_por_imagem": 95.23918651393615,
+      "deteccao_ms_por_imagem": 72.114665992558,
       "matches": 204,
       "inliers_F": 53,
       "inliers_F_pct": 25.98039215686275,
@@ -2123,7 +2123,7 @@
         1741,
         1947
       ],
-      "deteccao_ms_por_imagem": 94.19322249596007,
+      "deteccao_ms_por_imagem": 74.64862195774913,
       "matches": 201,
       "inliers_F": 76,
       "inliers_F_pct": 37.81094527363184,
@@ -2145,7 +2145,7 @@
         1741,
         1947
       ],
-      "deteccao_ms_por_imagem": 93.098031997215,
+      "deteccao_ms_por_imagem": 71.99205737560987,
       "matches": 202,
       "inliers_F": 154,
       "inliers_F_pct": 76.23762376237624,
@@ -2167,7 +2167,7 @@
         1741,
         1947
       ],
-      "deteccao_ms_por_imagem": 93.84622899233364,
+      "deteccao_ms_por_imagem": 74.62750817649066,
       "matches": 201,
       "inliers_F": 172,
       "inliers_F_pct": 85.57213930348259,
@@ -2189,7 +2189,7 @@
         7280,
         7980
       ],
-      "deteccao_ms_por_imagem": 15.810439508641139,
+      "deteccao_ms_por_imagem": 19.63181863538921,
       "matches": 45,
       "inliers_F": 29,
       "inliers_F_pct": 64.44444444444444,
@@ -2211,7 +2211,7 @@
         7280,
         7980
       ],
-      "deteccao_ms_por_imagem": 15.733442996861413,
+      "deteccao_ms_por_imagem": 20.356274442747235,
       "matches": 139,
       "inliers_F": 79,
       "inliers_F_pct": 56.83453237410072,
@@ -2233,7 +2233,7 @@
         7280,
         7980
       ],
-      "deteccao_ms_por_imagem": 15.870781993726268,
+      "deteccao_ms_por_imagem": 21.972631569951773,
       "matches": 221,
       "inliers_F": 104,
       "inliers_F_pct": 47.05882352941176,
@@ -2255,7 +2255,7 @@
         7280,
         7980
       ],
-      "deteccao_ms_por_imagem": 15.944183513056487,
+      "deteccao_ms_por_imagem": 21.176663925871253,
       "matches": 383,
       "inliers_F": 172,
       "inliers_F_pct": 44.90861618798956,
@@ -2277,14 +2277,14 @@
         7280,
         7980
       ],
-      "deteccao_ms_por_imagem": 16.030325990868732,
+      "deteccao_ms_por_imagem": 21.369215566664934,
       "matches": 970,
       "inliers_F": 355,
       "inliers_F_pct": 36.597938144329895,
       "sampson_mediana_px": 0.3123198406496753,
       "inliers_E": 427,
       "erro_R_graus": 1.5557778861433034,
-      "erro_t_graus": 6.18142594793152,
+      "erro_t_graus": 6.181425947931519,
       "triangulados_frente": 427,
       "reprojecao_tri_px": 0.6853152478190707
     },
@@ -2299,7 +2299,7 @@
         7280,
         7980
       ],
-      "deteccao_ms_por_imagem": 15.873690485022962,
+      "deteccao_ms_por_imagem": 21.0207374766469,
       "matches": 221,
       "inliers_F": 40,
       "inliers_F_pct": 18.099547511312217,
@@ -2321,7 +2321,7 @@
         7280,
         7980
       ],
-      "deteccao_ms_por_imagem": 15.998630988178775,
+      "deteccao_ms_por_imagem": 20.972889848053455,
       "matches": 221,
       "inliers_F": 65,
       "inliers_F_pct": 29.411764705882355,
@@ -2343,7 +2343,7 @@
         7280,
         7980
       ],
-      "deteccao_ms_por_imagem": 15.802445501321927,
+      "deteccao_ms_por_imagem": 21.046234527602792,
       "matches": 221,
       "inliers_F": 153,
       "inliers_F_pct": 69.23076923076923,
@@ -2365,7 +2365,7 @@
         7280,
         7980
       ],
-      "deteccao_ms_por_imagem": 15.979920484824106,
+      "deteccao_ms_por_imagem": 21.193887572735548,
       "matches": 221,
       "inliers_F": 161,
       "inliers_F_pct": 72.85067873303167,
@@ -2387,14 +2387,14 @@
         2619,
         3275
       ],
-      "deteccao_ms_por_imagem": 95.58102299342863,
+      "deteccao_ms_por_imagem": 91.43601590767503,
       "matches": 45,
       "inliers_F": 31,
       "inliers_F_pct": 68.88888888888889,
       "sampson_mediana_px": 0.19647433572589637,
       "inliers_E": 31,
       "erro_R_graus": 4.193171154279968,
-      "erro_t_graus": 5.884398266602732,
+      "erro_t_graus": 5.884398266602731,
       "triangulados_frente": 31,
       "reprojecao_tri_px": 0.7468366665464572
     },
@@ -2409,7 +2409,7 @@
         2619,
         3275
       ],
-      "deteccao_ms_por_imagem": 99.76978448685259,
+      "deteccao_ms_por_imagem": 86.16116945631802,
       "matches": 123,
       "inliers_F": 77,
       "inliers_F_pct": 62.601626016260155,
@@ -2431,7 +2431,7 @@
         2619,
         3275
       ],
-      "deteccao_ms_por_imagem": 87.16721349628642,
+      "deteccao_ms_por_imagem": 86.26915351487696,
       "matches": 187,
       "inliers_F": 114,
       "inliers_F_pct": 60.962566844919785,
@@ -2453,7 +2453,7 @@
         2619,
         3275
       ],
-      "deteccao_ms_por_imagem": 88.68395449826494,
+      "deteccao_ms_por_imagem": 90.19744745455682,
       "matches": 260,
       "inliers_F": 143,
       "inliers_F_pct": 55.00000000000001,
@@ -2475,7 +2475,7 @@
         2619,
         3275
       ],
-      "deteccao_ms_por_imagem": 93.92458249931224,
+      "deteccao_ms_por_imagem": 92.44599845260382,
       "matches": 574,
       "inliers_F": 241,
       "inliers_F_pct": 41.98606271777003,
@@ -2497,7 +2497,7 @@
         2619,
         3275
       ],
-      "deteccao_ms_por_imagem": 94.24657249473967,
+      "deteccao_ms_por_imagem": 92.16503403149545,
       "matches": 187,
       "inliers_F": 40,
       "inliers_F_pct": 21.390374331550802,
@@ -2519,7 +2519,7 @@
         2619,
         3275
       ],
-      "deteccao_ms_por_imagem": 91.9221505173482,
+      "deteccao_ms_por_imagem": 90.78425262123346,
       "matches": 187,
       "inliers_F": 68,
       "inliers_F_pct": 36.36363636363637,
@@ -2541,7 +2541,7 @@
         2619,
         3275
       ],
-      "deteccao_ms_por_imagem": 86.0112179943826,
+      "deteccao_ms_por_imagem": 88.33513897843659,
       "matches": 187,
       "inliers_F": 136,
       "inliers_F_pct": 72.72727272727273,
@@ -2563,7 +2563,7 @@
         2619,
         3275
       ],
-      "deteccao_ms_por_imagem": 88.28924800036475,
+      "deteccao_ms_por_imagem": 87.21267152577639,
       "matches": 187,
       "inliers_F": 154,
       "inliers_F_pct": 82.35294117647058,
@@ -2585,7 +2585,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 91.30429849028587,
+      "deteccao_ms_por_imagem": 88.44735892489552,
       "matches": 393,
       "inliers_F": 335,
       "inliers_F_pct": 85.24173027989822,
@@ -2607,7 +2607,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 90.72286300943233,
+      "deteccao_ms_por_imagem": 85.0608495529741,
       "matches": 487,
       "inliers_F": 387,
       "inliers_F_pct": 79.46611909650923,
@@ -2629,7 +2629,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 90.04986251238734,
+      "deteccao_ms_por_imagem": 82.01630809344351,
       "matches": 522,
       "inliers_F": 402,
       "inliers_F_pct": 77.01149425287356,
@@ -2651,7 +2651,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 90.25598500738852,
+      "deteccao_ms_por_imagem": 82.35161006450653,
       "matches": 574,
       "inliers_F": 420,
       "inliers_F_pct": 73.17073170731707,
@@ -2673,7 +2673,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 90.77021799748763,
+      "deteccao_ms_por_imagem": 81.37093600817025,
       "matches": 663,
       "inliers_F": 458,
       "inliers_F_pct": 69.07993966817496,
@@ -2695,7 +2695,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 92.10267398157157,
+      "deteccao_ms_por_imagem": 75.60836058109999,
       "matches": 524,
       "inliers_F": 203,
       "inliers_F_pct": 38.74045801526718,
@@ -2717,7 +2717,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 91.02074848487973,
+      "deteccao_ms_por_imagem": 76.31765864789486,
       "matches": 523,
       "inliers_F": 314,
       "inliers_F_pct": 60.038240917782026,
@@ -2739,7 +2739,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 89.93573699262924,
+      "deteccao_ms_por_imagem": 77.0789715461433,
       "matches": 522,
       "inliers_F": 489,
       "inliers_F_pct": 93.67816091954023,
@@ -2761,7 +2761,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 90.74487801990472,
+      "deteccao_ms_por_imagem": 81.76901959814131,
       "matches": 520,
       "inliers_F": 483,
       "inliers_F_pct": 92.88461538461539,
@@ -2783,7 +2783,7 @@
         7033,
         7217
       ],
-      "deteccao_ms_por_imagem": 15.611426497343928,
+      "deteccao_ms_por_imagem": 18.99393694475293,
       "matches": 343,
       "inliers_F": 257,
       "inliers_F_pct": 74.9271137026239,
@@ -2805,7 +2805,7 @@
         7033,
         7217
       ],
-      "deteccao_ms_por_imagem": 15.215190505841747,
+      "deteccao_ms_por_imagem": 18.73663580045104,
       "matches": 691,
       "inliers_F": 458,
       "inliers_F_pct": 66.28075253256151,
@@ -2827,7 +2827,7 @@
         7033,
         7217
       ],
-      "deteccao_ms_por_imagem": 15.39071902516298,
+      "deteccao_ms_por_imagem": 17.763384385034442,
       "matches": 929,
       "inliers_F": 647,
       "inliers_F_pct": 69.64477933261571,
@@ -2849,7 +2849,7 @@
         7033,
         7217
       ],
-      "deteccao_ms_por_imagem": 15.482789021916687,
+      "deteccao_ms_por_imagem": 18.08438217267394,
       "matches": 1206,
       "inliers_F": 732,
       "inliers_F_pct": 60.69651741293532,
@@ -2871,7 +2871,7 @@
         7033,
         7217
       ],
-      "deteccao_ms_por_imagem": 15.41583551443182,
+      "deteccao_ms_por_imagem": 17.315292032435536,
       "matches": 1947,
       "inliers_F": 1102,
       "inliers_F_pct": 56.59989727786338,
@@ -2893,7 +2893,7 @@
         7033,
         7217
       ],
-      "deteccao_ms_por_imagem": 15.443210490047932,
+      "deteccao_ms_por_imagem": 18.251813482493162,
       "matches": 929,
       "inliers_F": 234,
       "inliers_F_pct": 25.18837459634015,
@@ -2915,7 +2915,7 @@
         7033,
         7217
       ],
-      "deteccao_ms_por_imagem": 15.47259048675187,
+      "deteccao_ms_por_imagem": 18.753577955067158,
       "matches": 929,
       "inliers_F": 415,
       "inliers_F_pct": 44.67168998923574,
@@ -2937,7 +2937,7 @@
         7033,
         7217
       ],
-      "deteccao_ms_por_imagem": 16.005073994165286,
+      "deteccao_ms_por_imagem": 20.057118963450193,
       "matches": 929,
       "inliers_F": 751,
       "inliers_F_pct": 80.83961248654468,
@@ -2959,7 +2959,7 @@
         7033,
         7217
       ],
-      "deteccao_ms_por_imagem": 15.072387002874166,
+      "deteccao_ms_por_imagem": 18.652342027053237,
       "matches": 929,
       "inliers_F": 823,
       "inliers_F_pct": 88.58988159311087,
@@ -2981,7 +2981,7 @@
         3209,
         2887
       ],
-      "deteccao_ms_por_imagem": 100.56506399996579,
+      "deteccao_ms_por_imagem": 105.79233895987272,
       "matches": 424,
       "inliers_F": 350,
       "inliers_F_pct": 82.54716981132076,
@@ -3003,7 +3003,7 @@
         3209,
         2887
       ],
-      "deteccao_ms_por_imagem": 107.96400651452132,
+      "deteccao_ms_por_imagem": 105.56452441960573,
       "matches": 676,
       "inliers_F": 497,
       "inliers_F_pct": 73.5207100591716,
@@ -3025,7 +3025,7 @@
         3209,
         2887
       ],
-      "deteccao_ms_por_imagem": 106.06168798403814,
+      "deteccao_ms_por_imagem": 107.59458201937377,
       "matches": 803,
       "inliers_F": 575,
       "inliers_F_pct": 71.60647571606475,
@@ -3047,7 +3047,7 @@
         3209,
         2887
       ],
-      "deteccao_ms_por_imagem": 104.37438852386549,
+      "deteccao_ms_por_imagem": 107.2162960190326,
       "matches": 951,
       "inliers_F": 656,
       "inliers_F_pct": 68.98002103049421,
@@ -3069,7 +3069,7 @@
         3209,
         2887
       ],
-      "deteccao_ms_por_imagem": 104.62765448028222,
+      "deteccao_ms_por_imagem": 106.41063842922449,
       "matches": 1259,
       "inliers_F": 861,
       "inliers_F_pct": 68.38760921366163,
@@ -3091,7 +3091,7 @@
         3209,
         2887
       ],
-      "deteccao_ms_por_imagem": 103.28510450199246,
+      "deteccao_ms_por_imagem": 105.58366938494146,
       "matches": 803,
       "inliers_F": 246,
       "inliers_F_pct": 30.635118306351185,
@@ -3113,7 +3113,7 @@
         3209,
         2887
       ],
-      "deteccao_ms_por_imagem": 103.55810300097801,
+      "deteccao_ms_por_imagem": 104.84486795030534,
       "matches": 803,
       "inliers_F": 437,
       "inliers_F_pct": 54.42092154420921,
@@ -3135,7 +3135,7 @@
         3209,
         2887
       ],
-      "deteccao_ms_por_imagem": 104.2099529877305,
+      "deteccao_ms_por_imagem": 106.44553392194211,
       "matches": 803,
       "inliers_F": 718,
       "inliers_F_pct": 89.41469489414695,
@@ -3157,7 +3157,7 @@
         3209,
         2887
       ],
-      "deteccao_ms_por_imagem": 104.4316885236185,
+      "deteccao_ms_por_imagem": 104.96629751287401,
       "matches": 803,
       "inliers_F": 764,
       "inliers_F_pct": 95.14321295143213,
@@ -3179,7 +3179,7 @@
         1302,
         1265
       ],
-      "deteccao_ms_por_imagem": 90.93032401870005,
+      "deteccao_ms_por_imagem": 75.74065658263862,
       "matches": 198,
       "inliers_F": 160,
       "inliers_F_pct": 80.8080808080808,
@@ -3201,7 +3201,7 @@
         1302,
         1265
       ],
-      "deteccao_ms_por_imagem": 88.0283759906888,
+      "deteccao_ms_por_imagem": 71.38687139376998,
       "matches": 275,
       "inliers_F": 227,
       "inliers_F_pct": 82.54545454545455,
@@ -3223,7 +3223,7 @@
         1302,
         1265
       ],
-      "deteccao_ms_por_imagem": 87.43819547817111,
+      "deteccao_ms_por_imagem": 70.62481995671988,
       "matches": 311,
       "inliers_F": 227,
       "inliers_F_pct": 72.9903536977492,
@@ -3245,7 +3245,7 @@
         1302,
         1265
       ],
-      "deteccao_ms_por_imagem": 88.17941052257083,
+      "deteccao_ms_por_imagem": 74.43746482022107,
       "matches": 348,
       "inliers_F": 264,
       "inliers_F_pct": 75.86206896551724,
@@ -3267,7 +3267,7 @@
         1302,
         1265
       ],
-      "deteccao_ms_por_imagem": 88.33029202651232,
+      "deteccao_ms_por_imagem": 70.88894955813885,
       "matches": 450,
       "inliers_F": 295,
       "inliers_F_pct": 65.55555555555556,
@@ -3289,7 +3289,7 @@
         1302,
         1265
       ],
-      "deteccao_ms_por_imagem": 87.60769301443361,
+      "deteccao_ms_por_imagem": 70.64931048080325,
       "matches": 313,
       "inliers_F": 132,
       "inliers_F_pct": 42.17252396166134,
@@ -3311,7 +3311,7 @@
         1302,
         1265
       ],
-      "deteccao_ms_por_imagem": 87.57553301984444,
+      "deteccao_ms_por_imagem": 71.23226812109351,
       "matches": 314,
       "inliers_F": 192,
       "inliers_F_pct": 61.146496815286625,
@@ -3333,7 +3333,7 @@
         1302,
         1265
       ],
-      "deteccao_ms_por_imagem": 88.13775301678106,
+      "deteccao_ms_por_imagem": 75.30243578366935,
       "matches": 314,
       "inliers_F": 263,
       "inliers_F_pct": 83.7579617834395,
@@ -3355,7 +3355,7 @@
         1302,
         1265
       ],
-      "deteccao_ms_por_imagem": 89.46576350717805,
+      "deteccao_ms_por_imagem": 73.59163695946336,
       "matches": 314,
       "inliers_F": 285,
       "inliers_F_pct": 90.76433121019109,
@@ -3377,7 +3377,7 @@
         6748,
         6593
       ],
-      "deteccao_ms_por_imagem": 14.286016521509737,
+      "deteccao_ms_por_imagem": 18.994342535734177,
       "matches": 136,
       "inliers_F": 95,
       "inliers_F_pct": 69.85294117647058,
@@ -3399,7 +3399,7 @@
         6748,
         6593
       ],
-      "deteccao_ms_por_imagem": 14.401858497876674,
+      "deteccao_ms_por_imagem": 18.655629828572273,
       "matches": 345,
       "inliers_F": 226,
       "inliers_F_pct": 65.5072463768116,
@@ -3421,7 +3421,7 @@
         6748,
         6593
       ],
-      "deteccao_ms_por_imagem": 14.270587009377778,
+      "deteccao_ms_por_imagem": 18.119924468919635,
       "matches": 498,
       "inliers_F": 304,
       "inliers_F_pct": 61.044176706827315,
@@ -3443,7 +3443,7 @@
         6748,
         6593
       ],
-      "deteccao_ms_por_imagem": 14.473803981672972,
+      "deteccao_ms_por_imagem": 18.283255398273468,
       "matches": 711,
       "inliers_F": 401,
       "inliers_F_pct": 56.399437412095644,
@@ -3465,7 +3465,7 @@
         6748,
         6593
       ],
-      "deteccao_ms_por_imagem": 14.40382600412704,
+      "deteccao_ms_por_imagem": 18.037738045677543,
       "matches": 1361,
       "inliers_F": 672,
       "inliers_F_pct": 49.37545922116091,
@@ -3487,7 +3487,7 @@
         6748,
         6593
       ],
-      "deteccao_ms_por_imagem": 14.3875794892665,
+      "deteccao_ms_por_imagem": 18.46882002428174,
       "matches": 498,
       "inliers_F": 113,
       "inliers_F_pct": 22.690763052208833,
@@ -3509,7 +3509,7 @@
         6748,
         6593
       ],
-      "deteccao_ms_por_imagem": 14.404703018954024,
+      "deteccao_ms_por_imagem": 18.352938117459416,
       "matches": 498,
       "inliers_F": 195,
       "inliers_F_pct": 39.1566265060241,
@@ -3531,7 +3531,7 @@
         6748,
         6593
       ],
-      "deteccao_ms_por_imagem": 14.278496004408225,
+      "deteccao_ms_por_imagem": 18.33767513744533,
       "matches": 498,
       "inliers_F": 412,
       "inliers_F_pct": 82.73092369477911,
@@ -3553,7 +3553,7 @@
         6748,
         6593
       ],
-      "deteccao_ms_por_imagem": 14.340776979224756,
+      "deteccao_ms_por_imagem": 19.21842899173498,
       "matches": 498,
       "inliers_F": 437,
       "inliers_F_pct": 87.75100401606426,
@@ -3575,7 +3575,7 @@
         2716,
         2739
       ],
-      "deteccao_ms_por_imagem": 100.52856648690067,
+      "deteccao_ms_por_imagem": 88.96241895854473,
       "matches": 179,
       "inliers_F": 149,
       "inliers_F_pct": 83.24022346368714,
@@ -3597,7 +3597,7 @@
         2716,
         2739
       ],
-      "deteccao_ms_por_imagem": 103.00702499807812,
+      "deteccao_ms_por_imagem": 84.96070583350956,
       "matches": 313,
       "inliers_F": 250,
       "inliers_F_pct": 79.87220447284345,
@@ -3619,7 +3619,7 @@
         2716,
         2739
       ],
-      "deteccao_ms_por_imagem": 104.39408000092953,
+      "deteccao_ms_por_imagem": 83.90950551256537,
       "matches": 397,
       "inliers_F": 294,
       "inliers_F_pct": 74.05541561712846,
@@ -3641,7 +3641,7 @@
         2716,
         2739
       ],
-      "deteccao_ms_por_imagem": 106.25469198566861,
+      "deteccao_ms_por_imagem": 83.30824645236135,
       "matches": 507,
       "inliers_F": 369,
       "inliers_F_pct": 72.7810650887574,
@@ -3663,7 +3663,7 @@
         2716,
         2739
       ],
-      "deteccao_ms_por_imagem": 104.84790301416069,
+      "deteccao_ms_por_imagem": 82.52395456656814,
       "matches": 779,
       "inliers_F": 503,
       "inliers_F_pct": 64.56996148908858,
@@ -3685,7 +3685,7 @@
         2716,
         2739
       ],
-      "deteccao_ms_por_imagem": 105.94220951315947,
+      "deteccao_ms_por_imagem": 89.24713009037077,
       "matches": 397,
       "inliers_F": 161,
       "inliers_F_pct": 40.55415617128463,
@@ -3707,7 +3707,7 @@
         2716,
         2739
       ],
-      "deteccao_ms_por_imagem": 106.82538550463505,
+      "deteccao_ms_por_imagem": 84.55871045589447,
       "matches": 397,
       "inliers_F": 235,
       "inliers_F_pct": 59.19395465994962,
@@ -3729,7 +3729,7 @@
         2716,
         2739
       ],
-      "deteccao_ms_por_imagem": 106.2732515274547,
+      "deteccao_ms_por_imagem": 84.75735993124545,
       "matches": 397,
       "inliers_F": 348,
       "inliers_F_pct": 87.6574307304786,
@@ -3751,7 +3751,7 @@
         2716,
         2739
       ],
-      "deteccao_ms_por_imagem": 106.69871151912957,
+      "deteccao_ms_por_imagem": 86.07308543287218,
       "matches": 397,
       "inliers_F": 365,
       "inliers_F_pct": 91.93954659949623,
@@ -3773,7 +3773,7 @@
         1232,
         1284
       ],
-      "deteccao_ms_por_imagem": 90.70955301285721,
+      "deteccao_ms_por_imagem": 88.82111543789506,
       "matches": 322,
       "inliers_F": 271,
       "inliers_F_pct": 84.16149068322981,
@@ -3795,14 +3795,14 @@
         1232,
         1284
       ],
-      "deteccao_ms_por_imagem": 89.43751800688915,
+      "deteccao_ms_por_imagem": 95.46150779351592,
       "matches": 399,
       "inliers_F": 332,
       "inliers_F_pct": 83.20802005012531,
       "sampson_mediana_px": 0.1970336917335887,
       "inliers_E": 338,
       "erro_R_graus": 0.7370602743834017,
-      "erro_t_graus": 8.42876747323378,
+      "erro_t_graus": 8.428767473233778,
       "triangulados_frente": 338,
       "reprojecao_tri_px": 0.30846237359296047
     },
@@ -3817,7 +3817,7 @@
         1232,
         1284
       ],
-      "deteccao_ms_por_imagem": 89.35292699607089,
+      "deteccao_ms_por_imagem": 83.75629992224276,
       "matches": 446,
       "inliers_F": 352,
       "inliers_F_pct": 78.9237668161435,
@@ -3839,7 +3839,7 @@
         1232,
         1284
       ],
-      "deteccao_ms_por_imagem": 86.4684929838404,
+      "deteccao_ms_por_imagem": 82.00272708199918,
       "matches": 491,
       "inliers_F": 357,
       "inliers_F_pct": 72.70875763747455,
@@ -3861,14 +3861,14 @@
         1232,
         1284
       ],
-      "deteccao_ms_por_imagem": 87.41818150156178,
+      "deteccao_ms_por_imagem": 79.29333834908903,
       "matches": 567,
       "inliers_F": 394,
       "inliers_F_pct": 69.48853615520282,
       "sampson_mediana_px": 0.16367295674955756,
       "inliers_E": 442,
       "erro_R_graus": 0.5708784504801712,
-      "erro_t_graus": 4.847153702651444,
+      "erro_t_graus": 4.847153702651594,
       "triangulados_frente": 442,
       "reprojecao_tri_px": 0.592380232729632
     },
@@ -3883,7 +3883,7 @@
         1232,
         1284
       ],
-      "deteccao_ms_por_imagem": 87.66386299976148,
+      "deteccao_ms_por_imagem": 77.82448641955853,
       "matches": 449,
       "inliers_F": 190,
       "inliers_F_pct": 42.31625835189309,
@@ -3905,7 +3905,7 @@
         1232,
         1284
       ],
-      "deteccao_ms_por_imagem": 89.24361650133505,
+      "deteccao_ms_por_imagem": 78.5626876167953,
       "matches": 445,
       "inliers_F": 292,
       "inliers_F_pct": 65.61797752808988,
@@ -3927,7 +3927,7 @@
         1232,
         1284
       ],
-      "deteccao_ms_por_imagem": 89.92683899123222,
+      "deteccao_ms_por_imagem": 76.5161425806582,
       "matches": 449,
       "inliers_F": 376,
       "inliers_F_pct": 83.74164810690424,
@@ -3949,14 +3949,14 @@
         1232,
         1284
       ],
-      "deteccao_ms_por_imagem": 86.57625949126668,
+      "deteccao_ms_por_imagem": 75.81600500270724,
       "matches": 450,
       "inliers_F": 419,
       "inliers_F_pct": 93.11111111111111,
       "sampson_mediana_px": 0.5119531948049788,
       "inliers_E": 427,
       "erro_R_graus": 0.5733250248236489,
-      "erro_t_graus": 4.902731198074282,
+      "erro_t_graus": 4.902731198074281,
       "triangulados_frente": 427,
       "reprojecao_tri_px": 0.6700690119179737
     },
@@ -3971,7 +3971,7 @@
         6863,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.703727996675298,
+      "deteccao_ms_por_imagem": 19.844657508656383,
       "matches": 270,
       "inliers_F": 209,
       "inliers_F_pct": 77.4074074074074,
@@ -3993,7 +3993,7 @@
         6863,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.104876987403259,
+      "deteccao_ms_por_imagem": 19.92509700357914,
       "matches": 575,
       "inliers_F": 391,
       "inliers_F_pct": 68.0,
@@ -4015,7 +4015,7 @@
         6863,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.199131517671049,
+      "deteccao_ms_por_imagem": 20.519908517599106,
       "matches": 804,
       "inliers_F": 519,
       "inliers_F_pct": 64.55223880597015,
@@ -4037,7 +4037,7 @@
         6863,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.264136494603008,
+      "deteccao_ms_por_imagem": 20.410090452060103,
       "matches": 1060,
       "inliers_F": 694,
       "inliers_F_pct": 65.47169811320754,
@@ -4059,7 +4059,7 @@
         6863,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.168400492053479,
+      "deteccao_ms_por_imagem": 18.483832478523254,
       "matches": 1750,
       "inliers_F": 987,
       "inliers_F_pct": 56.39999999999999,
@@ -4081,7 +4081,7 @@
         6863,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.209540997399017,
+      "deteccao_ms_por_imagem": 20.773704862222075,
       "matches": 804,
       "inliers_F": 200,
       "inliers_F_pct": 24.875621890547265,
@@ -4103,7 +4103,7 @@
         6863,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.662045490695164,
+      "deteccao_ms_por_imagem": 20.378290908411145,
       "matches": 804,
       "inliers_F": 332,
       "inliers_F_pct": 41.29353233830846,
@@ -4125,14 +4125,14 @@
         6863,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.322838513180614,
+      "deteccao_ms_por_imagem": 19.92160058580339,
       "matches": 804,
       "inliers_F": 652,
       "inliers_F_pct": 81.09452736318407,
       "sampson_mediana_px": 0.5181019632580947,
       "inliers_E": 375,
       "erro_R_graus": 13.795019237622785,
-      "erro_t_graus": 84.36721124568056,
+      "erro_t_graus": 84.36721124568055,
       "triangulados_frente": 375,
       "reprojecao_tri_px": 1.0793413817585684
     },
@@ -4147,14 +4147,14 @@
         6863,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.184115512762219,
+      "deteccao_ms_por_imagem": 20.620068069547415,
       "matches": 804,
       "inliers_F": 731,
       "inliers_F_pct": 90.92039800995025,
       "sampson_mediana_px": 0.5880084842882752,
       "inliers_E": 710,
       "erro_R_graus": 2.5296533459740793,
-      "erro_t_graus": 32.727415927736224,
+      "erro_t_graus": 32.72741592773622,
       "triangulados_frente": 710,
       "reprojecao_tri_px": 1.2512161089531277
     },
@@ -4169,7 +4169,7 @@
         2564,
         2549
       ],
-      "deteccao_ms_por_imagem": 98.49178552394733,
+      "deteccao_ms_por_imagem": 113.34226629696786,
       "matches": 352,
       "inliers_F": 300,
       "inliers_F_pct": 85.22727272727273,
@@ -4191,7 +4191,7 @@
         2564,
         2549
       ],
-      "deteccao_ms_por_imagem": 103.85802699602209,
+      "deteccao_ms_por_imagem": 114.00118097662926,
       "matches": 547,
       "inliers_F": 430,
       "inliers_F_pct": 78.61060329067642,
@@ -4213,7 +4213,7 @@
         2564,
         2549
       ],
-      "deteccao_ms_por_imagem": 103.76975449617021,
+      "deteccao_ms_por_imagem": 112.12719953618944,
       "matches": 663,
       "inliers_F": 493,
       "inliers_F_pct": 74.35897435897436,
@@ -4235,7 +4235,7 @@
         2564,
         2549
       ],
-      "deteccao_ms_por_imagem": 104.24641700228676,
+      "deteccao_ms_por_imagem": 113.49029233679175,
       "matches": 776,
       "inliers_F": 567,
       "inliers_F_pct": 73.06701030927834,
@@ -4257,7 +4257,7 @@
         2564,
         2549
       ],
-      "deteccao_ms_por_imagem": 104.75412401137874,
+      "deteccao_ms_por_imagem": 113.62893204204738,
       "matches": 1037,
       "inliers_F": 685,
       "inliers_F_pct": 66.0559305689489,
@@ -4279,7 +4279,7 @@
         2564,
         2549
       ],
-      "deteccao_ms_por_imagem": 102.45166398817673,
+      "deteccao_ms_por_imagem": 111.96728912182152,
       "matches": 663,
       "inliers_F": 235,
       "inliers_F_pct": 35.444947209653094,
@@ -4301,7 +4301,7 @@
         2564,
         2549
       ],
-      "deteccao_ms_por_imagem": 103.68866502540186,
+      "deteccao_ms_por_imagem": 103.82967116311193,
       "matches": 663,
       "inliers_F": 380,
       "inliers_F_pct": 57.315233785822016,
@@ -4323,7 +4323,7 @@
         2564,
         2549
       ],
-      "deteccao_ms_por_imagem": 108.46126000978984,
+      "deteccao_ms_por_imagem": 102.34165471047163,
       "matches": 663,
       "inliers_F": 558,
       "inliers_F_pct": 84.16289592760181,
@@ -4345,7 +4345,7 @@
         2564,
         2549
       ],
-      "deteccao_ms_por_imagem": 108.29983701114543,
+      "deteccao_ms_por_imagem": 104.19989703223109,
       "matches": 663,
       "inliers_F": 606,
       "inliers_F_pct": 91.4027149321267,
@@ -4367,7 +4367,7 @@
         1588,
         1711
       ],
-      "deteccao_ms_por_imagem": 91.69924649177119,
+      "deteccao_ms_por_imagem": 76.20732951909304,
       "matches": 71,
       "inliers_F": 46,
       "inliers_F_pct": 64.7887323943662,
@@ -4389,7 +4389,7 @@
         1588,
         1711
       ],
-      "deteccao_ms_por_imagem": 91.02668950799853,
+      "deteccao_ms_por_imagem": 72.78088736347854,
       "matches": 153,
       "inliers_F": 94,
       "inliers_F_pct": 61.43790849673203,
@@ -4411,7 +4411,7 @@
         1588,
         1711
       ],
-      "deteccao_ms_por_imagem": 91.35938948020339,
+      "deteccao_ms_por_imagem": 72.54864438436925,
       "matches": 186,
       "inliers_F": 116,
       "inliers_F_pct": 62.365591397849464,
@@ -4433,7 +4433,7 @@
         1588,
         1711
       ],
-      "deteccao_ms_por_imagem": 90.49592650262639,
+      "deteccao_ms_por_imagem": 70.96590287983418,
       "matches": 246,
       "inliers_F": 141,
       "inliers_F_pct": 57.3170731707317,
@@ -4455,7 +4455,7 @@
         1588,
         1711
       ],
-      "deteccao_ms_por_imagem": 90.7525734801311,
+      "deteccao_ms_por_imagem": 74.059356469661,
       "matches": 386,
       "inliers_F": 174,
       "inliers_F_pct": 45.07772020725388,
@@ -4477,7 +4477,7 @@
         1588,
         1711
       ],
-      "deteccao_ms_por_imagem": 90.74416200746782,
+      "deteccao_ms_por_imagem": 69.07368008978665,
       "matches": 186,
       "inliers_F": 64,
       "inliers_F_pct": 34.40860215053764,
@@ -4499,7 +4499,7 @@
         1588,
         1711
       ],
-      "deteccao_ms_por_imagem": 89.65848150546663,
+      "deteccao_ms_por_imagem": 72.2701654303819,
       "matches": 186,
       "inliers_F": 84,
       "inliers_F_pct": 45.16129032258064,
@@ -4521,7 +4521,7 @@
         1588,
         1711
       ],
-      "deteccao_ms_por_imagem": 90.27335248538293,
+      "deteccao_ms_por_imagem": 73.77177895978093,
       "matches": 185,
       "inliers_F": 136,
       "inliers_F_pct": 73.51351351351352,
@@ -4543,7 +4543,7 @@
         1588,
         1711
       ],
-      "deteccao_ms_por_imagem": 90.55862799868919,
+      "deteccao_ms_por_imagem": 71.27975858747959,
       "matches": 182,
       "inliers_F": 144,
       "inliers_F_pct": 79.12087912087912,
@@ -4565,7 +4565,7 @@
         8000,
         7654
       ],
-      "deteccao_ms_por_imagem": 15.9812085039448,
+      "deteccao_ms_por_imagem": 19.3971605040133,
       "matches": 28,
       "inliers_F": 14,
       "inliers_F_pct": 50.0,
@@ -4587,7 +4587,7 @@
         8000,
         7654
       ],
-      "deteccao_ms_por_imagem": 15.905484528047964,
+      "deteccao_ms_por_imagem": 18.5716119594872,
       "matches": 108,
       "inliers_F": 51,
       "inliers_F_pct": 47.22222222222222,
@@ -4609,14 +4609,14 @@
         8000,
         7654
       ],
-      "deteccao_ms_por_imagem": 15.86846198188141,
+      "deteccao_ms_por_imagem": 18.57593096792698,
       "matches": 191,
       "inliers_F": 81,
       "inliers_F_pct": 42.40837696335078,
       "sampson_mediana_px": 0.2749017248545856,
       "inliers_E": 87,
       "erro_R_graus": 0.9147046794560734,
-      "erro_t_graus": 3.743212896015422,
+      "erro_t_graus": 3.743212896015421,
       "triangulados_frente": 87,
       "reprojecao_tri_px": 0.5605027661901612
     },
@@ -4631,7 +4631,7 @@
         8000,
         7654
       ],
-      "deteccao_ms_por_imagem": 15.858856990234926,
+      "deteccao_ms_por_imagem": 18.54198961518705,
       "matches": 345,
       "inliers_F": 137,
       "inliers_F_pct": 39.710144927536234,
@@ -4653,7 +4653,7 @@
         8000,
         7654
       ],
-      "deteccao_ms_por_imagem": 15.841625514440238,
+      "deteccao_ms_por_imagem": 20.47236799262464,
       "matches": 949,
       "inliers_F": 274,
       "inliers_F_pct": 28.87249736564805,
@@ -4675,14 +4675,14 @@
         8000,
         7654
       ],
-      "deteccao_ms_por_imagem": 15.80179447773844,
+      "deteccao_ms_por_imagem": 21.80231548845768,
       "matches": 191,
       "inliers_F": 36,
       "inliers_F_pct": 18.848167539267017,
       "sampson_mediana_px": 0.07932743978942239,
       "inliers_E": 36,
       "erro_R_graus": 0.9147046794560734,
-      "erro_t_graus": 3.743212896015422,
+      "erro_t_graus": 3.743212896015421,
       "triangulados_frente": 36,
       "reprojecao_tri_px": 0.2090844767665636
     },
@@ -4697,14 +4697,14 @@
         8000,
         7654
       ],
-      "deteccao_ms_por_imagem": 15.963921003276482,
+      "deteccao_ms_por_imagem": 19.820914138108492,
       "matches": 191,
       "inliers_F": 58,
       "inliers_F_pct": 30.36649214659686,
       "sampson_mediana_px": 0.1250355694590533,
       "inliers_E": 65,
       "erro_R_graus": 0.9645397642747592,
-      "erro_t_graus": 3.6084809131987914,
+      "erro_t_graus": 3.6084809131987905,
       "triangulados_frente": 65,
       "reprojecao_tri_px": 0.4943692561407922
     },
@@ -4719,7 +4719,7 @@
         8000,
         7654
       ],
-      "deteccao_ms_por_imagem": 15.961950499331579,
+      "deteccao_ms_por_imagem": 20.752011565491557,
       "matches": 191,
       "inliers_F": 115,
       "inliers_F_pct": 60.20942408376963,
@@ -4741,7 +4741,7 @@
         8000,
         7654
       ],
-      "deteccao_ms_por_imagem": 15.925979998428375,
+      "deteccao_ms_por_imagem": 20.447210874408484,
       "matches": 191,
       "inliers_F": 138,
       "inliers_F_pct": 72.25130890052355,
@@ -4763,7 +4763,7 @@
         3372,
         3357
       ],
-      "deteccao_ms_por_imagem": 99.20534348930232,
+      "deteccao_ms_por_imagem": 87.304905988276,
       "matches": 30,
       "inliers_F": 23,
       "inliers_F_pct": 76.66666666666667,
@@ -4785,7 +4785,7 @@
         3372,
         3357
       ],
-      "deteccao_ms_por_imagem": 105.68539501400664,
+      "deteccao_ms_por_imagem": 85.16404405236244,
       "matches": 87,
       "inliers_F": 50,
       "inliers_F_pct": 57.47126436781609,
@@ -4807,7 +4807,7 @@
         3372,
         3357
       ],
-      "deteccao_ms_por_imagem": 107.01361601240933,
+      "deteccao_ms_por_imagem": 85.12382255867124,
       "matches": 144,
       "inliers_F": 80,
       "inliers_F_pct": 55.55555555555556,
@@ -4829,7 +4829,7 @@
         3372,
         3357
       ],
-      "deteccao_ms_por_imagem": 104.69808150082827,
+      "deteccao_ms_por_imagem": 83.9348859153688,
       "matches": 222,
       "inliers_F": 116,
       "inliers_F_pct": 52.25225225225225,
@@ -4851,7 +4851,7 @@
         3372,
         3357
       ],
-      "deteccao_ms_por_imagem": 105.69851502077654,
+      "deteccao_ms_por_imagem": 85.54515987634659,
       "matches": 535,
       "inliers_F": 190,
       "inliers_F_pct": 35.51401869158878,
@@ -4873,7 +4873,7 @@
         3372,
         3357
       ],
-      "deteccao_ms_por_imagem": 104.72968351677991,
+      "deteccao_ms_por_imagem": 84.09733651205897,
       "matches": 144,
       "inliers_F": 35,
       "inliers_F_pct": 24.305555555555554,
@@ -4895,7 +4895,7 @@
         3372,
         3357
       ],
-      "deteccao_ms_por_imagem": 105.29369849245995,
+      "deteccao_ms_por_imagem": 86.33899292908609,
       "matches": 144,
       "inliers_F": 55,
       "inliers_F_pct": 38.19444444444444,
@@ -4917,7 +4917,7 @@
         3372,
         3357
       ],
-      "deteccao_ms_por_imagem": 105.97884299932048,
+      "deteccao_ms_por_imagem": 84.95877799578011,
       "matches": 144,
       "inliers_F": 95,
       "inliers_F_pct": 65.97222222222221,
@@ -4939,7 +4939,7 @@
         3372,
         3357
       ],
-      "deteccao_ms_por_imagem": 105.09127250406891,
+      "deteccao_ms_por_imagem": 83.2249610684812,
       "matches": 144,
       "inliers_F": 111,
       "inliers_F_pct": 77.08333333333334,
@@ -4961,7 +4961,7 @@
         1533,
         1774
       ],
-      "deteccao_ms_por_imagem": 95.231478480855,
+      "deteccao_ms_por_imagem": 78.26443808153272,
       "matches": 74,
       "inliers_F": 63,
       "inliers_F_pct": 85.13513513513513,
@@ -4983,14 +4983,14 @@
         1533,
         1774
       ],
-      "deteccao_ms_por_imagem": 93.28638701117598,
+      "deteccao_ms_por_imagem": 74.9420200008899,
       "matches": 157,
       "inliers_F": 113,
       "inliers_F_pct": 71.97452229299363,
       "sampson_mediana_px": 0.1776545180392847,
       "inliers_E": 111,
       "erro_R_graus": 1.1924181850412063,
-      "erro_t_graus": 3.8841742064522657,
+      "erro_t_graus": 3.884174206452265,
       "triangulados_frente": 111,
       "reprojecao_tri_px": 0.6046093589910491
     },
@@ -5005,13 +5005,13 @@
         1533,
         1774
       ],
-      "deteccao_ms_por_imagem": 93.86106848251075,
+      "deteccao_ms_por_imagem": 73.21468810550869,
       "matches": 198,
       "inliers_F": 143,
       "inliers_F_pct": 72.22222222222221,
       "sampson_mediana_px": 0.24999619715118312,
       "inliers_E": 145,
-      "erro_R_graus": 1.3537469595518141,
+      "erro_R_graus": 1.353746959551814,
       "erro_t_graus": 0.28266813130397966,
       "triangulados_frente": 145,
       "reprojecao_tri_px": 0.5843823414497611
@@ -5027,16 +5027,16 @@
         1533,
         1774
       ],
-      "deteccao_ms_por_imagem": 97.24192551220767,
-      "matches": 272,
-      "inliers_F": 170,
-      "inliers_F_pct": 62.5,
-      "sampson_mediana_px": 0.2396575639672289,
-      "inliers_E": 204,
-      "erro_R_graus": 0.041668627444442934,
-      "erro_t_graus": 0.06613626982188678,
-      "triangulados_frente": 204,
-      "reprojecao_tri_px": 0.4786017031176377
+      "deteccao_ms_por_imagem": 75.44370694085956,
+      "matches": 274,
+      "inliers_F": 184,
+      "inliers_F_pct": 67.15328467153284,
+      "sampson_mediana_px": 0.21771536630917707,
+      "inliers_E": 202,
+      "erro_R_graus": 0.9458939405552409,
+      "erro_t_graus": 0.6104841165073204,
+      "triangulados_frente": 202,
+      "reprojecao_tri_px": 0.5102035756820406
     },
     {
       "par": "h2/20261026_180242.jpg x h2/20261026_180245.jpg",
@@ -5049,7 +5049,7 @@
         1533,
         1774
       ],
-      "deteccao_ms_por_imagem": 94.01808999245986,
+      "deteccao_ms_por_imagem": 76.14365709014237,
       "matches": 389,
       "inliers_F": 225,
       "inliers_F_pct": 57.84061696658098,
@@ -5071,7 +5071,7 @@
         1533,
         1774
       ],
-      "deteccao_ms_por_imagem": 93.6660445004236,
+      "deteccao_ms_por_imagem": 74.18939494527876,
       "matches": 202,
       "inliers_F": 75,
       "inliers_F_pct": 37.12871287128713,
@@ -5093,7 +5093,7 @@
         1533,
         1774
       ],
-      "deteccao_ms_por_imagem": 95.28657599003054,
+      "deteccao_ms_por_imagem": 74.79190616868436,
       "matches": 204,
       "inliers_F": 104,
       "inliers_F_pct": 50.98039215686274,
@@ -5115,7 +5115,7 @@
         1533,
         1774
       ],
-      "deteccao_ms_por_imagem": 93.02052951534279,
+      "deteccao_ms_por_imagem": 76.5560430008918,
       "matches": 200,
       "inliers_F": 160,
       "inliers_F_pct": 80.0,
@@ -5137,7 +5137,7 @@
         1533,
         1774
       ],
-      "deteccao_ms_por_imagem": 95.40810147882439,
+      "deteccao_ms_por_imagem": 74.60682257078588,
       "matches": 202,
       "inliers_F": 165,
       "inliers_F_pct": 81.68316831683168,
@@ -5159,7 +5159,7 @@
         7113,
         7405
       ],
-      "deteccao_ms_por_imagem": 15.271398500772193,
+      "deteccao_ms_por_imagem": 18.710981821641326,
       "matches": 36,
       "inliers_F": 24,
       "inliers_F_pct": 66.66666666666666,
@@ -5181,14 +5181,14 @@
         7113,
         7405
       ],
-      "deteccao_ms_por_imagem": 15.12066600844264,
+      "deteccao_ms_por_imagem": 20.05409705452621,
       "matches": 125,
       "inliers_F": 73,
       "inliers_F_pct": 58.4,
       "sampson_mediana_px": 0.22105778072222917,
       "inliers_E": 80,
       "erro_R_graus": 0.7034595230757713,
-      "erro_t_graus": 3.271322485505834,
+      "erro_t_graus": 3.2713224855058334,
       "triangulados_frente": 80,
       "reprojecao_tri_px": 0.7283772208585373
     },
@@ -5203,7 +5203,7 @@
         7113,
         7405
       ],
-      "deteccao_ms_por_imagem": 15.202117006992921,
+      "deteccao_ms_por_imagem": 18.896562047302723,
       "matches": 214,
       "inliers_F": 116,
       "inliers_F_pct": 54.20560747663551,
@@ -5225,7 +5225,7 @@
         7113,
         7405
       ],
-      "deteccao_ms_por_imagem": 19.362170482054353,
+      "deteccao_ms_por_imagem": 18.455462530255318,
       "matches": 381,
       "inliers_F": 176,
       "inliers_F_pct": 46.194225721784775,
@@ -5247,7 +5247,7 @@
         7113,
         7405
       ],
-      "deteccao_ms_por_imagem": 14.857700007269159,
+      "deteccao_ms_por_imagem": 18.28988967463374,
       "matches": 966,
       "inliers_F": 348,
       "inliers_F_pct": 36.024844720496894,
@@ -5269,7 +5269,7 @@
         7113,
         7405
       ],
-      "deteccao_ms_por_imagem": 15.114292997168377,
+      "deteccao_ms_por_imagem": 19.86240711994469,
       "matches": 214,
       "inliers_F": 42,
       "inliers_F_pct": 19.626168224299064,
@@ -5291,7 +5291,7 @@
         7113,
         7405
       ],
-      "deteccao_ms_por_imagem": 15.197284519672394,
+      "deteccao_ms_por_imagem": 19.263682421296835,
       "matches": 214,
       "inliers_F": 77,
       "inliers_F_pct": 35.981308411214954,
@@ -5313,7 +5313,7 @@
         7113,
         7405
       ],
-      "deteccao_ms_por_imagem": 15.159025002503768,
+      "deteccao_ms_por_imagem": 18.857595045119524,
       "matches": 214,
       "inliers_F": 150,
       "inliers_F_pct": 70.09345794392523,
@@ -5335,7 +5335,7 @@
         7113,
         7405
       ],
-      "deteccao_ms_por_imagem": 14.949138974770904,
+      "deteccao_ms_por_imagem": 18.22779350914061,
       "matches": 214,
       "inliers_F": 162,
       "inliers_F_pct": 75.70093457943925,
@@ -5357,7 +5357,7 @@
         2856,
         3241
       ],
-      "deteccao_ms_por_imagem": 102.37700349534862,
+      "deteccao_ms_por_imagem": 106.15458153188229,
       "matches": 30,
       "inliers_F": 20,
       "inliers_F_pct": 66.66666666666666,
@@ -5379,7 +5379,7 @@
         2856,
         3241
       ],
-      "deteccao_ms_por_imagem": 106.64356101187877,
+      "deteccao_ms_por_imagem": 105.96399055793881,
       "matches": 88,
       "inliers_F": 62,
       "inliers_F_pct": 70.45454545454545,
@@ -5401,7 +5401,7 @@
         2856,
         3241
       ],
-      "deteccao_ms_por_imagem": 105.52870351239108,
+      "deteccao_ms_por_imagem": 104.03466853313148,
       "matches": 134,
       "inliers_F": 88,
       "inliers_F_pct": 65.67164179104478,
@@ -5423,7 +5423,7 @@
         2856,
         3241
       ],
-      "deteccao_ms_por_imagem": 110.83222649176605,
+      "deteccao_ms_por_imagem": 101.22986393980682,
       "matches": 212,
       "inliers_F": 123,
       "inliers_F_pct": 58.01886792452831,
@@ -5445,7 +5445,7 @@
         2856,
         3241
       ],
-      "deteccao_ms_por_imagem": 107.74198250146583,
+      "deteccao_ms_por_imagem": 100.59221857227385,
       "matches": 452,
       "inliers_F": 234,
       "inliers_F_pct": 51.76991150442478,
@@ -5467,7 +5467,7 @@
         2856,
         3241
       ],
-      "deteccao_ms_por_imagem": 107.66130351112224,
+      "deteccao_ms_por_imagem": 103.0943589285016,
       "matches": 134,
       "inliers_F": 47,
       "inliers_F_pct": 35.07462686567165,
@@ -5489,7 +5489,7 @@
         2856,
         3241
       ],
-      "deteccao_ms_por_imagem": 106.42383099184372,
+      "deteccao_ms_por_imagem": 104.43216795101762,
       "matches": 134,
       "inliers_F": 73,
       "inliers_F_pct": 54.47761194029851,
@@ -5511,7 +5511,7 @@
         2856,
         3241
       ],
-      "deteccao_ms_por_imagem": 105.9284940129146,
+      "deteccao_ms_por_imagem": 103.5249789711088,
       "matches": 134,
       "inliers_F": 100,
       "inliers_F_pct": 74.6268656716418,
@@ -5533,7 +5533,7 @@
         2856,
         3241
       ],
-      "deteccao_ms_por_imagem": 106.88431150629185,
+      "deteccao_ms_por_imagem": 103.85760455392301,
       "matches": 134,
       "inliers_F": 103,
       "inliers_F_pct": 76.86567164179104,
@@ -5555,7 +5555,7 @@
         1741,
         1696
       ],
-      "deteccao_ms_por_imagem": 95.72860950720496,
+      "deteccao_ms_por_imagem": 78.40435509569943,
       "matches": 17,
       "inliers_F": 10,
       "inliers_F_pct": 58.82352941176471,
@@ -5577,7 +5577,7 @@
         1741,
         1696
       ],
-      "deteccao_ms_por_imagem": 93.50354300113395,
+      "deteccao_ms_por_imagem": 73.083377443254,
       "matches": 31,
       "inliers_F": 15,
       "inliers_F_pct": 48.38709677419355,
@@ -5599,7 +5599,7 @@
         1741,
         1696
       ],
-      "deteccao_ms_por_imagem": 93.94902701023966,
+      "deteccao_ms_por_imagem": 74.06589342281222,
       "matches": 67,
       "inliers_F": 20,
       "inliers_F_pct": 29.850746268656714,
@@ -5621,7 +5621,7 @@
         1741,
         1696
       ],
-      "deteccao_ms_por_imagem": 94.35570749337785,
+      "deteccao_ms_por_imagem": 78.59812234528363,
       "matches": 94,
       "inliers_F": 23,
       "inliers_F_pct": 24.46808510638298,
@@ -5643,7 +5643,7 @@
         1741,
         1696
       ],
-      "deteccao_ms_por_imagem": 94.0147909859661,
+      "deteccao_ms_por_imagem": 74.87897388637066,
       "matches": 209,
       "inliers_F": 35,
       "inliers_F_pct": 16.74641148325359,
@@ -5665,7 +5665,7 @@
         1741,
         1696
       ],
-      "deteccao_ms_por_imagem": 93.62947300542146,
+      "deteccao_ms_por_imagem": 76.0959095787257,
       "matches": 63,
       "inliers_F": 13,
       "inliers_F_pct": 20.634920634920633,
@@ -5687,7 +5687,7 @@
         1741,
         1696
       ],
-      "deteccao_ms_por_imagem": 91.13291950779967,
+      "deteccao_ms_por_imagem": 76.03690400719643,
       "matches": 69,
       "inliers_F": 18,
       "inliers_F_pct": 26.08695652173913,
@@ -5709,7 +5709,7 @@
         1741,
         1696
       ],
-      "deteccao_ms_por_imagem": 94.40714749507606,
+      "deteccao_ms_por_imagem": 75.1192094758153,
       "matches": 63,
       "inliers_F": 25,
       "inliers_F_pct": 39.682539682539684,
@@ -5731,14 +5731,14 @@
         1741,
         1696
       ],
-      "deteccao_ms_por_imagem": 93.88682199642062,
+      "deteccao_ms_por_imagem": 74.93155752308667,
       "matches": 65,
       "inliers_F": 37,
       "inliers_F_pct": 56.92307692307692,
       "sampson_mediana_px": 0.33274128053777874,
       "inliers_E": 33,
       "erro_R_graus": 2.3738401605211887,
-      "erro_t_graus": 1.8255815271827194,
+      "erro_t_graus": 1.825581527182919,
       "triangulados_frente": 33,
       "reprojecao_tri_px": 1.540292307320042
     },
@@ -5753,7 +5753,7 @@
         7280,
         7418
       ],
-      "deteccao_ms_por_imagem": 17.247665993636474,
+      "deteccao_ms_por_imagem": 20.22599009796977,
       "matches": 11,
       "inliers_F": 7,
       "inliers_F_pct": 63.63636363636363,
@@ -5775,7 +5775,7 @@
         7280,
         7418
       ],
-      "deteccao_ms_por_imagem": 15.3505310008768,
+      "deteccao_ms_por_imagem": 20.379838533699512,
       "matches": 37,
       "inliers_F": 14,
       "inliers_F_pct": 37.83783783783784,
@@ -5797,7 +5797,7 @@
         7280,
         7418
       ],
-      "deteccao_ms_por_imagem": 15.526535018580034,
+      "deteccao_ms_por_imagem": 20.072884391993284,
       "matches": 82,
       "inliers_F": 20,
       "inliers_F_pct": 24.390243902439025,
@@ -5819,13 +5819,13 @@
         7280,
         7418
       ],
-      "deteccao_ms_por_imagem": 16.046797507442534,
+      "deteccao_ms_por_imagem": 19.52957850880921,
       "matches": 159,
       "inliers_F": 18,
       "inliers_F_pct": 11.320754716981133,
       "sampson_mediana_px": 0.09124489148516668,
       "inliers_E": 24,
-      "erro_R_graus": 19.0217638274235,
+      "erro_R_graus": 19.021763827423495,
       "erro_t_graus": 26.053164369475752,
       "triangulados_frente": 24,
       "reprojecao_tri_px": 0.6766781482627318
@@ -5841,7 +5841,7 @@
         7280,
         7418
       ],
-      "deteccao_ms_por_imagem": 16.151412477483973,
+      "deteccao_ms_por_imagem": 19.521288108080626,
       "matches": 595,
       "inliers_F": 32,
       "inliers_F_pct": 5.378151260504202,
@@ -5863,14 +5863,14 @@
         7280,
         7418
       ],
-      "deteccao_ms_por_imagem": 16.13276998978108,
+      "deteccao_ms_por_imagem": 20.3891817945987,
       "matches": 82,
       "inliers_F": 14,
       "inliers_F_pct": 17.073170731707318,
       "sampson_mediana_px": 0.027505117406600534,
       "inliers_E": 11,
-      "erro_R_graus": 31.28119128393916,
-      "erro_t_graus": 19.223770254343265,
+      "erro_R_graus": 31.281191283939155,
+      "erro_t_graus": 19.22377025434326,
       "triangulados_frente": 11,
       "reprojecao_tri_px": 0.09430982569501531
     },
@@ -5885,7 +5885,7 @@
         7280,
         7418
       ],
-      "deteccao_ms_por_imagem": 15.162581985350698,
+      "deteccao_ms_por_imagem": 19.990400411188602,
       "matches": 82,
       "inliers_F": 15,
       "inliers_F_pct": 18.29268292682927,
@@ -5907,13 +5907,13 @@
         7280,
         7418
       ],
-      "deteccao_ms_por_imagem": 15.199856483377516,
+      "deteccao_ms_por_imagem": 21.79079200141132,
       "matches": 82,
       "inliers_F": 27,
       "inliers_F_pct": 32.926829268292686,
       "sampson_mediana_px": 0.12085610790416486,
       "inliers_E": 30,
-      "erro_R_graus": 3.109711758535255,
+      "erro_R_graus": 3.1097117585352545,
       "erro_t_graus": 2.2602621573267494,
       "triangulados_frente": 30,
       "reprojecao_tri_px": 0.8823746227484282
@@ -5929,13 +5929,13 @@
         7280,
         7418
       ],
-      "deteccao_ms_por_imagem": 15.248674986651167,
+      "deteccao_ms_por_imagem": 19.756353460252285,
       "matches": 82,
       "inliers_F": 33,
       "inliers_F_pct": 40.243902439024396,
       "sampson_mediana_px": 0.5313650125912751,
       "inliers_E": 35,
-      "erro_R_graus": 3.109711758535255,
+      "erro_R_graus": 3.1097117585352545,
       "erro_t_graus": 2.2602621573267494,
       "triangulados_frente": 35,
       "reprojecao_tri_px": 1.3037717313524577
@@ -5951,7 +5951,7 @@
         2619,
         3088
       ],
-      "deteccao_ms_por_imagem": 102.11278349743225,
+      "deteccao_ms_por_imagem": 88.89109850861132,
       "matches": 14,
       "inliers_F": 8,
       "inliers_F_pct": 57.14285714285714,
@@ -5973,7 +5973,7 @@
         2619,
         3088
       ],
-      "deteccao_ms_por_imagem": 105.34425350488164,
+      "deteccao_ms_por_imagem": 84.36167682521045,
       "matches": 41,
       "inliers_F": 13,
       "inliers_F_pct": 31.70731707317073,
@@ -5995,7 +5995,7 @@
         2619,
         3088
       ],
-      "deteccao_ms_por_imagem": 105.80792251857929,
+      "deteccao_ms_por_imagem": 84.20988405123353,
       "matches": 70,
       "inliers_F": 17,
       "inliers_F_pct": 24.285714285714285,
@@ -6017,7 +6017,7 @@
         2619,
         3088
       ],
-      "deteccao_ms_por_imagem": 105.60585302300751,
+      "deteccao_ms_por_imagem": 85.19042260013521,
       "matches": 110,
       "inliers_F": 18,
       "inliers_F_pct": 16.363636363636363,
@@ -6039,14 +6039,14 @@
         2619,
         3088
       ],
-      "deteccao_ms_por_imagem": 104.53926248010248,
+      "deteccao_ms_por_imagem": 87.5487660523504,
       "matches": 323,
       "inliers_F": 22,
       "inliers_F_pct": 6.811145510835913,
       "sampson_mediana_px": 0.20115705506114273,
       "inliers_E": 36,
       "erro_R_graus": 5.4615373085057906,
-      "erro_t_graus": 3.9183731526834045,
+      "erro_t_graus": 3.918373152683311,
       "triangulados_frente": 36,
       "reprojecao_tri_px": 0.8748377488541266
     },
@@ -6061,14 +6061,14 @@
         2619,
         3088
       ],
-      "deteccao_ms_por_imagem": 105.50792448339052,
+      "deteccao_ms_por_imagem": 86.69763687066734,
       "matches": 70,
       "inliers_F": 11,
       "inliers_F_pct": 15.714285714285714,
       "sampson_mediana_px": 1.1065664210306206e-13,
       "inliers_E": 12,
-      "erro_R_graus": 6.8429837605849695,
-      "erro_t_graus": 5.214203675006525,
+      "erro_R_graus": 6.842983760584969,
+      "erro_t_graus": 5.214203675006524,
       "triangulados_frente": 12,
       "reprojecao_tri_px": 0.12956422254985622
     },
@@ -6083,7 +6083,7 @@
         2619,
         3088
       ],
-      "deteccao_ms_por_imagem": 104.98016100609675,
+      "deteccao_ms_por_imagem": 87.34653843566775,
       "matches": 70,
       "inliers_F": 13,
       "inliers_F_pct": 18.571428571428573,
@@ -6105,7 +6105,7 @@
         2619,
         3088
       ],
-      "deteccao_ms_por_imagem": 106.77841198048554,
+      "deteccao_ms_por_imagem": 86.94210392422974,
       "matches": 70,
       "inliers_F": 22,
       "inliers_F_pct": 31.428571428571427,
@@ -6127,14 +6127,14 @@
         2619,
         3088
       ],
-      "deteccao_ms_por_imagem": 106.04039701865986,
+      "deteccao_ms_por_imagem": 90.18892352469265,
       "matches": 70,
       "inliers_F": 28,
       "inliers_F_pct": 40.0,
       "sampson_mediana_px": 0.46085898547405213,
       "inliers_E": 28,
       "erro_R_graus": 3.5769870497475997,
-      "erro_t_graus": 3.6966765147568217,
+      "erro_t_graus": 3.6966765147569203,
       "triangulados_frente": 28,
       "reprojecao_tri_px": 2.2086411162611057
     },
@@ -6149,14 +6149,14 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 94.70227698329836,
+      "deteccao_ms_por_imagem": 80.01154963858426,
       "matches": 113,
       "inliers_F": 69,
       "inliers_F_pct": 61.06194690265486,
       "sampson_mediana_px": 0.27814213646563485,
       "inliers_E": 78,
       "erro_R_graus": 2.0248783901904517,
-      "erro_t_graus": 3.899177401499241,
+      "erro_t_graus": 3.89917740149924,
       "triangulados_frente": 78,
       "reprojecao_tri_px": 0.682925272272348
     },
@@ -6171,7 +6171,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 93.89386948896572,
+      "deteccao_ms_por_imagem": 74.98576515354216,
       "matches": 191,
       "inliers_F": 122,
       "inliers_F_pct": 63.87434554973822,
@@ -6193,7 +6193,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 93.13670551637188,
+      "deteccao_ms_por_imagem": 72.87631439976394,
       "matches": 247,
       "inliers_F": 156,
       "inliers_F_pct": 63.1578947368421,
@@ -6215,7 +6215,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 93.13855451182462,
+      "deteccao_ms_por_imagem": 74.11385653540492,
       "matches": 300,
       "inliers_F": 172,
       "inliers_F_pct": 57.333333333333336,
@@ -6237,7 +6237,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 96.92424300010316,
+      "deteccao_ms_por_imagem": 75.58441814035177,
       "matches": 426,
       "inliers_F": 230,
       "inliers_F_pct": 53.990610328638496,
@@ -6259,14 +6259,14 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 95.47925999504514,
+      "deteccao_ms_por_imagem": 78.9717014413327,
       "matches": 242,
       "inliers_F": 63,
       "inliers_F_pct": 26.033057851239672,
       "sampson_mediana_px": 0.0700560767008348,
       "inliers_E": 85,
       "erro_R_graus": 0.92100458300539,
-      "erro_t_graus": 0.48631066986217375,
+      "erro_t_graus": 0.48631066986142435,
       "triangulados_frente": 85,
       "reprojecao_tri_px": 0.15725948802807532
     },
@@ -6281,16 +6281,16 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 91.63236597669311,
-      "matches": 243,
-      "inliers_F": 92,
-      "inliers_F_pct": 37.86008230452675,
-      "sampson_mediana_px": 0.1513474638357189,
-      "inliers_E": 127,
-      "erro_R_graus": 0.6984406511776134,
-      "erro_t_graus": 0.5614970636569816,
-      "triangulados_frente": 127,
-      "reprojecao_tri_px": 0.33755375885280814
+      "deteccao_ms_por_imagem": 78.2159036025405,
+      "matches": 241,
+      "inliers_F": 105,
+      "inliers_F_pct": 43.56846473029046,
+      "sampson_mediana_px": 0.16278277369663877,
+      "inliers_E": 126,
+      "erro_R_graus": 0.6080799845016509,
+      "erro_t_graus": 0.6818193356177398,
+      "triangulados_frente": 126,
+      "reprojecao_tri_px": 0.366655149873662
     },
     {
       "par": "h2/20261026_180305.jpg x h2/20261026_180308.jpg",
@@ -6303,7 +6303,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 93.33094049361534,
+      "deteccao_ms_por_imagem": 75.7495875004679,
       "matches": 240,
       "inliers_F": 167,
       "inliers_F_pct": 69.58333333333333,
@@ -6325,7 +6325,7 @@
         1477,
         1476
       ],
-      "deteccao_ms_por_imagem": 91.54471449437551,
+      "deteccao_ms_por_imagem": 78.2496309839189,
       "matches": 245,
       "inliers_F": 214,
       "inliers_F_pct": 87.34693877551021,
@@ -6347,14 +6347,14 @@
         7033,
         6879
       ],
-      "deteccao_ms_por_imagem": 14.618735498515889,
+      "deteccao_ms_por_imagem": 19.24669905565679,
       "matches": 61,
       "inliers_F": 34,
       "inliers_F_pct": 55.73770491803278,
       "sampson_mediana_px": 0.25948189116272535,
       "inliers_E": 40,
       "erro_R_graus": 1.1364680025042684,
-      "erro_t_graus": 0.713988182695803,
+      "erro_t_graus": 0.7139881826958029,
       "triangulados_frente": 40,
       "reprojecao_tri_px": 0.8147105387146761
     },
@@ -6369,7 +6369,7 @@
         7033,
         6879
       ],
-      "deteccao_ms_por_imagem": 14.474305004114285,
+      "deteccao_ms_por_imagem": 18.94173608161509,
       "matches": 166,
       "inliers_F": 82,
       "inliers_F_pct": 49.39759036144578,
@@ -6391,7 +6391,7 @@
         7033,
         6879
       ],
-      "deteccao_ms_por_imagem": 14.452327479375526,
+      "deteccao_ms_por_imagem": 18.731824588030577,
       "matches": 269,
       "inliers_F": 127,
       "inliers_F_pct": 47.21189591078067,
@@ -6413,7 +6413,7 @@
         7033,
         6879
       ],
-      "deteccao_ms_por_imagem": 14.611418504500762,
+      "deteccao_ms_por_imagem": 18.638865556567907,
       "matches": 422,
       "inliers_F": 196,
       "inliers_F_pct": 46.44549763033176,
@@ -6435,7 +6435,7 @@
         7033,
         6879
       ],
-      "deteccao_ms_por_imagem": 14.496137999230996,
+      "deteccao_ms_por_imagem": 18.58986052684486,
       "matches": 1032,
       "inliers_F": 361,
       "inliers_F_pct": 34.980620155038764,
@@ -6457,7 +6457,7 @@
         7033,
         6879
       ],
-      "deteccao_ms_por_imagem": 14.614772982895374,
+      "deteccao_ms_por_imagem": 18.88295100070536,
       "matches": 269,
       "inliers_F": 45,
       "inliers_F_pct": 16.728624535315987,
@@ -6479,7 +6479,7 @@
         7033,
         6879
       ],
-      "deteccao_ms_por_imagem": 14.697024977067485,
+      "deteccao_ms_por_imagem": 19.852490397170186,
       "matches": 269,
       "inliers_F": 79,
       "inliers_F_pct": 29.36802973977695,
@@ -6501,7 +6501,7 @@
         7033,
         6879
       ],
-      "deteccao_ms_por_imagem": 14.808650506893173,
+      "deteccao_ms_por_imagem": 18.788995454087853,
       "matches": 269,
       "inliers_F": 178,
       "inliers_F_pct": 66.17100371747212,
@@ -6523,7 +6523,7 @@
         7033,
         6879
       ],
-      "deteccao_ms_por_imagem": 14.607303019147366,
+      "deteccao_ms_por_imagem": 19.205090356990695,
       "matches": 269,
       "inliers_F": 198,
       "inliers_F_pct": 73.60594795539033,
@@ -6545,7 +6545,7 @@
         3209,
         2743
       ],
-      "deteccao_ms_por_imagem": 102.52852548728697,
+      "deteccao_ms_por_imagem": 108.26816596090794,
       "matches": 49,
       "inliers_F": 30,
       "inliers_F_pct": 61.224489795918366,
@@ -6567,7 +6567,7 @@
         3209,
         2743
       ],
-      "deteccao_ms_por_imagem": 105.75538402190432,
+      "deteccao_ms_por_imagem": 107.95793100260198,
       "matches": 121,
       "inliers_F": 72,
       "inliers_F_pct": 59.50413223140496,
@@ -6589,7 +6589,7 @@
         3209,
         2743
       ],
-      "deteccao_ms_por_imagem": 108.17259250325151,
+      "deteccao_ms_por_imagem": 108.28357515856624,
       "matches": 185,
       "inliers_F": 95,
       "inliers_F_pct": 51.35135135135135,
@@ -6611,7 +6611,7 @@
         3209,
         2743
       ],
-      "deteccao_ms_por_imagem": 106.75149597227573,
+      "deteccao_ms_por_imagem": 109.41223055124283,
       "matches": 270,
       "inliers_F": 137,
       "inliers_F_pct": 50.74074074074074,
@@ -6633,7 +6633,7 @@
         3209,
         2743
       ],
-      "deteccao_ms_por_imagem": 107.26533448905684,
+      "deteccao_ms_por_imagem": 108.27689617872238,
       "matches": 565,
       "inliers_F": 235,
       "inliers_F_pct": 41.5929203539823,
@@ -6655,7 +6655,7 @@
         3209,
         2743
       ],
-      "deteccao_ms_por_imagem": 104.59522300516255,
+      "deteccao_ms_por_imagem": 109.09448750317097,
       "matches": 185,
       "inliers_F": 37,
       "inliers_F_pct": 20.0,
@@ -6677,7 +6677,7 @@
         3209,
         2743
       ],
-      "deteccao_ms_por_imagem": 107.25954148801975,
+      "deteccao_ms_por_imagem": 106.35724058374763,
       "matches": 185,
       "inliers_F": 58,
       "inliers_F_pct": 31.351351351351354,
@@ -6699,7 +6699,7 @@
         3209,
         2743
       ],
-      "deteccao_ms_por_imagem": 105.41866699350066,
+      "deteccao_ms_por_imagem": 109.36540109105408,
       "matches": 185,
       "inliers_F": 133,
       "inliers_F_pct": 71.89189189189189,
@@ -6721,7 +6721,7 @@
         3209,
         2743
       ],
-      "deteccao_ms_por_imagem": 106.31579099572264,
+      "deteccao_ms_por_imagem": 110.48858007416129,
       "matches": 185,
       "inliers_F": 145,
       "inliers_F_pct": 78.37837837837837,
@@ -6743,7 +6743,7 @@
         1302,
         1429
       ],
-      "deteccao_ms_por_imagem": 92.27306401589885,
+      "deteccao_ms_por_imagem": 72.0833414234221,
       "matches": 18,
       "inliers_F": 9,
       "inliers_F_pct": 50.0,
@@ -6765,7 +6765,7 @@
         1302,
         1429
       ],
-      "deteccao_ms_por_imagem": 92.4710565013811,
+      "deteccao_ms_por_imagem": 73.48074810579419,
       "matches": 31,
       "inliers_F": 9,
       "inliers_F_pct": 29.03225806451613,
@@ -6787,7 +6787,7 @@
         1302,
         1429
       ],
-      "deteccao_ms_por_imagem": 92.06600999459624,
+      "deteccao_ms_por_imagem": 73.26855254359543,
       "matches": 53,
       "inliers_F": 12,
       "inliers_F_pct": 22.641509433962266,
@@ -6809,7 +6809,7 @@
         1302,
         1429
       ],
-      "deteccao_ms_por_imagem": 94.10951100289822,
+      "deteccao_ms_por_imagem": 73.71344440616667,
       "matches": 135,
       "inliers_F": 14,
       "inliers_F_pct": 10.37037037037037,
@@ -6831,7 +6831,7 @@
         1302,
         1429
       ],
-      "deteccao_ms_por_imagem": 91.8003315164242,
+      "deteccao_ms_por_imagem": 74.49756050482392,
       "matches": 33,
       "inliers_F": 9,
       "inliers_F_pct": 27.27272727272727,
@@ -6853,13 +6853,13 @@
         1302,
         1429
       ],
-      "deteccao_ms_por_imagem": 92.0576170028653,
+      "deteccao_ms_por_imagem": 74.96837596409023,
       "matches": 31,
       "inliers_F": 10,
       "inliers_F_pct": 32.25806451612903,
       "sampson_mediana_px": 1.7675447704551904e-13,
       "inliers_E": 6,
-      "erro_R_graus": 143.90310548435443,
+      "erro_R_graus": 143.9031054843544,
       "erro_t_graus": 67.31949024148874,
       "triangulados_frente": 6,
       "reprojecao_tri_px": 0.07646080406958909
@@ -6875,14 +6875,14 @@
         1302,
         1429
       ],
-      "deteccao_ms_por_imagem": 94.78943099384196,
+      "deteccao_ms_por_imagem": 72.99692486412823,
       "matches": 32,
       "inliers_F": 10,
       "inliers_F_pct": 31.25,
       "sampson_mediana_px": 1.1870612065022596e-13,
       "inliers_E": 4,
       "erro_R_graus": 51.327292597019635,
-      "erro_t_graus": 74.96305993064105,
+      "erro_t_graus": 74.96305993064107,
       "triangulados_frente": 4,
       "reprojecao_tri_px": 0.7539819118963687
     },
@@ -6897,7 +6897,7 @@
         1302,
         1429
       ],
-      "deteccao_ms_por_imagem": 93.05059749749489,
+      "deteccao_ms_por_imagem": 72.94258056208491,
       "matches": 33,
       "inliers_F": 12,
       "inliers_F_pct": 36.36363636363637,
@@ -6919,14 +6919,14 @@
         6748,
         7212
       ],
-      "deteccao_ms_por_imagem": 14.464061008766294,
+      "deteccao_ms_por_imagem": 17.860955325886607,
       "matches": 20,
       "inliers_F": 9,
       "inliers_F_pct": 45.0,
       "sampson_mediana_px": 8.697280099621139e-14,
       "inliers_E": 4,
       "erro_R_graus": 156.1714550894189,
-      "erro_t_graus": 53.33420907394462,
+      "erro_t_graus": 53.33420907394463,
       "triangulados_frente": 4,
       "reprojecao_tri_px": 0.18619768340565931
     },
@@ -6941,7 +6941,7 @@
         6748,
         7212
       ],
-      "deteccao_ms_por_imagem": 14.435689023230225,
+      "deteccao_ms_por_imagem": 17.580756917595863,
       "matches": 41,
       "inliers_F": 9,
       "inliers_F_pct": 21.951219512195124,
@@ -6963,7 +6963,7 @@
         6748,
         7212
       ],
-      "deteccao_ms_por_imagem": 14.472479990217835,
+      "deteccao_ms_por_imagem": 17.464983509853482,
       "matches": 100,
       "inliers_F": 10,
       "inliers_F_pct": 10.0,
@@ -6985,7 +6985,7 @@
         6748,
         7212
       ],
-      "deteccao_ms_por_imagem": 14.444613509112969,
+      "deteccao_ms_por_imagem": 18.416879465803504,
       "matches": 444,
       "inliers_F": 15,
       "inliers_F_pct": 3.3783783783783785,
@@ -7007,14 +7007,14 @@
         6748,
         7212
       ],
-      "deteccao_ms_por_imagem": 14.342680980917066,
+      "deteccao_ms_por_imagem": 17.231176840141416,
       "matches": 41,
       "inliers_F": 8,
       "inliers_F_pct": 19.51219512195122,
       "sampson_mediana_px": 5.241631490812711e-14,
       "inliers_E": 8,
       "erro_R_graus": 72.9155697719354,
-      "erro_t_graus": 69.9566340257818,
+      "erro_t_graus": 69.95663402578181,
       "triangulados_frente": 8,
       "reprojecao_tri_px": 2.9331820843929354e-11
     },
@@ -7029,14 +7029,14 @@
         6748,
         7212
       ],
-      "deteccao_ms_por_imagem": 14.441319508478045,
+      "deteccao_ms_por_imagem": 17.146914498880506,
       "matches": 41,
       "inliers_F": 9,
       "inliers_F_pct": 21.951219512195124,
       "sampson_mediana_px": 4.4678459817776405e-13,
       "inliers_E": 9,
       "erro_R_graus": 72.9155697719354,
-      "erro_t_graus": 69.9566340257818,
+      "erro_t_graus": 69.95663402578181,
       "triangulados_frente": 9,
       "reprojecao_tri_px": 3.873329873962491e-11
     },
@@ -7051,7 +7051,7 @@
         6748,
         7212
       ],
-      "deteccao_ms_por_imagem": 14.643624483142048,
+      "deteccao_ms_por_imagem": 17.52510596998036,
       "matches": 41,
       "inliers_F": 10,
       "inliers_F_pct": 24.390243902439025,
@@ -7073,7 +7073,7 @@
         6748,
         7212
       ],
-      "deteccao_ms_por_imagem": 14.44976098719053,
+      "deteccao_ms_por_imagem": 18.923701951280236,
       "matches": 41,
       "inliers_F": 11,
       "inliers_F_pct": 26.82926829268293,
@@ -7095,7 +7095,7 @@
         2716,
         2581
       ],
-      "deteccao_ms_por_imagem": 100.86905147181824,
+      "deteccao_ms_por_imagem": 87.96622860245407,
       "matches": 7,
       "inliers_F": 7,
       "inliers_F_pct": 100.0,
@@ -7117,7 +7117,7 @@
         2716,
         2581
       ],
-      "deteccao_ms_por_imagem": 105.98536601173691,
+      "deteccao_ms_por_imagem": 85.71692649275064,
       "matches": 16,
       "inliers_F": 9,
       "inliers_F_pct": 56.25,
@@ -7139,14 +7139,14 @@
         2716,
         2581
       ],
-      "deteccao_ms_por_imagem": 106.6783299902454,
+      "deteccao_ms_por_imagem": 83.63167243078351,
       "matches": 29,
       "inliers_F": 9,
       "inliers_F_pct": 31.03448275862069,
       "sampson_mediana_px": 1.0173735525934085e-12,
       "inliers_E": 7,
       "erro_R_graus": 89.50636301006773,
-      "erro_t_graus": 151.13224689201644,
+      "erro_t_graus": 151.1322468920164,
       "triangulados_frente": 7,
       "reprojecao_tri_px": 3.882800655888856e-12
     },
@@ -7161,7 +7161,7 @@
         2716,
         2581
       ],
-      "deteccao_ms_por_imagem": 105.62916801427491,
+      "deteccao_ms_por_imagem": 83.17134995013475,
       "matches": 61,
       "inliers_F": 9,
       "inliers_F_pct": 14.754098360655737,
@@ -7183,7 +7183,7 @@
         2716,
         2581
       ],
-      "deteccao_ms_por_imagem": 105.49319701385684,
+      "deteccao_ms_por_imagem": 85.90483036823571,
       "matches": 201,
       "inliers_F": 13,
       "inliers_F_pct": 6.467661691542288,
@@ -7205,14 +7205,14 @@
         2716,
         2581
       ],
-      "deteccao_ms_por_imagem": 108.42583450721577,
+      "deteccao_ms_por_imagem": 86.34484745562077,
       "matches": 29,
       "inliers_F": 8,
       "inliers_F_pct": 27.586206896551722,
       "sampson_mediana_px": 5.759455033310168e-13,
       "inliers_E": 6,
       "erro_R_graus": 118.81203897107592,
-      "erro_t_graus": 47.843488396356506,
+      "erro_t_graus": 47.8434883963565,
       "triangulados_frente": 6,
       "reprojecao_tri_px": 9.282647366486619e-10
     },
@@ -7227,13 +7227,13 @@
         2716,
         2581
       ],
-      "deteccao_ms_por_imagem": 105.70519551401958,
+      "deteccao_ms_por_imagem": 86.63019654341042,
       "matches": 29,
       "inliers_F": 9,
       "inliers_F_pct": 31.03448275862069,
       "sampson_mediana_px": 2.3663129053578426e-13,
       "inliers_E": 7,
-      "erro_R_graus": 148.77009550721118,
+      "erro_R_graus": 148.7700955072112,
       "erro_t_graus": 14.846394198115787,
       "triangulados_frente": 7,
       "reprojecao_tri_px": 1.4616021941679813e-12
@@ -7249,7 +7249,7 @@
         2716,
         2581
       ],
-      "deteccao_ms_por_imagem": 106.55145850614645,
+      "deteccao_ms_por_imagem": 86.25658135861158,
       "matches": 29,
       "inliers_F": 10,
       "inliers_F_pct": 34.48275862068966,
@@ -7271,7 +7271,7 @@
         2716,
         2581
       ],
-      "deteccao_ms_por_imagem": 106.05931750615127,
+      "deteccao_ms_por_imagem": 84.68246343545616,
       "matches": 29,
       "inliers_F": 11,
       "inliers_F_pct": 37.93103448275862,
@@ -7293,7 +7293,7 @@
         1401,
         1284
       ],
-      "deteccao_ms_por_imagem": 94.5518264779821,
+      "deteccao_ms_por_imagem": 82.97930448316038,
       "matches": 17,
       "inliers_F": 13,
       "inliers_F_pct": 76.47058823529412,
@@ -7315,7 +7315,7 @@
         1401,
         1284
       ],
-      "deteccao_ms_por_imagem": 94.56458751810715,
+      "deteccao_ms_por_imagem": 83.73326133005321,
       "matches": 48,
       "inliers_F": 22,
       "inliers_F_pct": 45.83333333333333,
@@ -7337,7 +7337,7 @@
         1401,
         1284
       ],
-      "deteccao_ms_por_imagem": 93.94124450045638,
+      "deteccao_ms_por_imagem": 85.60626162216067,
       "matches": 75,
       "inliers_F": 27,
       "inliers_F_pct": 36.0,
@@ -7359,7 +7359,7 @@
         1401,
         1284
       ],
-      "deteccao_ms_por_imagem": 92.92880550492555,
+      "deteccao_ms_por_imagem": 83.22696946561337,
       "matches": 116,
       "inliers_F": 37,
       "inliers_F_pct": 31.896551724137932,
@@ -7381,7 +7381,7 @@
         1401,
         1284
       ],
-      "deteccao_ms_por_imagem": 92.6099535136018,
+      "deteccao_ms_por_imagem": 84.82443843968213,
       "matches": 228,
       "inliers_F": 70,
       "inliers_F_pct": 30.701754385964914,
@@ -7403,7 +7403,7 @@
         1401,
         1284
       ],
-      "deteccao_ms_por_imagem": 96.48573200684041,
+      "deteccao_ms_por_imagem": 84.0233985800296,
       "matches": 73,
       "inliers_F": 18,
       "inliers_F_pct": 24.65753424657534,
@@ -7425,7 +7425,7 @@
         1401,
         1284
       ],
-      "deteccao_ms_por_imagem": 90.99611750571057,
+      "deteccao_ms_por_imagem": 85.55756998248398,
       "matches": 75,
       "inliers_F": 22,
       "inliers_F_pct": 29.333333333333332,
@@ -7447,7 +7447,7 @@
         1401,
         1284
       ],
-      "deteccao_ms_por_imagem": 92.72109798621386,
+      "deteccao_ms_por_imagem": 85.19893838092685,
       "matches": 77,
       "inliers_F": 42,
       "inliers_F_pct": 54.54545454545454,
@@ -7469,7 +7469,7 @@
         1401,
         1284
       ],
-      "deteccao_ms_por_imagem": 92.77213900350034,
+      "deteccao_ms_por_imagem": 85.73398692533374,
       "matches": 79,
       "inliers_F": 48,
       "inliers_F_pct": 60.75949367088608,
@@ -7491,7 +7491,7 @@
         7212,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.259375515393913,
+      "deteccao_ms_por_imagem": 18.782932544127107,
       "matches": 9,
       "inliers_F": 7,
       "inliers_F_pct": 77.77777777777779,
@@ -7513,7 +7513,7 @@
         7212,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.420141495065764,
+      "deteccao_ms_por_imagem": 21.23160706833005,
       "matches": 47,
       "inliers_F": 12,
       "inliers_F_pct": 25.53191489361702,
@@ -7535,7 +7535,7 @@
         7212,
         6780
       ],
-      "deteccao_ms_por_imagem": 15.18525299616158,
+      "deteccao_ms_por_imagem": 21.363459527492523,
       "matches": 101,
       "inliers_F": 18,
       "inliers_F_pct": 17.82178217821782,
@@ -7557,7 +7557,7 @@
         7212,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.377732499269769,
+      "deteccao_ms_por_imagem": 21.045608911663294,
       "matches": 175,
       "inliers_F": 22,
       "inliers_F_pct": 12.571428571428573,
@@ -7579,14 +7579,14 @@
         7212,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.322392002213746,
+      "deteccao_ms_por_imagem": 21.170280408114195,
       "matches": 609,
       "inliers_F": 96,
       "inliers_F_pct": 15.763546798029557,
       "sampson_mediana_px": 0.23704139375252642,
       "inliers_E": 62,
       "erro_R_graus": 1.713412872970587,
-      "erro_t_graus": 2.7168922866733407,
+      "erro_t_graus": 2.7168922866730725,
       "triangulados_frente": 62,
       "reprojecao_tri_px": 0.6884017988286084
     },
@@ -7601,13 +7601,13 @@
         7212,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.310336991911754,
+      "deteccao_ms_por_imagem": 21.378240082412958,
       "matches": 101,
       "inliers_F": 12,
       "inliers_F_pct": 11.881188118811881,
       "sampson_mediana_px": 9.08117150767173e-14,
       "inliers_E": 12,
-      "erro_R_graus": 37.20656758030539,
+      "erro_R_graus": 37.20656758030538,
       "erro_t_graus": 143.17098784567096,
       "triangulados_frente": 12,
       "reprojecao_tri_px": 0.04770042252802774
@@ -7623,13 +7623,13 @@
         7212,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.287606492871419,
+      "deteccao_ms_por_imagem": 18.385833827778697,
       "matches": 101,
       "inliers_F": 15,
       "inliers_F_pct": 14.85148514851485,
       "sampson_mediana_px": 0.01675594716654289,
       "inliers_E": 16,
-      "erro_R_graus": 3.4898449325552368,
+      "erro_R_graus": 3.4898449325552363,
       "erro_t_graus": 2.6342590857008648,
       "triangulados_frente": 16,
       "reprojecao_tri_px": 0.3670474929009274
@@ -7645,14 +7645,14 @@
         7212,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.31291998596862,
+      "deteccao_ms_por_imagem": 18.54070881381631,
       "matches": 101,
       "inliers_F": 23,
       "inliers_F_pct": 22.772277227722775,
       "sampson_mediana_px": 0.14555540707852926,
       "inliers_E": 26,
       "erro_R_graus": 0.6570214611214086,
-      "erro_t_graus": 1.8160427406753792,
+      "erro_t_graus": 1.8160427406757804,
       "triangulados_frente": 26,
       "reprojecao_tri_px": 1.2222596164604476
     },
@@ -7667,14 +7667,14 @@
         7212,
         6780
       ],
-      "deteccao_ms_por_imagem": 14.277533016866073,
+      "deteccao_ms_por_imagem": 18.416146049275994,
       "matches": 101,
       "inliers_F": 32,
       "inliers_F_pct": 31.683168316831683,
       "sampson_mediana_px": 0.7348116651222873,
       "inliers_E": 29,
       "erro_R_graus": 0.6570214611214086,
-      "erro_t_graus": 1.8160427406753792,
+      "erro_t_graus": 1.8160427406757804,
       "triangulados_frente": 29,
       "reprojecao_tri_px": 1.4352695355480578
     },
@@ -7689,7 +7689,7 @@
         2762,
         2549
       ],
-      "deteccao_ms_por_imagem": 105.94394998042844,
+      "deteccao_ms_por_imagem": 82.7765241265297,
       "matches": 24,
       "inliers_F": 12,
       "inliers_F_pct": 50.0,
@@ -7711,7 +7711,7 @@
         2762,
         2549
       ],
-      "deteccao_ms_por_imagem": 105.11495851096697,
+      "deteccao_ms_por_imagem": 85.67708847112954,
       "matches": 47,
       "inliers_F": 14,
       "inliers_F_pct": 29.78723404255319,
@@ -7733,14 +7733,14 @@
         2762,
         2549
       ],
-      "deteccao_ms_por_imagem": 104.84159149928018,
+      "deteccao_ms_por_imagem": 84.16790096089244,
       "matches": 90,
       "inliers_F": 22,
       "inliers_F_pct": 24.444444444444443,
       "sampson_mediana_px": 0.25432761376999563,
       "inliers_E": 25,
       "erro_R_graus": 0.687965896157749,
-      "erro_t_graus": 1.990415607570764,
+      "erro_t_graus": 1.9904156075709474,
       "triangulados_frente": 25,
       "reprojecao_tri_px": 0.7408473233013273
     },
@@ -7755,7 +7755,7 @@
         2762,
         2549
       ],
-      "deteccao_ms_por_imagem": 105.92608150909655,
+      "deteccao_ms_por_imagem": 85.2838836144656,
       "matches": 298,
       "inliers_F": 32,
       "inliers_F_pct": 10.738255033557047,
@@ -7777,7 +7777,7 @@
         2762,
         2549
       ],
-      "deteccao_ms_por_imagem": 105.53093600901775,
+      "deteccao_ms_por_imagem": 84.56226554699242,
       "matches": 47,
       "inliers_F": 11,
       "inliers_F_pct": 23.404255319148938,
@@ -7799,7 +7799,7 @@
         2762,
         2549
       ],
-      "deteccao_ms_por_imagem": 109.71916900598444,
+      "deteccao_ms_por_imagem": 86.86234406195581,
       "matches": 47,
       "inliers_F": 12,
       "inliers_F_pct": 25.53191489361702,
@@ -7821,7 +7821,7 @@
         2762,
         2549
       ],
-      "deteccao_ms_por_imagem": 107.14831500081345,
+      "deteccao_ms_por_imagem": 86.79994405247271,
       "matches": 47,
       "inliers_F": 18,
       "inliers_F_pct": 38.297872340425535,
@@ -7843,7 +7843,7 @@
         2762,
         2549
       ],
-      "deteccao_ms_por_imagem": 105.1717689842917,
+      "deteccao_ms_por_imagem": 87.15372066944838,
       "matches": 47,
       "inliers_F": 22,
       "inliers_F_pct": 46.808510638297875,
@@ -7865,7 +7865,7 @@
         2775,
         2781
       ],
-      "deteccao_ms_por_imagem": 329.26438050344586,
+      "deteccao_ms_por_imagem": 303.79346711561084,
       "matches": 503,
       "inliers_F": 306,
       "inliers_F_pct": 60.834990059642145,
@@ -7887,7 +7887,7 @@
         8000,
         8000
       ],
-      "deteccao_ms_por_imagem": 32.66339801484719,
+      "deteccao_ms_por_imagem": 38.32881501875818,
       "matches": 437,
       "inliers_F": 222,
       "inliers_F_pct": 50.800915331807786,
@@ -7909,7 +7909,7 @@
         6373,
         6320
       ],
-      "deteccao_ms_por_imagem": 447.8142415173352,
+      "deteccao_ms_por_imagem": 514.729430899024,
       "matches": 688,
       "inliers_F": 397,
       "inliers_F_pct": 57.70348837209303,
@@ -7931,7 +7931,7 @@
         2109,
         2672
       ],
-      "deteccao_ms_por_imagem": 321.4776359964162,
+      "deteccao_ms_por_imagem": 294.4072925020009,
       "matches": 432,
       "inliers_F": 319,
       "inliers_F_pct": 73.8425925925926,
@@ -7953,14 +7953,14 @@
         8000,
         8000
       ],
-      "deteccao_ms_por_imagem": 30.56735501741059,
+      "deteccao_ms_por_imagem": 36.034059477970004,
       "matches": 588,
       "inliers_F": 333,
       "inliers_F_pct": 56.63265306122449,
       "sampson_mediana_px": 0.2802102150412568,
       "inliers_E": 362,
       "erro_R_graus": 0.37224044973275267,
-      "erro_t_graus": 3.0546872264908354,
+      "erro_t_graus": 3.054687226490835,
       "triangulados_frente": 362,
       "reprojecao_tri_px": 0.3456756039714684
     },
@@ -7975,7 +7975,7 @@
         5138,
         6334
       ],
-      "deteccao_ms_por_imagem": 447.7433235151693,
+      "deteccao_ms_por_imagem": 501.98765587992966,
       "matches": 868,
       "inliers_F": 643,
       "inliers_F_pct": 74.07834101382488,
@@ -7997,7 +7997,7 @@
         2381,
         2654
       ],
-      "deteccao_ms_por_imagem": 329.98507501906715,
+      "deteccao_ms_por_imagem": 315.47118443995714,
       "matches": 218,
       "inliers_F": 83,
       "inliers_F_pct": 38.07339449541284,
@@ -8019,7 +8019,7 @@
         8000,
         8000
       ],
-      "deteccao_ms_por_imagem": 33.05363899562508,
+      "deteccao_ms_por_imagem": 38.14495843835175,
       "matches": 223,
       "inliers_F": 62,
       "inliers_F_pct": 27.802690582959645,
@@ -8041,7 +8041,7 @@
         4436,
         6686
       ],
-      "deteccao_ms_por_imagem": 433.856460993411,
+      "deteccao_ms_por_imagem": 517.3046535346657,
       "matches": 282,
       "inliers_F": 113,
       "inliers_F_pct": 40.0709219858156,
@@ -8063,7 +8063,7 @@
         1898,
         1979
       ],
-      "deteccao_ms_por_imagem": 320.00672598951496,
+      "deteccao_ms_por_imagem": 297.69803560338914,
       "matches": 558,
       "inliers_F": 312,
       "inliers_F_pct": 55.91397849462365,
@@ -8085,7 +8085,7 @@
         7814,
         7998
       ],
-      "deteccao_ms_por_imagem": 31.094672507606447,
+      "deteccao_ms_por_imagem": 35.741660511121154,
       "matches": 791,
       "inliers_F": 412,
       "inliers_F_pct": 52.08596713021492,
@@ -8107,7 +8107,7 @@
         6580,
         5336
       ],
-      "deteccao_ms_por_imagem": 436.5916764945723,
+      "deteccao_ms_por_imagem": 505.677979439497,
       "matches": 1292,
       "inliers_F": 721,
       "inliers_F_pct": 55.804953560371516,
@@ -8129,7 +8129,7 @@
         1660,
         1656
       ],
-      "deteccao_ms_por_imagem": 326.3540224870667,
+      "deteccao_ms_por_imagem": 312.4535344541073,
       "matches": 347,
       "inliers_F": 218,
       "inliers_F_pct": 62.824207492795395,
@@ -8151,7 +8151,7 @@
         7802,
         7791
       ],
-      "deteccao_ms_por_imagem": 30.948968516895548,
+      "deteccao_ms_por_imagem": 35.276864655315876,
       "matches": 498,
       "inliers_F": 238,
       "inliers_F_pct": 47.791164658634536,
@@ -8173,14 +8173,14 @@
         4770,
         5251
       ],
-      "deteccao_ms_por_imagem": 439.1160254890565,
+      "deteccao_ms_por_imagem": 509.59227909334004,
       "matches": 680,
       "inliers_F": 403,
       "inliers_F_pct": 59.26470588235294,
       "sampson_mediana_px": 0.2982810024711881,
       "inliers_E": 520,
       "erro_R_graus": 0.44001017032637635,
-      "erro_t_graus": 1.9167851324836982,
+      "erro_t_graus": 1.9167851324840786,
       "triangulados_frente": 520,
       "reprojecao_tri_px": 0.2909894687094913
     },
@@ -8195,7 +8195,7 @@
         1856,
         1949
       ],
-      "deteccao_ms_por_imagem": 316.0273414978292,
+      "deteccao_ms_por_imagem": 302.8129425365478,
       "matches": 528,
       "inliers_F": 364,
       "inliers_F_pct": 68.93939393939394,
@@ -8217,7 +8217,7 @@
         8000,
         8000
       ],
-      "deteccao_ms_por_imagem": 30.00817049178295,
+      "deteccao_ms_por_imagem": 33.806505613029,
       "matches": 813,
       "inliers_F": 464,
       "inliers_F_pct": 57.07257072570726,
@@ -8239,7 +8239,7 @@
         4278,
         4530
       ],
-      "deteccao_ms_por_imagem": 429.601026000455,
+      "deteccao_ms_por_imagem": 504.15089749731123,
       "matches": 1015,
       "inliers_F": 664,
       "inliers_F_pct": 65.41871921182266,
@@ -8261,14 +8261,14 @@
         2775,
         2885
       ],
-      "deteccao_ms_por_imagem": 331.76268549868837,
+      "deteccao_ms_por_imagem": 317.45208194479346,
       "matches": 243,
       "inliers_F": 93,
       "inliers_F_pct": 38.2716049382716,
       "sampson_mediana_px": 0.3592653663021638,
       "inliers_E": 109,
       "erro_R_graus": 0.5529486160171139,
-      "erro_t_graus": 2.532614847636404,
+      "erro_t_graus": 2.5326148476364034,
       "triangulados_frente": 109,
       "reprojecao_tri_px": 0.39101180579654726
     },
@@ -8283,7 +8283,7 @@
         8000,
         8000
       ],
-      "deteccao_ms_por_imagem": 32.453332998557016,
+      "deteccao_ms_por_imagem": 39.08823197707534,
       "matches": 165,
       "inliers_F": 55,
       "inliers_F_pct": 33.33333333333333,
@@ -8305,7 +8305,7 @@
         6373,
         7449
       ],
-      "deteccao_ms_por_imagem": 441.4731285069138,
+      "deteccao_ms_por_imagem": 519.6738466620445,
       "matches": 258,
       "inliers_F": 92,
       "inliers_F_pct": 35.65891472868217,
@@ -8327,7 +8327,7 @@
         2109,
         2350
       ],
-      "deteccao_ms_por_imagem": 318.88981998781674,
+      "deteccao_ms_por_imagem": 308.4066389128566,
       "matches": 235,
       "inliers_F": 139,
       "inliers_F_pct": 59.148936170212764,
@@ -8349,7 +8349,7 @@
         8000,
         8000
       ],
-      "deteccao_ms_por_imagem": 30.545857007382438,
+      "deteccao_ms_por_imagem": 36.66464891284704,
       "matches": 210,
       "inliers_F": 69,
       "inliers_F_pct": 32.857142857142854,
@@ -8371,7 +8371,7 @@
         5138,
         6929
       ],
-      "deteccao_ms_por_imagem": 436.6614675091114,
+      "deteccao_ms_por_imagem": 509.65417246334255,
       "matches": 240,
       "inliers_F": 125,
       "inliers_F_pct": 52.083333333333336,
@@ -8393,7 +8393,7 @@
         2381,
         2343
       ],
-      "deteccao_ms_por_imagem": 326.3250610034447,
+      "deteccao_ms_por_imagem": 320.11792063713074,
       "matches": 49,
       "inliers_F": 14,
       "inliers_F_pct": 28.57142857142857,
@@ -8415,7 +8415,7 @@
         8000,
         8000
       ],
-      "deteccao_ms_por_imagem": 32.348153996281326,
+      "deteccao_ms_por_imagem": 38.28315995633602,
       "matches": 142,
       "inliers_F": 11,
       "inliers_F_pct": 7.746478873239436,
@@ -8437,7 +8437,7 @@
         4436,
         5197
       ],
-      "deteccao_ms_por_imagem": 439.46815602248535,
+      "deteccao_ms_por_imagem": 512.0222878176719,
       "matches": 108,
       "inliers_F": 18,
       "inliers_F_pct": 16.666666666666664,
@@ -8459,7 +8459,7 @@
         1898,
         2083
       ],
-      "deteccao_ms_por_imagem": 314.9392110062763,
+      "deteccao_ms_por_imagem": 295.48082360997796,
       "matches": 253,
       "inliers_F": 96,
       "inliers_F_pct": 37.94466403162055,
@@ -8481,7 +8481,7 @@
         7814,
         7747
       ],
-      "deteccao_ms_por_imagem": 30.082059500273317,
+      "deteccao_ms_por_imagem": 34.494131337851286,
       "matches": 250,
       "inliers_F": 88,
       "inliers_F_pct": 35.199999999999996,
@@ -8503,7 +8503,7 @@
         6580,
         4624
       ],
-      "deteccao_ms_por_imagem": 438.25038347858936,
+      "deteccao_ms_por_imagem": 511.6579656023532,
       "matches": 290,
       "inliers_F": 102,
       "inliers_F_pct": 35.172413793103445,
@@ -8525,7 +8525,7 @@
         1660,
         2336
       ],
-      "deteccao_ms_por_imagem": 325.4313829820603,
+      "deteccao_ms_por_imagem": 309.2368005309254,
       "matches": 35,
       "inliers_F": 10,
       "inliers_F_pct": 28.57142857142857,
@@ -8547,7 +8547,7 @@
         7802,
         8000
       ],
-      "deteccao_ms_por_imagem": 31.410739495186135,
+      "deteccao_ms_por_imagem": 35.96913139335811,
       "matches": 78,
       "inliers_F": 9,
       "inliers_F_pct": 11.538461538461538,
@@ -8569,7 +8569,7 @@
         4770,
         4499
       ],
-      "deteccao_ms_por_imagem": 436.45352849853225,
+      "deteccao_ms_por_imagem": 501.33119407109916,
       "matches": 56,
       "inliers_F": 9,
       "inliers_F_pct": 16.071428571428573,
@@ -8591,7 +8591,7 @@
         2292,
         1949
       ],
-      "deteccao_ms_por_imagem": 315.14494150178507,
+      "deteccao_ms_por_imagem": 314.2138454131782,
       "matches": 78,
       "inliers_F": 23,
       "inliers_F_pct": 29.48717948717949,
@@ -8613,7 +8613,7 @@
         8000,
         8000
       ],
-      "deteccao_ms_por_imagem": 29.98573097283952,
+      "deteccao_ms_por_imagem": 35.8345159329474,
       "matches": 115,
       "inliers_F": 10,
       "inliers_F_pct": 8.695652173913043,
@@ -8635,14 +8635,14 @@
         5155,
         4530
       ],
-      "deteccao_ms_por_imagem": 439.51765200472437,
+      "deteccao_ms_por_imagem": 507.1095118764788,
       "matches": 110,
       "inliers_F": 27,
       "inliers_F_pct": 24.545454545454547,
       "sampson_mediana_px": 0.25916621331124423,
       "inliers_E": 29,
       "erro_R_graus": 0.965039945386409,
-      "erro_t_graus": 2.074032686039293,
+      "erro_t_graus": 2.0740326860389415,
       "triangulados_frente": 29,
       "reprojecao_tri_px": 0.35739156258610894
     }
@@ -8650,19 +8650,19 @@
   "escala": {
     "tipo": "tabuleiro",
     "cantos": 30,
-    "s_completo": 100.41957822312219,
+    "s_completo": 100.41957822312222,
     "subconjuntos": {
       "4 cantos": {
-        "desvio_pct": 0.06633238649572241,
-        "max_pct": 0.2079428298966568
+        "desvio_pct": 0.06633238649571954,
+        "max_pct": 0.2079428298966901
       },
       "8 cantos": {
-        "desvio_pct": 0.034830007828930164,
-        "max_pct": 0.10027091867595983
+        "desvio_pct": 0.034830007828926896,
+        "max_pct": 0.10027091867599314
       },
       "16 cantos": {
-        "desvio_pct": 0.019694934251958587,
-        "max_pct": 0.05176079269511025
+        "desvio_pct": 0.01969493425195306,
+        "max_pct": 0.051760792694999225
       }
     }
   },
@@ -8671,7 +8671,7 @@
       "comprimento_mm": 119.07684326171875,
       "largura_mm": 65.6097412109375,
       "altura_mm": 81.78214272111654,
-      "volume_cm3": 167.73187884429848
+      "volume_cm3": 167.73187884429842
     },
     "2 mm": {
       "comprimento_mm": 119.08297729492188,
@@ -8683,7 +8683,7 @@
       "comprimento_mm": 119.08103942871094,
       "largura_mm": 65.02269744873047,
       "altura_mm": 81.78214272111654,
-      "volume_cm3": 167.6816164015929
+      "volume_cm3": 167.68161640159295
     },
     "5 mm": {
       "comprimento_mm": 119.08094787597656,
@@ -8695,135 +8695,135 @@
   "pipeline": {
     "base": {
       "ok": true,
-      "minutos": 6.4588821490605675,
+      "minutos": 7.400723711649577,
       "registradas": 96,
-      "reprojecao_px": 1.0949697229037019,
-      "pontos_densos_objeto": 102352,
+      "reprojecao_px": 1.0970480183555023,
+      "pontos_densos_objeto": 103064,
       "dimensoes": {
-        "comprimento_mm": 118.75640869140625,
-        "largura_mm": 65.5732192993164,
-        "altura_mm": 81.88737547397614,
-        "volume_cm3": 182.16007290210158
+        "comprimento_mm": 118.75947570800781,
+        "largura_mm": 65.50263977050781,
+        "altura_mm": 81.87581875920296,
+        "volume_cm3": 183.6550646780629
       },
       "erro_mm": {
-        "comprimento_mm": 0.24359130859375,
-        "largura_mm": 1.5732192993164062,
-        "altura_mm": 0.8873754739761353,
+        "comprimento_mm": 0.2405242919921875,
+        "largura_mm": 1.5026397705078125,
+        "altura_mm": 0.8758187592029572,
         "volume_cm3": null
       },
-      "acuracia_1mm_pct": 87.18070490857899,
-      "completude_1mm_pct": 82.10874245686387,
-      "icp_translacao_mm": 0.251029580769783
+      "acuracia_1mm_pct": 87.33180401958435,
+      "completude_1mm_pct": 81.26573066076355,
+      "icp_translacao_mm": 0.052814486117618624
     },
     "MVS res 1": {
       "ok": true,
-      "minutos": 15.599973332881927,
+      "minutos": 22.308534479141237,
       "registradas": 96,
-      "reprojecao_px": 1.1019687278691639,
-      "pontos_densos_objeto": 416977,
+      "reprojecao_px": 1.0972032478184595,
+      "pontos_densos_objeto": 411644,
       "dimensoes": {
-        "comprimento_mm": 119.0824966430664,
-        "largura_mm": 65.37052917480469,
-        "altura_mm": 81.76310772821307,
-        "volume_cm3": 170.18884160970384
+        "comprimento_mm": 119.16017150878906,
+        "largura_mm": 65.41572570800781,
+        "altura_mm": 81.8538329899311,
+        "volume_cm3": 171.78286723990374
       },
       "erro_mm": {
-        "comprimento_mm": 0.08249664306640625,
-        "largura_mm": 1.3705291748046875,
-        "altura_mm": 0.7631077282130718,
+        "comprimento_mm": 0.1601715087890625,
+        "largura_mm": 1.4157257080078125,
+        "altura_mm": 0.8538329899311066,
         "volume_cm3": null
       },
-      "acuracia_1mm_pct": 96.57475490196077,
-      "completude_1mm_pct": 95.47866694969221,
-      "icp_translacao_mm": 0.19735058330280994
+      "acuracia_1mm_pct": 95.03513455460431,
+      "completude_1mm_pct": 93.78354610789337,
+      "icp_translacao_mm": 0.1598843757968785
     },
     "MVS res 3": {
       "ok": true,
-      "minutos": 6.486767931779226,
+      "minutos": 7.692896978060404,
       "registradas": 96,
-      "reprojecao_px": 1.1012600563651378,
-      "pontos_densos_objeto": 102011,
+      "reprojecao_px": 1.0983669025182672,
+      "pontos_densos_objeto": 103330,
       "dimensoes": {
-        "comprimento_mm": 118.64663696289062,
-        "largura_mm": 65.2669906616211,
-        "altura_mm": 81.60250898450613,
-        "volume_cm3": 182.05079062789622
+        "comprimento_mm": 118.64273071289062,
+        "largura_mm": 65.36779022216797,
+        "altura_mm": 81.58911387622356,
+        "volume_cm3": 182.42228634583023
       },
       "erro_mm": {
-        "comprimento_mm": 0.353363037109375,
-        "largura_mm": 1.2669906616210938,
-        "altura_mm": 0.6025089845061302,
+        "comprimento_mm": 0.357269287109375,
+        "largura_mm": 1.3677902221679688,
+        "altura_mm": 0.5891138762235641,
         "volume_cm3": null
       },
-      "acuracia_1mm_pct": 85.84507521611872,
-      "completude_1mm_pct": 80.94732692482638,
-      "icp_translacao_mm": 0.41981344382149094
+      "acuracia_1mm_pct": 86.77396059011659,
+      "completude_1mm_pct": 81.18385541437972,
+      "icp_translacao_mm": 0.407985965291894
     },
     "SIMPLE_RADIAL": {
       "ok": true,
-      "minutos": 6.382630252838135,
+      "minutos": 7.60468715429306,
       "registradas": 96,
-      "reprojecao_px": 1.1353043063239903,
-      "pontos_densos_objeto": 102344,
+      "reprojecao_px": 1.14349353968307,
+      "pontos_densos_objeto": 105394,
       "dimensoes": {
-        "comprimento_mm": 118.71764373779297,
-        "largura_mm": 65.30133819580078,
-        "altura_mm": 81.86927113682032,
-        "volume_cm3": 179.20724455985422
+        "comprimento_mm": 118.81965637207031,
+        "largura_mm": 65.38391876220703,
+        "altura_mm": 81.66685795411468,
+        "volume_cm3": 179.4582667517645
       },
       "erro_mm": {
-        "comprimento_mm": 0.28235626220703125,
-        "largura_mm": 1.3013381958007812,
-        "altura_mm": 0.8692711368203163,
+        "comprimento_mm": 0.1803436279296875,
+        "largura_mm": 1.3839187622070312,
+        "altura_mm": 0.6668579541146755,
         "volume_cm3": null
       },
-      "acuracia_1mm_pct": 86.44217386876676,
-      "completude_1mm_pct": 81.65691239348637,
-      "icp_translacao_mm": 0.0886763478272488
+      "acuracia_1mm_pct": 86.55036387131878,
+      "completude_1mm_pct": 81.63265306122449,
+      "icp_translacao_mm": 0.3130790786321106
     },
     "OPENCV": {
       "ok": true,
-      "minutos": 6.598948951562246,
+      "minutos": 7.918526951471964,
       "registradas": 96,
-      "reprojecao_px": 1.1011824874879812,
-      "pontos_densos_objeto": 102968,
+      "reprojecao_px": 1.0990628663401072,
+      "pontos_densos_objeto": 100331,
       "dimensoes": {
-        "comprimento_mm": 118.80288696289062,
-        "largura_mm": 65.49185943603516,
-        "altura_mm": 81.72886933386326,
-        "volume_cm3": 179.72509428901756
+        "comprimento_mm": 118.60196685791016,
+        "largura_mm": 65.09374237060547,
+        "altura_mm": 81.60580746084452,
+        "volume_cm3": 179.067057851874
       },
       "erro_mm": {
-        "comprimento_mm": 0.197113037109375,
-        "largura_mm": 1.4918594360351562,
-        "altura_mm": 0.7288693338632584,
+        "comprimento_mm": 0.39803314208984375,
+        "largura_mm": 1.0937423706054688,
+        "altura_mm": 0.6058074608445168,
         "volume_cm3": null
       },
-      "acuracia_1mm_pct": 88.45561299599439,
-      "completude_1mm_pct": 82.6758043484853,
-      "icp_translacao_mm": 0.08268656604530591
+      "acuracia_1mm_pct": 86.93237614709966,
+      "completude_1mm_pct": 81.69026897534646,
+      "icp_translacao_mm": 0.3551971865071355
     },
     "SIFT 1600 px": {
       "ok": true,
-      "minutos": 4.877697916825612,
+      "minutos": 7.0350039521853125,
       "registradas": 96,
-      "reprojecao_px": 1.252061164647846,
-      "pontos_densos_objeto": 103260,
+      "reprojecao_px": 1.25435814268584,
+      "pontos_densos_objeto": 101860,
       "dimensoes": {
-        "comprimento_mm": 119.09151458740234,
-        "largura_mm": 65.2427749633789,
-        "altura_mm": 81.81524244695902,
-        "volume_cm3": 179.60407332427792
+        "comprimento_mm": 118.89842987060547,
+        "largura_mm": 65.52729797363281,
+        "altura_mm": 81.41748936474323,
+        "volume_cm3": 181.29767703161224
       },
       "erro_mm": {
-        "comprimento_mm": 0.09151458740234375,
-        "largura_mm": 1.2427749633789062,
-        "altura_mm": 0.8152424469590187,
+        "comprimento_mm": 0.10157012939453125,
+        "largura_mm": 1.5272979736328125,
+        "altura_mm": 0.4174893647432327,
         "volume_cm3": null
       },
-      "acuracia_1mm_pct": 86.28761407198833,
-      "completude_1mm_pct": 81.62962064469176,
-      "icp_translacao_mm": 0.12279226318610766
+      "acuracia_1mm_pct": 84.67899817727672,
+      "completude_1mm_pct": 80.75021985019862,
+      "icp_translacao_mm": 0.4801530607554935
     }
   }
 }

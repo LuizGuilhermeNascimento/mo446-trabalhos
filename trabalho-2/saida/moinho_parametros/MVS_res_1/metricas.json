@@ -2,34 +2,34 @@
   "imagens": 96,
   "imagens_registradas": 96,
   "reprojecao_px": {
-    "media": 1.2796273582674167,
-    "mediana": 1.1019687278691639
+    "media": 1.277928587861286,
+    "mediana": 1.0972032478184595
   },
-  "pontos_esparsos": 24796,
-  "pontos_densos": 3266181,
-  "pontos_densos_objeto": 416977,
-  "area_objeto_m2": 0.032640401283368994,
-  "densidade_pontos_m2": 12774873.580137601,
+  "pontos_esparsos": 24823,
+  "pontos_densos": 3163259,
+  "pontos_densos_objeto": 411644,
+  "area_objeto_m2": 0.03258977627447104,
+  "densidade_pontos_m2": 12631077.812045563,
   "tabuleiro_z_mm": {
-    "mediana": -0.11412854120135307,
-    "desvio": 0.6245398565796048
+    "mediana": -0.20923307538032532,
+    "desvio": 0.6260690160939901
   },
   "escala": {
     "quadrado_mm": 39.6,
     "cantos_usados": 30,
     "cantos_descartados": 0,
-    "vistas_por_canto_mediana": 52.5,
+    "vistas_por_canto_mediana": 52.0,
     "residuo_alinhamento_mm": {
-      "rms": 0.3543963490898611,
-      "mediana": 0.30609782409665065,
-      "max": 0.647055548580974
+      "rms": 0.35330335559049286,
+      "mediana": 0.31352387449822106,
+      "max": 0.647717595575245
     },
     "reprojecao_cantos_px": {
-      "media": 0.9715856866443615,
-      "mediana": 0.9211875323116592
+      "media": 0.9659868838188194,
+      "mediana": 0.9235818003533184
     },
-    "mm_por_unidade": 99.59770937589641,
-    "pontos_esparsos_roi": 21708,
+    "mm_por_unidade": 101.53664528043493,
+    "pontos_esparsos_roi": 21784,
     "area_xy_mm": [
       [
         0.0,
@@ -43,28 +43,28 @@
   },
   "dimensoes": {
     "comprimento_mm": {
-      "estimado": 119.0824966430664,
+      "estimado": 119.16017150878906,
       "medido": 119.0,
       "desvio_medidas": 0.0,
-      "erro_abs": 0.08249664306640625,
-      "erro_rel_pct": 0.06932491013983719
+      "erro_abs": 0.1601715087890625,
+      "erro_rel_pct": 0.13459790654543066
     },
     "largura_mm": {
-      "estimado": 65.37052917480469,
+      "estimado": 65.41572570800781,
       "medido": 64.0,
       "desvio_medidas": 0.0,
-      "erro_abs": 1.3705291748046875,
-      "erro_rel_pct": 2.141451835632324
+      "erro_abs": 1.4157257080078125,
+      "erro_rel_pct": 2.212071418762207
     },
     "altura_mm": {
-      "estimado": 81.76310772821307,
+      "estimado": 81.8538329899311,
       "medido": 81.0,
       "desvio_medidas": 0.0,
-      "erro_abs": 0.7631077282130718,
-      "erro_rel_pct": 0.9421083064358912
+      "erro_abs": 0.8538329899311066,
+      "erro_rel_pct": 1.0541148023840823
     },
     "volume_cm3": {
-      "estimado": 170.18884160970384
+      "estimado": 171.78286723990374
     }
   }
 }
