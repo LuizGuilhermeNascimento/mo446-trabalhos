@@ -71,9 +71,11 @@
   },
   "comprimento_mm": [],
   "largura_mm": [],
-  "altura_mm": [],
+  "altura_mm": [
+    81.0
+  ],
   "volume_cm3": [
     180
   ],
-  "notas": "coleta do Vitor (28/10/2026): h1-h3 = arcos A1-A3 a cada 15 graus, detalhe = posições D30/D150/D240/D300 x7; GPS removido; D300_* giradas para paisagem (re-salvas q95) para ter as mesmas dimensões das demais; volume por deslocamento de água (dados/pato_agua)"
+  "notas": "coleta do Vitor (28/10/2026): h1-h3 = arcos A1-A3 a cada 15 graus, detalhe = posições D30/D150/D240/D300 x7; GPS removido; D300_* giradas para paisagem (re-salvas q95) para ter as mesmas dimensões das demais; volume por deslocamento de água (dados/pato_agua); altura 81 mm lida em régua vertical ao lado do pato (fotos IMG_2178/2183, 30/10); comprimento e largura não medidos: nas fotos a régua ficou à frente do objeto (paralaxe ~10-15%)"
 }
