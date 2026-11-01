@@ -67,6 +67,8 @@ def two_view(name, det, im1, im2, img1, img2, s, ratio=RATIO, threshold=F_THRESH
     E, mask_e = cv2.findEssentialMat(n1, n2, np.eye(3), cv2.RANSAC, 0.999, threshold / (cam.mean_focal_length() * s))
     _, R, t, mask_pose = cv2.recoverPose(E, n1, n2, np.eye(3), mask=mask_e.copy())
     good = mask_pose.ravel() > 0
+    if not good.any():
+        raise ValueError("no point in front of both cameras")
     T1, T2 = im1.cam_from_world().matrix(), im2.cam_from_world().matrix()
     R_ref = T2[:, :3] @ T1[:, :3].T
     t_ref = T2[:, 3] - R_ref @ T1[:, 3]

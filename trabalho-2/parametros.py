@@ -39,7 +39,7 @@ RUNS = {
 def two_view_sweep(data, out, pairs_per_gap=6):
     rec = pycolmap.Reconstruction(out / "metrico")
     by_name = {im.name: im for im in rec.images.values() if im.has_pose}
-    ring = sorted(n for n in by_name if n.startswith("h2/"))
+    ring = sorted(n for n in by_name if n.startswith("h2/")) or sorted(by_name)  # video: consecutive frames
     pairs = [(gap, ring[i], ring[i + gap]) for gap in (1, 2)
              for i in np.linspace(0, len(ring) - gap - 1, pairs_per_gap).astype(int)]
     dets = features.detectors()
@@ -64,6 +64,9 @@ def two_view_sweep(data, out, pairs_per_gap=6):
 def scale_sweep(data, out):
     rec = pycolmap.Reconstruction(out / "esparso")
     m = escala.measurements(data)
+    if "grade_mm" in m:
+        periods = np.array(json.loads((out / "escala.json").read_text())["periodo_mm_por_vista"])
+        return {"tipo": "grade", "por_vista": {f"vista {k + 1}": 100 * (p / np.median(periods) - 1) for k, p in enumerate(periods)}}
     if "regua" in m:
         images = {im.name: im for im in rec.images.values() if im.has_pose}
         mm, ticks = [], []
@@ -190,9 +193,10 @@ def plot(report, path):
         axes[1].set_xlabel(f"cantos do ChArUco usados (de {sc['cantos']})")
         axes[1].legend(fontsize=8)
     else:
-        axes[1].bar(range(len(sc["deixa_um_fora"])), list(sc["deixa_um_fora"].values()))
-        axes[1].set_xticks(range(len(sc["deixa_um_fora"])), list(sc["deixa_um_fora"]), fontsize=8)
-        axes[1].set_xlabel("marca da régua retirada")
+        bars = sc["deixa_um_fora"] if sc["tipo"] == "régua" else sc["por_vista"]
+        axes[1].bar(range(len(bars)), list(bars.values()))
+        axes[1].set_xticks(range(len(bars)), list(bars), fontsize=8)
+        axes[1].set_xlabel("marca da régua retirada" if sc["tipo"] == "régua" else "período da grade em cada vista")
     axes[1].set_ylabel("variação da escala (%)")
     fig.tight_layout()
     fig.savefig(path / "hiperparametros_escala_corte.png", dpi=130)
