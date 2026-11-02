@@ -15,7 +15,6 @@ OBJECTS = {"moinho": "Moinho", "pato": "Pato", "pedra": "Pedra"}
 DETECTORS = {"SIFT": ("#d62728", "o"), "ORB": ("#7b4fb3", "s"), "AKAZE": ("#009a9a", "^")}
 GAPS = {1: "vizinhas", 2: "dois passos"}
 FAIL_DEG = 5.0
-NO_POSE = 400.0
 
 
 def complete(rows, **fixed):
@@ -75,28 +74,22 @@ def ratio_figure(rows, saida):
     fig.savefig(saida / "hiperparametros_objetos.png", dpi=200)
 
 
-def pose_figure(rows, saida):
-    # Neighbouring pairs only: one column of points per detector, grouped by object.
-    fig, axes = plt.subplots(2, 1, figsize=(3.6, 4.2), sharex=True)
-    for ax, (key, ylabel) in zip(axes, (("erro_R_graus", "erro de rotação (°)"), ("erro_t_graus", "erro da direção de t (°)"))):
-        for k, o in enumerate(OBJECTS):
-            for j, (name, (color, marker)) in enumerate(DETECTORS.items()):
-                pairs = default_pairs(rows[o], name, 1)
-                x = k + (j - 1) * 0.28 + np.linspace(-0.07, 0.07, len(pairs))
-                ys = [max(r[key], 0.01) if r else NO_POSE for r in pairs]
-                ax.scatter(x, ys, s=14, marker=marker, color=color, edgecolor="white", lw=0.4, zorder=3,
-                           label=name if k == 0 else None)
-                ax.hlines(np.median([y for y in ys if y < NO_POSE]), x[0] - 0.05, x[-1] + 0.05, color="0.15", lw=1.2, zorder=4)
-        ax.axhline(FAIL_DEG, color="0.3", ls=":", lw=1)
-        ax.axhspan(200, 1000, color="0.92", zorder=0)
-        ax.text(-0.45, NO_POSE, "sem pose", va="center", fontsize=6, color="0.3")
-        ax.set_yscale("log")
-        ax.set_ylim(0.006, 1000)
-        style(ax, "", ylabel)
-    axes[1].set_xticks(range(len(OBJECTS)), list(OBJECTS.values()))
-    axes[0].legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=3, frameon=False, handletextpad=0.1)
-    fig.tight_layout()
-    fig.savefig(saida / "detectores_pose.png", dpi=300)
+def failure_figure(rows, saida):
+    fig, axes = plt.subplots(1, 2, figsize=(3.6, 2.3), sharey=True)
+    x, width = np.arange(len(OBJECTS)), 0.27
+    for ax, (gap, title) in zip(axes, GAPS.items()):
+        for j, (name, (color, _)) in enumerate(DETECTORS.items()):
+            bars = ax.bar(x + (j - 1) * width, [failure_pct(rows[o], name, gap) for o in OBJECTS], width,
+                          color=color, edgecolor="white", lw=0.6, label=name)
+            ax.bar_label(bars, fmt="%.0f", fontsize=5.5, padding=1)
+        ax.set_xticks(x, list(OBJECTS.values()))
+        ax.set_title(title)
+        style(ax, "", "falhas (%)" if gap == 1 else "")
+        ax.grid(axis="x", visible=False)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="upper center", ncol=3, frameon=False)
+    fig.tight_layout(rect=(0, 0, 1, 0.9))
+    fig.savefig(saida / "detectores_falha.png", dpi=300)
 
 
 def table(rows, saida):
@@ -131,7 +124,7 @@ def main(saida):
     rows = {o: json.loads((saida / f"{o}_parametros/parametros.json").read_text())["dois_pontos"] for o in OBJECTS}
     ratio_figure(rows, saida)
     with plt.rc_context({"font.size": 8}):
-        pose_figure(rows, saida)
+        failure_figure(rows, saida)
     table(rows, saida)
 
 
