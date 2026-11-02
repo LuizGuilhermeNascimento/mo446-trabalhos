@@ -76,31 +76,27 @@ def ratio_figure(rows, saida):
 
 
 def pose_figure(rows, saida):
-    fig, axes = plt.subplots(2, 3, figsize=(12, 5), sharex=True, sharey=True)
-    for col, (o, label) in enumerate(OBJECTS.items()):
-        for row, (key, ylabel) in enumerate((("erro_R_graus", "erro de rotação (°)"), ("erro_t_graus", "erro da direção de t (°)"))):
-            ax = axes[row, col]
+    # Neighbouring pairs only: one column of points per detector, grouped by object.
+    fig, axes = plt.subplots(2, 1, figsize=(3.6, 4.2), sharex=True)
+    for ax, (key, ylabel) in zip(axes, (("erro_R_graus", "erro de rotação (°)"), ("erro_t_graus", "erro da direção de t (°)"))):
+        for k, o in enumerate(OBJECTS):
             for j, (name, (color, marker)) in enumerate(DETECTORS.items()):
-                for g, gap in enumerate(GAPS):
-                    pairs = default_pairs(rows[o], name, gap)
-                    x = g + (j - 1) * 0.25 + np.linspace(-0.06, 0.06, len(pairs))
-                    ys = [max(r[key], 0.01) if r else NO_POSE for r in pairs]
-                    ax.scatter(x, ys, s=22, marker=marker, color=color, edgecolor="white", lw=0.5, zorder=3,
-                               label=name if g == 0 else None)
-                    found = [y for y in ys if y < NO_POSE]
-                    ax.hlines(np.median(found), x[0] - 0.05, x[-1] + 0.05, color="0.15", lw=1.5, zorder=4)
-            ax.axhline(FAIL_DEG, color="0.3", ls=":", lw=1)
-            ax.axhspan(200, 1000, color="0.92", zorder=0)
-            ax.set_yscale("log")
-            ax.set_ylim(0.006, 1000)
-            ax.set_xticks(range(len(GAPS)), list(GAPS.values()))
-            style(ax, "", ylabel if col == 0 else "")
-            if row == 0:
-                ax.set_title(label)
-    axes[0, 0].text(-0.45, NO_POSE, "sem pose", va="center", fontsize=7, color="0.3")
-    axes[0, 2].legend(fontsize=8, loc="lower right")
+                pairs = default_pairs(rows[o], name, 1)
+                x = k + (j - 1) * 0.28 + np.linspace(-0.07, 0.07, len(pairs))
+                ys = [max(r[key], 0.01) if r else NO_POSE for r in pairs]
+                ax.scatter(x, ys, s=14, marker=marker, color=color, edgecolor="white", lw=0.4, zorder=3,
+                           label=name if k == 0 else None)
+                ax.hlines(np.median([y for y in ys if y < NO_POSE]), x[0] - 0.05, x[-1] + 0.05, color="0.15", lw=1.2, zorder=4)
+        ax.axhline(FAIL_DEG, color="0.3", ls=":", lw=1)
+        ax.axhspan(200, 1000, color="0.92", zorder=0)
+        ax.text(-0.45, NO_POSE, "sem pose", va="center", fontsize=6, color="0.3")
+        ax.set_yscale("log")
+        ax.set_ylim(0.006, 1000)
+        style(ax, "", ylabel)
+    axes[1].set_xticks(range(len(OBJECTS)), list(OBJECTS.values()))
+    axes[0].legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=3, frameon=False, handletextpad=0.1)
     fig.tight_layout()
-    fig.savefig(saida / "detectores_pose.png", dpi=200)
+    fig.savefig(saida / "detectores_pose.png", dpi=300)
 
 
 def table(rows, saida):
@@ -134,7 +130,8 @@ def table(rows, saida):
 def main(saida):
     rows = {o: json.loads((saida / f"{o}_parametros/parametros.json").read_text())["dois_pontos"] for o in OBJECTS}
     ratio_figure(rows, saida)
-    pose_figure(rows, saida)
+    with plt.rc_context({"font.size": 8}):
+        pose_figure(rows, saida)
     table(rows, saida)
 
 
