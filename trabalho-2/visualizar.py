@@ -190,6 +190,8 @@ def navigation_video(render, rec, dense, center, radius, path):
             frame, _ = render(K, T, w, h)
         frame = np.ascontiguousarray(frame)
         cv2.putText(frame, acts[act][0], (24, 44), cv2.FONT_HERSHEY_SIMPLEX, 1.1, (40, 40, 40), 2, cv2.LINE_AA)
+        if k == round(n * 11 / 18):  # dense act, seen from about the side of modelo_3d.jpg
+            cv2.imwrite(str(path.parent / "figuras/nuvem_densa.jpg"), cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
         writer.send(frame)
     writer.close()
 

@@ -29,6 +29,7 @@ O protocolo de coleta está em [COLETA.md](COLETA.md). Imprima `charuco_a4.pdf`,
 dados/<objeto>/{h1,h2,h3,<extra>}/*.jpg    # anéis de altura; qualquer outra pasta entra como "extra" na ablação
 dados/<objeto>/video/*.MOV                 # alternativa: quadros.py extrai 100 quadros nítidos para quadros/
 dados/<objeto>/medidas.json
+dados/<objeto>/pares.txt                   # opcional: pares de imagens das figuras de duas vistas, um por linha
 ```
 
 A referência de escala vem do `medidas.json`:
@@ -64,7 +65,7 @@ As coordenadas clicadas usam os pixels da imagem sem a rotação do EXIF, como o
 | 4 escala | `escala.py` | `metrico/`, `roi/`, `mvs/` (imagens sem distorção), `escala.json` |
 | 4 MVS | OpenMVS | `mvs/scene_dense.ply`, `scene_mesh.ply`, `scene_refine.ply`, `scene_texture.obj` |
 | 5 | `avaliar.py` | `metricas.json`, `objeto.ply` |
-| 5 | `visualizar.py` | `figuras/cameras.png`, `figuras/foto_vs_render_*`, `cena.glb`, `navegacao.mp4` |
+| 5 | `visualizar.py` | `figuras/cameras.png`, `figuras/foto_vs_render_*`, `figuras/nuvem_densa.jpg`, `cena.glb`, `navegacao.mp4` |
 | 5 | `ablacao.py` | `ablacao.json`, `ablacao.png` |
 | 5 | `parametros.py` | `parametros.json`, `hiperparametros_*.png` |
 | 1 | `quadros.py` | `dados/<objeto>/quadros/`, `quadros.json` |

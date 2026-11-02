@@ -145,7 +145,12 @@ def main(data, out, names=None):
     rec = pycolmap.Reconstruction(out / "metrico")
     by_name = {im.name: im for im in rec.images.values() if im.has_pose}
     ring = sorted(n for n in by_name if n.startswith("h2/")) or sorted(by_name)
-    pairs = [names] if names else [(ring[0], ring[g]) for g in GAPS]
+    if names:
+        pairs = [names]
+    elif (data / "pares.txt").exists():  # video frames: the first neighbours may not have moved at all
+        pairs = [tuple(line.split()) for line in (data / "pares.txt").read_text().splitlines() if line.strip()]
+    else:
+        pairs = [(ring[0], ring[g]) for g in GAPS]
     figures = out / "figuras"
     figures.mkdir(exist_ok=True)
     table = {}
