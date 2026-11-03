@@ -61,7 +61,11 @@
       "erro_rel_pct": 45.133296678463616
     },
     "volume_cm3": {
-      "estimado": 58.775751152864466
+      "estimado": 58.775751152864466,
+      "medido": 421.875,
+      "desvio_medidas": 0.0,
+      "erro_abs": 363.0992488471355,
+      "erro_rel_pct": 86.0679700970988
     }
   }
 }
