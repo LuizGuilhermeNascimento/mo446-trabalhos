@@ -66,8 +66,10 @@ As coordenadas clicadas usam os pixels da imagem sem a rotação do EXIF, como o
 | 4 MVS | OpenMVS | `mvs/scene_dense.ply`, `scene_mesh.ply`, `scene_refine.ply`, `scene_texture.obj` |
 | 5 | `avaliar.py` | `metricas.json`, `objeto.ply` |
 | 5 | `visualizar.py` | `figuras/cameras.png`, `figuras/foto_vs_render_*`, `figuras/nuvem_densa.jpg`, `cena.glb`, `navegacao.mp4` |
+| 5 | `web.py` | `modelo.glb`, `modelo.html` (visualizador web autocontido) |
 | 5 | `ablacao.py` | `ablacao.json`, `ablacao.png` |
 | 5 | `parametros.py` | `parametros.json`, `hiperparametros_*.png` |
+| 2 | `figura_parametros.py saida` | `saida/hiperparametros_objetos.png`, `saida/detectores_objetos.tex` (os três objetos juntos) |
 | 1 | `quadros.py` | `dados/<objeto>/quadros/`, `quadros.json` |
 
 ## Método
@@ -78,7 +80,7 @@ As coordenadas clicadas usam os pixels da imagem sem a rotação do EXIF, como o
   - Uma similaridade (Umeyama) leva o modelo ao referencial do tabuleiro, em mm, com a mesa em z = 0. Ela é aplicada antes do MVS, então todos os produtos já saem métricos.
 - **Medidas:**
   - O objeto é a maior componente da malha acima de z = 2 mm.
-  - Comprimento e largura são os lados do menor retângulo que contém a vista de cima; a altura é o z máximo.
+  - Na vista de cima, a largura é a menor distância entre duas retas paralelas que envolvem o objeto, e o comprimento é medido na direção perpendicular, como com uma régua; a altura é o z máximo.
   - O volume vem do teorema da divergência com F = (0, 0, z): a base apoiada na mesa contribui com zero.
 - **Ablação:**
   - Subconjuntos por número de alturas e de fotos por anel.
