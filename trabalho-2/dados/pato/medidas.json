@@ -69,13 +69,17 @@
       ]
     }
   },
-  "comprimento_mm": [],
-  "largura_mm": [],
+  "comprimento_mm": [
+    95.0
+  ],
+  "largura_mm": [
+    60.0
+  ],
   "altura_mm": [
-    81.0
+    85.0
   ],
   "volume_cm3": [
-    180
+    175
   ],
-  "notas": "coleta do Vitor (28/10/2026): h1-h3 = arcos A1-A3 a cada 15 graus, detalhe = posições D30/D150/D240/D300 x7; GPS removido; D300_* giradas para paisagem (re-salvas q95) para ter as mesmas dimensões das demais; volume por deslocamento de água (dados/pato_agua); altura 81 mm lida em régua vertical ao lado do pato (fotos IMG_2178/2183, 30/10); comprimento e largura não medidos: nas fotos a régua ficou à frente do objeto (paralaxe ~10-15%)"
+  "notas": "coleta do Vitor (28/10/2026): h1-h3 = arcos A1-A3 a cada 15 graus, detalhe = posições D30/D150/D240/D300 x7; GPS removido; D300_* giradas para paisagem (re-salvas q95) para ter as mesmas dimensões das demais; volume por deslocamento de água (dados/pato_agua), 175 cm³ na revisão de 03/11; comprimento, largura e altura remedidos pelo Vitor em 03/11 como o menor bloco retangular que contém o pato (antes: altura de 81 mm lida em régua nas fotos IMG_2178/2183; comprimento e largura sem medida por paralaxe)"
 }

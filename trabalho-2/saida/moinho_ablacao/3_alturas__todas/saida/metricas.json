@@ -43,18 +43,18 @@
   },
   "dimensoes": {
     "comprimento_mm": {
-      "estimado": 118.60173034667969,
+      "estimado": 118.60171700120196,
       "medido": 119.0,
       "desvio_medidas": 0.0,
-      "erro_abs": 0.3982696533203125,
-      "erro_rel_pct": 0.3346803809414391
+      "erro_abs": 0.3982829987980381,
+      "erro_rel_pct": 0.33469159562860346
     },
     "largura_mm": {
-      "estimado": 65.57943725585938,
+      "estimado": 65.57943580833495,
       "medido": 64.0,
       "desvio_medidas": 0.0,
-      "erro_abs": 1.579437255859375,
-      "erro_rel_pct": 2.4678707122802734
+      "erro_abs": 1.5794358083349493,
+      "erro_rel_pct": 2.4678684505233583
     },
     "altura_mm": {
       "estimado": 81.40771001577377,

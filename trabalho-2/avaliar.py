@@ -30,6 +30,16 @@ def crop_object(mesh, lo, hi, z0):
     return mesh
 
 
+def footprint_mm(V):
+    # Width is the narrowest gap between two parallel plates touching the footprint (always flush with a hull edge),
+    # length is measured across it, as with a ruler; the minimum-area box can sit diagonally on rounded objects.
+    H = cv2.convexHull(V[:, :2].astype(np.float32))[:, 0].astype(float)
+    U = np.roll(H, -1, 0) - H
+    U /= np.linalg.norm(U, axis=1, keepdims=True)
+    widths = np.ptp(H @ np.c_[-U[:, 1], U[:, 0]].T, axis=0)
+    return float(np.ptp(H @ U[widths.argmin()])), float(widths.min())
+
+
 def volume_cm3(mesh, z0):
     # Flux of F = (0, 0, z - z0) through the surface; the base resting on the table (z = z0) adds nothing,
     # assuming the walls go straight down from the 2 mm cut to the table.
@@ -63,8 +73,8 @@ def main(data, out):
     obj = crop_object(o3d.io.read_triangle_mesh(str(out / "mvs/scene_mesh.ply")), lo, hi, z0)
     o3d.io.write_triangle_mesh(str(out / "objeto.ply"), obj)
     V = np.asarray(obj.vertices)
-    _, (a, b), _ = cv2.minAreaRect(V[:, :2].astype(np.float32))
-    estimated = {"comprimento_mm": max(a, b), "largura_mm": min(a, b), "altura_mm": V[:, 2].max() - z0}
+    length, width = footprint_mm(V)
+    estimated = {"comprimento_mm": length, "largura_mm": width, "altura_mm": V[:, 2].max() - z0}
     if (volume := volume_cm3(obj, z0)) is not None:
         estimated["volume_cm3"] = volume
 

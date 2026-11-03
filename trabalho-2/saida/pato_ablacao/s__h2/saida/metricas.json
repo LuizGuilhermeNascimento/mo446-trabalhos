@@ -41,20 +41,32 @@
   },
   "dimensoes": {
     "comprimento_mm": {
-      "estimado": 87.21800231933594
+      "estimado": 98.33873785365132,
+      "medido": 95.0,
+      "desvio_medidas": 0.0,
+      "erro_abs": 3.338737853651324,
+      "erro_rel_pct": 3.514460898580341
     },
     "largura_mm": {
-      "estimado": 70.65904235839844
+      "estimado": 65.29056645696674,
+      "medido": 60.0,
+      "desvio_medidas": 0.0,
+      "erro_abs": 5.290566456966744,
+      "erro_rel_pct": 8.81761076161124
     },
     "altura_mm": {
-      "estimado": 82.88211262598634
+      "estimado": 82.88211262598634,
+      "medido": 85.0,
+      "desvio_medidas": 0.0,
+      "erro_abs": 2.1178873740136623,
+      "erro_rel_pct": 2.491632204721956
     },
     "volume_cm3": {
       "estimado": 174.5617911715322,
-      "medido": 180.0,
+      "medido": 175.0,
       "desvio_medidas": 0.0,
-      "erro_abs": 5.438208828467793,
-      "erro_rel_pct": 3.021227126926552
+      "erro_abs": 0.4382088284677934,
+      "erro_rel_pct": 0.2504050448387391
     }
   }
 }

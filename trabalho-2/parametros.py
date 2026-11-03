@@ -108,8 +108,8 @@ def cut_sweep(data, out):
         avaliar.CUT_MM = cut
         obj = avaliar.crop_object(o3d.io.read_triangle_mesh(str(out / "mvs/scene_mesh.ply")), lo, hi, z0)
         V = np.asarray(obj.vertices)
-        _, (a, b), _ = cv2.minAreaRect(V[:, :2].astype(np.float32))
-        rows[f"{cut:g} mm"] = {"comprimento_mm": float(max(a, b)), "largura_mm": float(min(a, b)),
+        length, width = avaliar.footprint_mm(V)
+        rows[f"{cut:g} mm"] = {"comprimento_mm": length, "largura_mm": width,
                                "altura_mm": float(V[:, 2].max() - z0), "volume_cm3": avaliar.volume_cm3(obj, z0)}
     return rows
 
