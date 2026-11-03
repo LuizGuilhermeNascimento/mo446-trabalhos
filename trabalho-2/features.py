@@ -13,6 +13,7 @@ import pycolmap
 
 MAX_SIDE, RATIO, F_THRESHOLD_PX = 1600, 0.75, 1.0
 GAPS = (1, 3)
+SEEDS = 50
 
 
 def detectors():
@@ -51,7 +52,8 @@ def sampson(F, p1, p2):
     return (np.sum(x2 * Fx1, 1) ** 2) / (Fx1[:, 0] ** 2 + Fx1[:, 1] ** 2 + Ftx2[:, 0] ** 2 + Ftx2[:, 1] ** 2)
 
 
-def two_view(name, det, im1, im2, img1, img2, s, ratio=RATIO, threshold=F_THRESHOLD_PX):
+def two_view(name, det, im1, im2, img1, img2, s, ratio=RATIO, threshold=F_THRESHOLD_PX, seed=0):
+    cv2.setRNGSeed(seed)  # FLANN's randomized k-d trees draw from OpenCV's global RNG; RANSAC is already deterministic
     t0 = time.perf_counter()
     k1, d1 = det.detectAndCompute(cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY), None)
     k2, d2 = det.detectAndCompute(cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY), None)
@@ -67,6 +69,8 @@ def two_view(name, det, im1, im2, img1, img2, s, ratio=RATIO, threshold=F_THRESH
     E, mask_e = cv2.findEssentialMat(n1, n2, np.eye(3), cv2.RANSAC, 0.999, threshold / (cam.mean_focal_length() * s))
     _, R, t, mask_pose = cv2.recoverPose(E, n1, n2, np.eye(3), mask=mask_e.copy())
     good = mask_pose.ravel() > 0
+    if not good.any():
+        raise ValueError("no point in front of both cameras")
     T1, T2 = im1.cam_from_world().matrix(), im2.cam_from_world().matrix()
     R_ref = T2[:, :3] @ T1[:, :3].T
     t_ref = T2[:, 3] - R_ref @ T1[:, 3]
@@ -98,14 +102,15 @@ def draw_keypoints(img, results, path):
     plt.close(fig)
 
 
-def draw_inliers(img1, img2, r, path, n=300):
-    idx = np.random.default_rng(0).permutation(len(r["pairs"]))[:n]
-    matches = [cv2.DMatch(int(i), int(j), 0) for i, j in r["pairs"][idx]]
-    vis = cv2.drawMatches(img1, r["k1"], img2, r["k2"], matches, None, matchesMask=r["inl"][idx].astype(int).tolist(),
-                          matchColor=(0, 255, 0), flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
-    outl = [m for m, ok in zip(matches, r["inl"][idx]) if not ok]
-    vis = cv2.drawMatches(img1, r["k1"], img2, r["k2"], outl, vis, matchColor=(0, 0, 255),
-                          flags=cv2.DrawMatchesFlags_DRAW_OVER_OUTIMG | cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+def draw_inliers(img1, img2, r, path, n=80):
+    # Random sample of mutual matches: green are inliers of F, red are rejected by RANSAC.
+    vis, w = np.hstack([img1, img2]), img1.shape[1]
+    for k in np.random.default_rng(0).permutation(len(r["pairs"]))[:n]:
+        p, q = r["p1"][k].astype(int), (r["p2"][k] + (w, 0)).astype(int)
+        color = (0, 220, 0) if r["inl"][k] else (0, 0, 255)
+        cv2.line(vis, tuple(p), tuple(q), color, 3, cv2.LINE_AA)
+        for c in (p, q):
+            cv2.circle(vis, tuple(c), 7, color, -1)
     cv2.imwrite(str(path), vis)
 
 
@@ -118,8 +123,8 @@ def draw_epipolar(img1, img2, r, path, n=15):
         for img, p, q, F in ((b, r["p1"][k], r["p2"][k], r["F"]), (a, r["p2"][k], r["p1"][k], r["F"].T)):
             l = F @ np.r_[p, 1]
             x0, x1 = 0, img.shape[1]
-            cv2.line(img, (x0, int(-l[2] / l[1])), (x1, int(-(l[2] + l[0] * x1) / l[1])), color, 2)
-            cv2.circle(img, tuple(int(v) for v in q), 6, color, -1)
+            cv2.line(img, (x0, int(-l[2] / l[1])), (x1, int(-(l[2] + l[0] * x1) / l[1])), color, 4, cv2.LINE_AA)
+            cv2.circle(img, tuple(int(v) for v in q), 10, color, -1)
     cv2.imwrite(str(path), np.hstack([a, b]))
 
 
@@ -140,7 +145,12 @@ def main(data, out, names=None):
     rec = pycolmap.Reconstruction(out / "metrico")
     by_name = {im.name: im for im in rec.images.values() if im.has_pose}
     ring = sorted(n for n in by_name if n.startswith("h2/")) or sorted(by_name)
-    pairs = [names] if names else [(ring[0], ring[g]) for g in GAPS]
+    if names:
+        pairs = [names]
+    elif (data / "pares.txt").exists():  # video frames: the first neighbours may not have moved at all
+        pairs = [tuple(line.split()) for line in (data / "pares.txt").read_text().splitlines() if line.strip()]
+    else:
+        pairs = [(ring[0], ring[g]) for g in GAPS]
     figures = out / "figuras"
     figures.mkdir(exist_ok=True)
     table = {}
@@ -160,6 +170,14 @@ def main(data, out, names=None):
             draw_inliers(img1, img2, r, figures / f"inliers_{name}_{tag}.jpg")
         draw_epipolar(img1, img2, results["SIFT"][1], figures / f"epipolares_SIFT_{tag}.jpg")
         draw_triangulation(results["SIFT"][1], figures / f"triangulacao_SIFT_{tag}.png")
+        # Same pair under other FLANN seeds, which change ~1% of the matches: how stable is the SIFT pose?
+        runs = []
+        for k in range(SEEDS):
+            try:
+                runs.append(two_view("SIFT", detectors()["SIFT"], by_name[n1], by_name[n2], img1, img2, s, seed=k)[0])
+            except (cv2.error, TypeError, ValueError, AttributeError):
+                pass
+        results["SIFT"][0]["sementes"] = {k: [r[k] for r in runs] for k in ("inliers_F", "inliers_E", "erro_R_graus", "erro_t_graus")}
         table[f"{n1} x {n2}"] = {name: stats for name, (stats, _) in results.items()}
     (out / "features.json").write_text(json.dumps(table, indent=2))
     for pair, rows in table.items():
