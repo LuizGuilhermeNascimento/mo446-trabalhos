@@ -12,8 +12,10 @@ import numpy as np
 import open3d as o3d
 import pycolmap
 import trimesh
+from PIL import Image
 
 VIDEO_SIZE, VIDEO_FPS, VIDEO_SECONDS = (1280, 720), 30, 40
+EXIF_ROTATION = {3: cv2.ROTATE_180, 6: cv2.ROTATE_90_CLOCKWISE, 8: cv2.ROTATE_90_COUNTERCLOCKWISE}
 RING_COLORS = {"h1": (230, 80, 60), "h2": (60, 160, 230), "h3": (80, 200, 90), "topo": (240, 190, 40)}
 
 
@@ -112,7 +114,7 @@ def export_glb(rec, textured, path):
     scene.export(path)
 
 
-def photo_vs_render(render, mvs_rec, mvs_dir, figures, scale=0.5):
+def photo_vs_render(render, mvs_rec, mvs_dir, figures, data, scale=0.5):
     names = sorted(im.name for im in mvs_rec.images.values())
     chosen = [next(n for n in names if ring(n) == r) for r in ("h1", "h2", "h3") if any(ring(n) == r for n in names)] or names[:3]
     stats = {}
@@ -129,7 +131,10 @@ def photo_vs_render(render, mvs_rec, mvs_dir, figures, scale=0.5):
                        "psnr_db": float(10 * np.log10(255 ** 2 / mse))}
         heat = cv2.applyColorMap(np.clip(diff * 4, 0, 255).astype(np.uint8), cv2.COLORMAP_INFERNO)
         heat[~valid] = 0
-        cv2.imwrite(str(figures / f"foto_vs_render_{Path(name).stem}.jpg"), np.hstack([photo, rendered, heat]))
+        # The pipeline ignores EXIF orientation; only the figure is turned upright.
+        turn = EXIF_ROTATION.get(Image.open(data / name).getexif().get(274))
+        panels = [cv2.rotate(p, turn) if turn is not None else p for p in (photo, rendered, heat)]
+        cv2.imwrite(str(figures / f"foto_vs_render_{Path(name).stem}.jpg"), np.hstack(panels))
     return stats
 
 
@@ -227,7 +232,7 @@ def main(data, out):
     textured = out / "mvs/scene_texture.obj"
     export_glb(rec, textured, out / "cena.glb")
     render = Renderer(textured)
-    stats = photo_vs_render(render, pycolmap.Reconstruction(out / "mvs/sparse"), out / "mvs", figures)
+    stats = photo_vs_render(render, pycolmap.Reconstruction(out / "mvs/sparse"), out / "mvs", figures, data)
     (out / "foto_vs_render.json").write_text(json.dumps(stats, indent=2))
     print(json.dumps(stats, indent=2))
     obj = np.asarray(o3d.io.read_triangle_mesh(str(out / "objeto.ply")).vertices)
