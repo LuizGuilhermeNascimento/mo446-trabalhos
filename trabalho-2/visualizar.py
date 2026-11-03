@@ -118,6 +118,7 @@ def photo_vs_render(render, mvs_rec, mvs_dir, figures, data, scale=0.5):
     names = sorted(im.name for im in mvs_rec.images.values())
     chosen = [next(n for n in names if ring(n) == r) for r in ("h1", "h2", "h3") if any(ring(n) == r for n in names)] or names[:3]
     stats = {}
+    X = np.asarray(o3d.io.read_triangle_mesh(str(mvs_dir.parent / "objeto.ply")).vertices)
     for name in chosen:
         im = mvs_rec.find_image_with_name(name)
         K = im.camera.calibration_matrix() * [[scale], [scale], [1]]
@@ -131,10 +132,19 @@ def photo_vs_render(render, mvs_rec, mvs_dir, figures, data, scale=0.5):
                        "psnr_db": float(10 * np.log10(255 ** 2 / mse))}
         heat = cv2.applyColorMap(np.clip(diff * 4, 0, 255).astype(np.uint8), cv2.COLORMAP_INFERNO)
         heat[~valid] = 0
-        # The pipeline ignores EXIF orientation; only the figure is turned upright.
+        uv = np.round(im.camera.img_from_cam(im.cam_from_world() * X) * scale).astype(int)
+        uv = uv[(uv >= 0).all(1) & (uv < [w, h]).all(1)]
+        mask = np.zeros((h, w), np.uint8)
+        mask[uv[:, 1], uv[:, 0]] = 1
+        # The pipeline ignores EXIF orientation; only the figure is turned upright, then cut to 16:9 around the object
+        # so that every row of the figure has the same shape.
         turn = EXIF_ROTATION.get(Image.open(data / name).getexif().get(274))
-        panels = [cv2.rotate(p, turn) if turn is not None else p for p in (photo, rendered, heat)]
-        cv2.imwrite(str(figures / f"foto_vs_render_{Path(name).stem}.jpg"), np.hstack(panels))
+        panels = [cv2.rotate(p, turn) if turn is not None else p for p in (photo, rendered, heat, mask)]
+        H, W = panels[0].shape[:2]
+        if (rows := round(W * 9 / 16)) < H:
+            top = int(np.clip(np.flatnonzero(panels[3].any(1)).mean() - rows / 2, 0, H - rows))
+            panels = [p[top:top + rows] for p in panels]
+        cv2.imwrite(str(figures / f"foto_vs_render_{Path(name).stem}.jpg"), np.hstack(panels[:3]))
     return stats
 
 
