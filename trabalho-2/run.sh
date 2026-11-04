@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Uso: ./run.sh dados/<objeto> [saida]    RES=2 reduz a resolução do MVS; RAPIDO=1 para após a avaliação;
-# MAXRES/THREADS limitam o DensifyPointCloud (memória: 24 MP com 10 threads estourou 16 GB);
+# MAXRES/THREADS limitam a memória do DensifyPointCloud em fotos grandes;
 # CAMERA e SIFT_MAX mudam o modelo de câmera e o tamanho das imagens no SfM.
 set -euo pipefail
 DADOS=$(cd "${1:?uso: ./run.sh dados/<objeto> [saida]}" && pwd)

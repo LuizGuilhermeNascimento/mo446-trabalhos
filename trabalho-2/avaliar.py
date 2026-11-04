@@ -31,8 +31,8 @@ def crop_object(mesh, lo, hi, z0):
 
 
 def footprint_mm(V):
-    # Width is the narrowest gap between two parallel plates touching the footprint (always flush with a hull edge),
-    # length is measured across it, as with a ruler; the minimum-area box can sit diagonally on rounded objects.
+    # Width: narrowest gap between two parallel lines touching the footprint (flush with a hull edge);
+    # length: extent across it, as measured with a ruler.
     H = cv2.convexHull(V[:, :2].astype(np.float32))[:, 0].astype(float)
     U = np.roll(H, -1, 0) - H
     U /= np.linalg.norm(U, axis=1, keepdims=True)
