@@ -23,7 +23,7 @@ JOBS=8 ./instalar_openmvs.sh   # também compila uma OpenCV 4.12 mínima, porque
 
 ## Dados
 
-O protocolo de coleta está em [COLETA.md](COLETA.md). Imprima `charuco_a4.pdf`, `charuco_a3.pdf` ou `charuco_a2.pdf` (gerados por `charuco.py`) em 100%. A estrutura esperada é:
+Imprima `charuco_a4.pdf`, `charuco_a3.pdf` ou `charuco_a2.pdf` (gerados por `charuco.py`) em 100%. A estrutura esperada é:
 
 ```
 dados/<objeto>/{h1,h2,h3,<extra>}/*.jpg    # anéis de altura; qualquer outra pasta entra como "extra" na ablação
