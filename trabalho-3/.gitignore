@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+data/
+submission*.csv
+por_imagem*.csv
