@@ -1,0 +1,15 @@
+{
+  "id": "thiagolaitz/mo446-t3-submissao-fluxo",
+  "title": "mo446-t3-submissao-fluxo",
+  "code_file": "run_submission.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": ["thiagolaitz/mo446-t3-cmfd-v11"],
+  "competition_sources": ["recodai-luc-scientific-image-forgery-detection"],
+  "kernel_sources": ["thiagolaitz/mo446-t3-sam-pesos"],
+  "model_sources": []
+}

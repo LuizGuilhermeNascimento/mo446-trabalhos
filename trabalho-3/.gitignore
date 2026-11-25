@@ -2,5 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 data/
+work/
 submission*.csv
 por_imagem*.csv
