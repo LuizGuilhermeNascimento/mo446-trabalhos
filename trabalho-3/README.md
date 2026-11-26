@@ -13,6 +13,7 @@ Para cada figura, a resposta é `authentic` ou uma máscara por região copiada.
 | Predição | `predict.sh` |
 | Predições da partição de teste | `predicoes_teste.csv` |
 | Script que calcula S com a métrica oficial | `eval.py` (usa `metric/recodai_f1.py`, cópia sem modificações de [metric/recodai-f1](https://www.kaggle.com/code/metric/recodai-f1)) |
+| Baseline clássico (SIFT) | `baseline_sift.py`, predições do teste em `baseline_teste.csv` |
 | Caderno submetido ao Kaggle | `kaggle/submissao/run_submission.py` |
 
 Demais pastas:
@@ -75,6 +76,8 @@ export DATA=<pasta dos dados da competição>
 ./predict.sh test predicoes_teste.csv    # predições da partição de teste
 python eval.py --data $DATA --split test --submission predicoes_teste.csv   # S e nota por grupo
 python eval.py --data $DATA --split test --baseline                         # baseline: tudo authentic
+python baseline_sift.py --data $DATA --split val --varre 4,5,6,8,10,12,15,20,30,50,80        # baseline clássico: escolhe o mínimo de pares
+python baseline_sift.py --data $DATA --split test --min-pares 8 --out baseline_teste.csv   # e roda o teste com ele
 ```
 
 - `train.sh` roda, só na partição de treino: SAM (fotos, texto, objetos), candidatos com os cortes abertos,
@@ -106,6 +109,30 @@ Teste (775 imagens), rodado uma única vez, com tudo já fixado: `./predict.sh t
 | Únicas com fraude | 412 | 0,6892 | 338 |
 | **Todas** | 775 | **0,8276** | 343 |
 | Baseline (tudo `authentic`) | 775 | 0,4594 | 0 |
+
+Comparação com os baselines no teste (775 imagens: 356 sem fraude, 419 com fraude):
+
+| Método | S | Acurácia | Precisão | Revocação | F1 | oF1 nas forjadas detectadas |
+|---|---:|---:|---:|---:|---:|---:|
+| Tudo `authentic` | 0,4594 | 0,4594 | – | 0,0000 | – | – |
+| Baseline clássico (SIFT) | 0,6337 | 0,7239 | 0,9476 | 0,5179 | 0,6698 | 0,6778 |
+| **Método proposto** | **0,8276** | 0,8994 | 0,9971 | 0,8162 | 0,8976 | 0,8375 |
+
+Matriz de confusão no teste (linhas: verdade; colunas: resposta):
+
+| | Método proposto: fraude | Método proposto: autêntica | Baseline SIFT: fraude | Baseline SIFT: autêntica |
+|---|---:|---:|---:|---:|
+| Com fraude (419) | 342 | 77 | 217 | 202 |
+| Sem fraude (356) | 1 | 355 | 12 | 344 |
+
+Acurácia, precisão, revocação e F1 são da decisão por imagem (fraude ou autêntica). A última coluna é a média da
+nota oficial só nas imagens com fraude que o método detectou.
+
+**Baseline clássico** (`baseline_sift.py`): pontos SIFT (Kornia, na GPU; lado maior limitado a 2048 px), cada ponto
+casado com o mais parecido da própria imagem a mais de 20 px, teste de razão 0,6, um movimento (deslocamento, giro,
+escala) por RANSAC e uma máscara pelo contorno convexo dos pontos concordantes dos dois lados. Responde fraude com
+8 ou mais pares concordantes; esse mínimo foi escolhido na validação (S = 0,628 com 8; 0,580 com 4; 0,608 com 20) e
+o teste rodou uma única vez com ele.
 
 Validação (777 imagens), mesmos scripts:
 
