@@ -11,7 +11,7 @@ Para cada figura, a resposta é `authentic` ou uma máscara por região copiada.
 | Partições (treino, validação, teste) | `splits/train.csv`, `splits/val.csv`, `splits/test.csv` |
 | Treino | `train.sh` |
 | Predição | `predict.sh` |
-| Predições da partição de teste | `predicoes_teste.csv` (**ainda não gerado**: o teste roda uma única vez, no fim) |
+| Predições da partição de teste | `predicoes_teste.csv` |
 | Script que calcula S com a métrica oficial | `eval.py` (usa `metric/recodai_f1.py`, cópia sem modificações de [metric/recodai-f1](https://www.kaggle.com/code/metric/recodai-f1)) |
 | Caderno submetido ao Kaggle | `kaggle/submissao/run_submission.py` |
 
@@ -97,22 +97,31 @@ nota de cada imagem.
 
 ## Resultados
 
-Validação (777 imagens), pelo `predict_fluxo.py` deste repositório com `eval.py`:
+Teste (775 imagens), rodado uma única vez, com tudo já fixado: `./predict.sh test predicoes_teste.csv` e `eval.py`.
 
-| Grupo | Imagens | S |
-|---|---:|---:|
-| Sem fraude | 357 | 0,9888 |
-| Várias fotos | 7 | 0,5000 |
-| Únicas com fraude | 413 | 0,7620 |
-| **Todas** | 777 | **0,8638** |
-| Baseline (tudo `authentic`) | 777 | 0,4595 |
+| Grupo | Imagens | S | Marcadas como fraude |
+|---|---:|---:|---:|
+| Sem fraude | 356 | 0,9972 | 1 |
+| Várias fotos | 7 | 0,3553 | 4 |
+| Únicas com fraude | 412 | 0,6892 | 338 |
+| **Todas** | 775 | **0,8276** | 343 |
+| Baseline (tudo `authentic`) | 775 | 0,4594 | 0 |
 
-Essa medição usou scikit-learn 1.6.1 (a versão do Kaggle) e o SIFT do Kornia em CPU. Com scikit-learn 1.9.1 o total
-é 0,8664: a versão muda um pouco as árvores.
+Validação (777 imagens), mesmos scripts:
+
+| Grupo | Imagens | S | Marcadas como fraude |
+|---|---:|---:|---:|
+| Sem fraude | 357 | 0,9972 | 1 |
+| Várias fotos | 7 | 0,5000 | 5 |
+| Únicas com fraude | 413 | 0,7602 | 369 |
+| **Todas** | 777 | **0,8667** | 375 |
+| Baseline (tudo `authentic`) | 777 | 0,4595 | 0 |
 
 Kaggle (late submission, mesmo código e mesmas tabelas): **0,35340** público e **0,46550** privado.
 
-Teste local: ainda não rodado.
+As duas rodadas locais usaram uma GPU NVIDIA B200, 16 processos e as versões do `requirements.txt` (scikit-learn
+1.6.1, a mesma do Kaggle). Tempo: cerca de 19 minutos por partição (SAM de fotos e texto 0,08 s por imagem, SAM de
+objetos 0,3 s, o restante 1,0 s por imagem de relógio).
 
 ## Caderno do Kaggle
 
