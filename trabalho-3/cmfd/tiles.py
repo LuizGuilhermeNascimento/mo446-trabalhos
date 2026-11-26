@@ -1,15 +1,4 @@
-"""Ligações entre pedaços fixos da figura.
-
-Ideia do 3º lugar privado da competição (comparar recortes fixos dois a dois quando não há painéis) e a mesma lógica
-da nossa comparação entre fotos (cmfd/pairs.py): dentro de um par de pedaços, cada ponto de referência só concorre
-com os pontos do OUTRO pedaço, e não com a figura inteira, então o teste de razão deixa passar ligações que o
-casamento global descarta (é onde as cópias pequenas se perdem).
-A figura é cortada em metades, terços e quadrantes; para cada par de pedaços de um mesmo corte: vizinho mais parecido
-no outro pedaço, teste de razão, e uma semelhança (deslocamento, giro, tamanho; também espelhada) ajustada por RANSAC.
-Cada movimento com ligações suficientes vira um candidato igual aos de detector.fit_models, e passa pelas mesmas
-etapas de confirmação (máscara por ZNCC, correlação do ruído, filtros de fotos e de texto, seleção).
-Usa os pontos e descritores já calculados por detector.self_matches (não refaz o SIFT).
-"""
+"""Ligações entre pedaços fixos da figura."""
 from __future__ import annotations
 
 import cv2
@@ -31,8 +20,7 @@ def _dentro(p: np.ndarray, t: tuple, h: int, w: int) -> np.ndarray:
 
 
 def tile_models(p0: np.ndarray, d0: np.ndarray, pm: np.ndarray, dm: np.ndarray, shape, cfg) -> list[dict]:
-    """p0, d0: pontos e descritores da figura (escala de trabalho); pm, dm: os da figura espelhada, com pm já nas
-    coordenadas da figura (podem vir vazios). Devolve movimentos candidatos no formato de detector.fit_models."""
+    """p0, d0: pontos e descritores da figura (escala de trabalho); pm, dm: os da figura espelhada, com pm já nas coordenadas da figura (podem vir vazios)."""
     from .detector import _valid_affine
     h, w = shape
     if len(p0) < 6:

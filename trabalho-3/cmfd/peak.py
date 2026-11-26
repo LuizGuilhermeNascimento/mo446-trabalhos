@@ -1,10 +1,4 @@
-"""Nitidez do pico de correlação.
-
-Numa cópia de verdade o ruído fino da origem só bate com o da cópia no deslocamento exato: mexendo alguns pixels a
-correlação despenca. Em repetições legítimas (borda da imagem, barra de escala, linha reta, fundo liso, padrão
-periódico) a correlação continua alta quando se desliza ao longo da estrutura. Mede-se a correlação no pico e nos
-deslocamentos vizinhos (lóbulos laterais), como na razão pico/lóbulo usada em filtros de correlação.
-"""
+"""Nitidez do pico de correlação."""
 from __future__ import annotations
 
 import cv2
@@ -12,9 +6,7 @@ import numpy as np
 
 
 def peak_sharpness(r: np.ndarray, An: np.ndarray, src: np.ndarray, W: int = 12, guard: int = 3) -> dict:
-    """r = resíduo de ruído (detector.noise_residual), An = movimento origem -> cópia em pixels da imagem,
-    src = máscara da origem. Devolve pico (melhor correlação a até 1 px do movimento), lado_max e lado_med/lado_std
-    (correlações com deslocamento extra entre `guard` e `W` px), e n = pixels usados."""
+    """r = resíduo de ruído (detector.noise_residual), An = movimento origem -> cópia em pixels da imagem, src = máscara da origem."""
     H, Wd = r.shape
     ys, xs = np.nonzero(src)
     out = dict(pico=0.0, lado_max=0.0, lado_med=0.0, lado_std=0.0, n=int(len(ys)))
@@ -43,10 +35,7 @@ def peak_sharpness(r: np.ndarray, An: np.ndarray, src: np.ndarray, W: int = 12, 
 
 def sign_peak(r: np.ndarray, An: np.ndarray, src: np.ndarray, W: int = 12, guard: int = 3, max_px: int = 0,
               rapido: bool = True) -> dict:
-    """Como peak_sharpness, mas com a concordância de SINAL do ruído fino, pixel a pixel: cada pixel pesa igual, então
-    uma estrutura forte isolada (pontinho, traço) não domina, e pixel sem ruído (região saturada ou lisa, resíduo
-    exatamente zero) não entra. s = média de sinal(a) * sinal(b) nos pixels em que os dois são diferentes de zero.
-    Devolve s_pico, s_lado_max, s_lado_med, s_lado_std, s_n (pixels válidos no pico) e s_frac (fração válida)."""
+    """Como peak_sharpness, mas com a concordância de SINAL do ruído fino, pixel a pixel."""
     H, Wd = r.shape
     ys, xs = np.nonzero(src)
     out = dict(s_pico=0.0, s_lado_max=0.0, s_lado_med=0.0, s_lado_std=0.0, s_n=0, s_frac=0.0)

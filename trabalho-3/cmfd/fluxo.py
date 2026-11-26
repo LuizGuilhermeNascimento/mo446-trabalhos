@@ -1,10 +1,4 @@
-"""Fluxo final: do arquivo da figura à resposta.
-
-Faz, sem gabarito, as mesmas contas dos scripts de treino: scripts/verif_cache.py (candidatos e medidas),
-scripts/verif_treina.py (verificador) e scripts/mascara_seletor.py (seletor de máscara). Configuração: comparação
-entre fotos; se ela não responde, SIFT em 3 ampliações (Kornia, na GPU), verificador com corte 0,9 sem regras fixas,
-seletor com limiar 0,02.
-"""
+"""Fluxo final: do arquivo da figura à resposta."""
 from __future__ import annotations
 
 import pickle
@@ -76,7 +70,7 @@ def medidas(d: dict) -> np.ndarray:
 
 
 def treina_verificador(T):
-    """T: tabela candidatos.csv do treino (scripts/verif_treina.py). Mesmo modelo e mesmos parâmetros do script de treino."""
+    """T: tabela candidatos.csv do treino (scripts/verif_treina.py)."""
     from sklearn.ensemble import HistGradientBoostingClassifier
     m = HistGradientBoostingClassifier(max_iter=400, learning_rate=0.05, max_leaf_nodes=15, l2_regularization=1.0, random_state=0)
     return m.fit(T[MEDIDAS].to_numpy(np.float32), T.y.to_numpy(), sample_weight=np.ones(len(T)))
@@ -87,7 +81,7 @@ def _feats(P, nm):
 
 
 def treina_seletor(P):
-    """P: tabela pedacos.csv do treino (scripts/mascara_seletor.py). Devolve os dois regressores (U, B)."""
+    """P: tabela pedacos.csv do treino (scripts/mascara_seletor.py)."""
     from sklearn.ensemble import HistGradientBoostingRegressor
     f = lambda: HistGradientBoostingRegressor(max_iter=300, learning_rate=0.05, max_leaf_nodes=15, l2_regularization=1.0, random_state=0)
     return f().fit(_feats(P, "u"), (P.g_u - P.g_q).to_numpy()), f().fit(_feats(P, "b"), (P.g_b - P.g_q).to_numpy())

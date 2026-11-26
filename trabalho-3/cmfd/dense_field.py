@@ -1,21 +1,4 @@
-"""Candidatos de copy-move por campo denso de correspondências (sem treino).
-
-Segue Cozzolino, Poggi e Verdoliva, "Efficient dense-field copy-move forgery
-detection", IEEE TIFS 10(11), 2015:
-
-1. cada pixel é descrito pelos módulos dos momentos de Zernike do patch circular em
-   volta dele (invariantes a giro e a espelho);
-2. PatchMatch acha, para cada pixel, o pixel mais parecido fora de uma distância
-   mínima (campo de deslocamentos);
-3. numa cópia rígida o campo é localmente LINEAR (translação: constante; giro/zoom:
-   varia linearmente); fora dela é ruído. O erro do ajuste linear local (DLF) separa
-   os dois;
-4. componentes coerentes viram movimentos afins (mínimos quadrados) que seguem para a
-   mesma máscara densa (ZNCC) e os mesmos filtros do detector por SIFT.
-
-Funciona pixel a pixel, por isso alcança regiões pequenas e lisas onde não há
-pontos-chave suficientes para o RANSAC.
-"""
+"""Candidatos de copy-move por campo denso de correspondências (sem treino)."""
 from __future__ import annotations
 
 import cv2
@@ -150,11 +133,7 @@ def dlf_error(oy: np.ndarray, ox: np.ndarray, radius: int) -> np.ndarray:
 def field_models(gray: np.ndarray, max_side: int = 768, radius: int = 8, dmin_frac: float = 0.03,
                  n_iter: int = 6, dlf_radius: int = 4, dlf_thr: float = 1.0, flat_std: float = 3.0,
                  min_area_frac: float = 2e-4, min_area_px: int = 48, max_models: int = 4, seed: int = 0):
-    """Movimentos afins (na escala de `gray`) a partir do campo denso coerente.
-
-    Devolve lista de dicts no formato de detector.fit_models (A, S, T, estatísticas) e
-    a escala usada. `inliers` = nº de pixels coerentes (na escala do campo).
-    """
+    """Movimentos afins (na escala de `gray`) a partir do campo denso coerente."""
     h0, w0 = gray.shape
     s = min(1.0, max_side / max(h0, w0))
     g = cv2.resize(gray, (max(1, int(round(w0 * s))), max(1, int(round(h0 * s)))), interpolation=cv2.INTER_AREA) \

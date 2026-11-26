@@ -1,10 +1,4 @@
-"""Cópia ENTRE fotos da mesma figura: cada par de painéis é comparado diretamente (como os primeiros colocados).
-
-As caixas dos painéis vêm do SAM 3.1 congelado (kaggle/sam_paineis.py, campo B). Cada painel é recortado, recebe
-SIFT próprio e é casado com cada um dos outros; uma similaridade (deslocamento, giro, escala) por RANSAC dá o número
-de pontos concordantes do par. Ficam os pares fortes (>= min_pontos e >= rel x o mais forte); pares que dividem um
-painel viram uma máscara só; a máscara é a área em que um painel cai sobre o outro.
-"""
+"""Cópia ENTRE fotos da mesma figura: cada par de painéis é comparado diretamente (como os primeiros colocados)."""
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
@@ -87,7 +81,7 @@ def _descreve(g: np.ndarray, c: tuple, cfg: PairConfig) -> dict:
 
 
 def _casa(A: dict, B: dict, flip: bool, cfg: PairConfig):
-    """Similaridade A -> B. Devolve (nº de pontos concordantes distintos, M 2x3, pontos concordantes em A) ou (0, None, None)."""
+    """Similaridade A -> B."""
     pb, db = (B["pf"], B["df"]) if flip else (B["p"], B["d"])
     if len(A["p"]) < 3 or len(pb) < 3:
         return 0, None, None
@@ -142,9 +136,7 @@ def movimento(A: dict, B: dict, flip: bool, M) -> np.ndarray:
 
 
 def confere(gray: np.ndarray, gf: np.ndarray, A: dict, B: dict, flip: bool, M, Sk=None) -> tuple[float, float]:
-    """(deslocamento mediano em px da região de A sob o movimento do par, correlação do conteúdo dessa região com B).
-    A região é o casco dos pontos concordantes em A (Sk, onde a cópia foi de fato vista); sem Sk, toda a área em que
-    uma foto cai sobre a outra. gf = figura borrada (sigma 1) em float32."""
+    """(deslocamento mediano em px da região de A sob o movimento do par, correlação do conteúdo dessa região com B)."""
     from .peak import peak_sharpness
     Af = movimento(A, B, flip, M)
     reg = cv2.transform(_ret(B)[None], cv2.invertAffineTransform(M))[0] if Sk is None else np.asarray(Sk, np.float64)
@@ -212,9 +204,7 @@ def monta(regs: list, agrupa: bool = True) -> list:
 
 
 def pair_masks(gray: np.ndarray, B: np.ndarray, cfg: PairConfig = PairConfig(), texto: np.ndarray | None = None) -> tuple[list, dict]:
-    """Figura em tons de cinza + caixas do SAM -> (máscaras dos pares fortes, informações). [] = os pares não se aplicam.
-    texto: máscara de texto (cmfd.textfilter, como na procura dentro da figura): o par cujos pontos concordantes caem
-    em cima de letras e números sai (rótulos iguais repetidos na figura não são cópia)."""
+    """Figura em tons de cinza + caixas do SAM -> (máscaras dos pares fortes, informações). [] = os pares não se aplicam."""
     cx, ps, ach = candidatos(gray, B, cfg)
     info = dict(pares_paineis=len(cx), pares_melhor=0, pares_ficam=0)
     if ach and texto is not None:

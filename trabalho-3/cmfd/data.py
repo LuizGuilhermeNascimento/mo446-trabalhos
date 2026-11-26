@@ -1,13 +1,4 @@
-"""Leitura do dataset da competição Recod.ai/LUC e criação das partições.
-
-A estrutura esperada (confirmada na EDA) é:
-    <raiz>/train_images/{authentic,forged}/<case_id>.png
-    <raiz>/train_masks/<case_id>.npy            (só para as forjadas)
-    <raiz>/supplemental_images/<case_id>.png   (opcional)
-    <raiz>/supplemental_masks/<case_id>.npy
-A leitura é tolerante: varre as pastas, deduz a classe pelo nome da pasta-mãe
-e aceita máscaras (H, W), (n, H, W) ou (H, W, n).
-"""
+"""Leitura do dataset da competição Recod.ai/LUC e criação das partições."""
 from __future__ import annotations
 
 import os
@@ -106,12 +97,7 @@ def load_masks(mask_path: str, shape: tuple[int, int] | None = None) -> list[np.
 
 
 def make_splits(df: pd.DataFrame, seed: int = 42, fracs=(0.70, 0.15, 0.15)) -> pd.DataFrame:
-    """70/15/15 agrupado por case_id e estratificado pelo tipo do grupo.
-
-    Tipo do grupo = composição de classes do case_id (só autêntica, só forjada,
-    ambas) × origem (treino/suplementar). Dentro de cada estrato os grupos são
-    embaralhados com semente fixa e cortados nas frações pedidas.
-    """
+    """70/15/15 agrupado por case_id e estratificado pelo tipo do grupo."""
     g = df.groupby("case_id").agg(labels=("label", lambda s: "+".join(sorted(set(s)))),
                                   source=("source", "first")).reset_index()
     g["stratum"] = g["labels"] + "|" + g["source"]

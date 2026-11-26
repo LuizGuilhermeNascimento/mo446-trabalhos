@@ -1,21 +1,9 @@
 #!/usr/bin/env python3
-"""Nota oficial (oF1 da competição Recod.ai/LUC) de um arquivo de respostas numa das partições.
+"""S (métrica oficial da competição) de um arquivo de respostas numa partição, no total e por grupo.
 
-Uso:
-    python eval.py --data <raiz dos dados> --split val --submission submission.csv
-    python eval.py --data <raiz dos dados> --split val --baseline        # tudo "authentic", para conferir
-
-O arquivo de respostas tem duas colunas, `path` e `annotation`, com uma linha por imagem da partição:
-  - path: o caminho da imagem como está em splits/<partição>.csv (ex.: train_images/forged/10.png);
-  - annotation: "authentic" ou as máscaras no formato da competição (metric/recodai_f1.py: rle_encode).
-A chave é o caminho, e não o case_id, porque o mesmo case_id aparece como imagem autêntica e como forjada.
-
-A nota de cada imagem sai da função oficial (metric/recodai_f1.py: score, sem modificações), e a nota da partição é
-a média das imagens. Além do total, mostra a nota por grupo:
-  - Sem fraude: imagens autênticas;
-  - Várias fotos: figuras compostas com fraude (as de supplemental_images);
-  - Únicas com fraude: as demais imagens com fraude (train_images/forged).
-Qualquer problema no arquivo (imagem faltando, sobrando ou repetida) é erro: não existe resposta-padrão.
+Uso: python eval.py --data <raiz dos dados> --split test --submission predicoes_teste.csv
+     python eval.py --data <raiz dos dados> --split test --baseline
+O arquivo tem as colunas path e annotation; imagem faltando, sobrando ou repetida é erro.
 """
 import argparse
 import json

@@ -1,10 +1,4 @@
-"""Filtro de painéis: descarta o candidato cujos pontos casados caem fora dos painéis de imagem.
-
-Os painéis vêm do SAM 3.1 congelado (frase "microscopic images", nota >= 0,3), pesos públicos, sem ajuste.
-Numa foto única o SAM costuma devolver a imagem inteira como painel, e aí nada é cortado. Regra medida no
-treino: fica o candidato com 50% ou mais dos pontos
-de origem E de cópia dentro de painel; se o SAM não achar painel nenhum, o filtro não se aplica.
-"""
+"""Filtro de painéis: descarta o candidato cujos pontos casados caem fora dos painéis de imagem."""
 from __future__ import annotations
 
 import numpy as np

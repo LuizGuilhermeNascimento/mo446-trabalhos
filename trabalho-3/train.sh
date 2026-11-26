@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
-# Treino do fluxo final, só com a partição de treino (splits/train.csv).
-#
-# Uso:  DATA=<pasta dos dados da competição> ./train.sh
-# Opcionais: SAM (pasta ou nome dos pesos do SAM 3.1; padrão unsloth/sam3.1), WORK (pasta de trabalho; padrão work),
-#            WORKERS (processos; padrão 4), PYTHON (padrão python).
-# Precisa de GPU. Saída: tabelas/candidatos.csv e tabelas/pedacos.csv, de onde o verificador e o seletor de máscara
-# são ajustados no começo da predição (predict.sh e caderno do Kaggle). Qualquer erro interrompe o script.
+# Treino, só com a partição de treino. Uso: DATA=<dados da competição> ./train.sh
+# Opcionais: SAM, WORK, WORKERS, PYTHON. Precisa de GPU. Saída: tabelas/candidatos.csv e tabelas/pedacos.csv.
 set -euo pipefail
 cd "$(dirname "$0")"
 : "${DATA:?defina DATA com a pasta dos dados da competição (train_images/, train_masks/, supplemental_*/)}"

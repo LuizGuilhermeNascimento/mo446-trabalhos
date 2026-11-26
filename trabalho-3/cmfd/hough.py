@@ -1,12 +1,4 @@
-"""Candidatos por voto de Hough (Lowe 2004), sem teste de razão (só testado no treino; fora do fluxo final).
-
-Motivo: nas cópias pequenas o vizinho mais parecido de um ponto É a cópia, mas o teste de
-razão do g2NN descarta a ligação, e com 2 ligações o movimento afim (6 graus de liberdade) sai deformado.
-Aqui cada ponto liga aos seus k vizinhos mais parecidos, sem razão. Cada ligação já propõe um movimento completo
-(deslocamento, giro e tamanho, pela orientação e escala do próprio ponto SIFT) e vota numa caixa desse espaço.
-Caixas com votos suficientes viram candidatos: ajusta-se uma semelhança (4 graus de liberdade) às ligações da caixa.
-A confirmação fica com as etapas de sempre (máscara por ZNCC, correlação do ruído, seleção).
-"""
+"""Candidatos por voto de Hough (Lowe 2004), sem teste de razão (só testado no treino; fora do fluxo final)."""
 from __future__ import annotations
 
 import cv2
@@ -31,8 +23,7 @@ def _sift_full(gray: np.ndarray, cfg):
 
 
 def hough_matches(gray: np.ndarray, cfg, k: int = 2) -> dict:
-    """Ligações sem razão. P = ponto na imagem; Q = vizinho (na imagem ou na imagem espelhada, coordenadas DELA);
-    Qo = Q nas coordenadas da imagem; mir = vizinho veio da imagem espelhada; ds, da = razão de escala e giro (graus)."""
+    """Ligações sem razão."""
     h, w = gray.shape
     p0, s0, a0, d0 = _sift_full(gray, cfg)
     vazio = dict(P=np.zeros((0, 2), np.float32), Q=np.zeros((0, 2), np.float32), Qo=np.zeros((0, 2), np.float32),
@@ -135,8 +126,7 @@ def hough_models(gray: np.ndarray, cfg, k: int = 2, min_pairs: int = 3, bin_frac
 
 
 def links_from_knn(kn: dict, cfg, k: int, shape) -> dict:
-    """As mesmas ligações de hough_matches (P, Qo, mir), a partir dos pontos e vizinhos já calculados por
-    detector.self_matches (kn = dict(p0, pts, I, n0)), sem refazer o SIFT nem a busca de vizinhos."""
+    """As mesmas ligações de hough_matches (P, Qo, mir), a partir dos pontos e vizinhos já calculados por detector.self_matches."""
     h, w = shape
     p0, pts, I, n0 = kn["p0"], kn["pts"], kn["I"], kn["n0"]
     if I.shape[1] < k + 1:
@@ -162,11 +152,7 @@ def links_from_knn(kn: dict, cfg, k: int, shape) -> dict:
 
 def confirma_ligacoes(gray_full: np.ndarray, P: np.ndarray, Q: np.ndarray, M: np.ndarray, radius: int = 8,
                        sigma: float = 1.0, search: float = 1.0, lote: int = 20000) -> np.ndarray:
-    """A mesma medida de detector.verify_pairs (correlação do ruído fino entre o recorte em P e o recorte em Q, com
-    busca de meio em meio pixel até ±search; espelho horizontal quando M), calculada com o torch: na GPU quando há
-    (como a busca de vizinhos, cmfd/knn.py), senão na CPU, com a mesma conta. Uma amostragem bilinear só em torno de
-    Q; os 25 deslocamentos são fatias dela. Difere de verify_pairs na 3ª casa (lá o cv2.remap arredonda as
-    coordenadas em 1/32 px)."""
+    """A mesma medida de detector.verify_pairs, calculada com o torch."""
     import torch
     import torch.nn.functional as F
 
@@ -226,10 +212,7 @@ def confirma_ligacoes(gray_full: np.ndarray, P: np.ndarray, Q: np.ndarray, M: np
 
 def verified_models(gray_full: np.ndarray, gray: np.ndarray, s: float, cfg, k: int = 2, thr: float = 0.8, radius: int = 8,
                     min_pairs: int = 2, max_models: int = 8, kn: dict | None = None, sigma: float = 1.0) -> list[dict]:
-    """Ligações sem razão (k vizinhos), cada uma confirmada nos pixels (correlação do ruído fino entre os dois recortes,
-    no tamanho original; translação pura ou espelho). As confirmadas são agrupadas por deslocamento, do maior grupo
-    para o menor; cada grupo vira um candidato de translação (formato de detector.seed_models, vseed = 1).
-    gray = imagem na escala de trabalho (a que vai ao SIFT); s = escala de trabalho / original."""
+    """Ligações sem razão (k vizinhos), cada uma confirmada pela correlação do ruído fino."""
     from .detector import verify_pairs
     m = links_from_knn(kn, cfg, k, gray.shape) if kn is not None else hough_matches(gray, cfg, k)
     if len(m["P"]) < min_pairs:

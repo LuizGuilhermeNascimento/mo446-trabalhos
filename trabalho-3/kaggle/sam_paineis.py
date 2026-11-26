@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""Fotos (painéis) e texto de cada figura pelo SAM 3.1 congelado, pesos públicos.
-
-Processa as imagens em lotes, das maiores para as menores (a mesma ordem de kaggle/predict_fluxo.py). Para cada
-imagem grava <saida>/<nome>.npz: P = união das instâncias da frase "microscopic images" (bits, reduzida a 512 px no
-lado maior), n = nº de instâncias, B = caixa de cada foto. Com --texto, grava também T = texto da figura (frases
-"text", "letters", "words", "numbers"; lado maior 1024 px), para o filtro de texto. No fim grava _FIM; se o modelo
-não carregar, grava _FALHA. Qualquer falha é erro (não existe resposta-padrão).
-Uso: python kaggle/sam_paineis.py --root <raiz> --list <arquivo com caminhos relativos> --model <pesos> --out <dir> --texto
-     (ou --images <dir> [<dir> ...]; com --list, o nome do arquivo é o caminho com '/' trocado por '__')
-"""
+"""Fotos (painéis) e texto de cada figura pelo SAM 3.1 congelado, pesos públicos."""
 import argparse
 import json
 import os

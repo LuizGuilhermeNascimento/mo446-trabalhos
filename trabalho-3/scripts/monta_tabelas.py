@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""Tabelas de treino do fluxo final, só com as colunas que os modelos usam.
-
-candidatos.csv: as 37 medidas de cada candidato e o rótulo y (scripts/verif_treina.py) -> treina o verificador.
-pedacos.csv: as medidas de cada pedaço de máscara e o ganho real de cada alternativa (scripts/mascara_seletor.py)
--> treina o seletor de máscara. Os modelos são ajustados a partir destas tabelas no começo da predição
-(cmfd/fluxo.py: treina_verificador e treina_seletor).
-Uso: python scripts/monta_tabelas.py --ver <candidatos.csv> --sel <pedacos.csv> --out tabelas
-"""
+"""Tabelas de treino do fluxo final, só com as colunas que os modelos usam."""
 import argparse
 import os
 import sys

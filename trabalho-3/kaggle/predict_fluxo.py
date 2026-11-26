@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""Respostas do fluxo (cmfd/fluxo.py) para uma lista de imagens: csv com path, case_id e annotation.
-
-Treina o verificador e o seletor a partir das tabelas do treino (candidatos.csv e pedacos.csv) e aplica imagem a
-imagem. As fotos/texto (kaggle/sam_paineis.py) e os objetos (scripts/sam_objetos.py) do SAM podem estar sendo
-gravados por outros processos: cada imagem espera o arquivo dela até --espera segundos; passou disso, é erro.
-Qualquer erro numa imagem derruba tudo (não existe resposta-padrão).
-Uso: python kaggle/predict_fluxo.py --root <raiz> --list <txt> --sam <dir> --obj <dir> --tab-ver <csv> --tab-sel <csv> --out <csv>
-"""
+"""Respostas do fluxo (cmfd/fluxo.py) para uma lista de imagens: csv com path, case_id e annotation."""
 import argparse
 import os
 import pickle

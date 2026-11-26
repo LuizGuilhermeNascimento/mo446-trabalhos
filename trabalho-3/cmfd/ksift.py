@@ -1,10 +1,4 @@
-"""SIFT do Kornia (PyTorch), para rodar na GPU.
-
-No Kaggle o SIFT do OpenCV em CPU é ~70% do tempo. O do Kornia roda na GPU, mas NÃO dá os mesmos pontos: é o
-SIFT clássico por extremos do espaço de escala (SIFTFeatureScaleSpace: pirâmide 3 níveis, sigma 1,6, imagem dobrada),
-com mínimos e máximos, uma orientação por ponto, sem os cortes de contraste e de borda do OpenCV; ficam os
-`max_keypoints` pontos de maior resposta. Os descritores já saem como RootSIFT.
-"""
+"""SIFT do Kornia (PyTorch), para rodar na GPU."""
 from __future__ import annotations
 
 import numpy as np

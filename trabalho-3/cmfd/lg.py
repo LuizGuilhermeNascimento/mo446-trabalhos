@@ -1,11 +1,4 @@
-"""Ligações por LightGlue no lugar do casamento por vizinho mais próximo (só testado no treino; fora do fluxo final).
-
-O LightGlue casa DUAS imagens; dentro de uma só ele devolveria cada ponto ligado a si mesmo. Então os pontos são
-extraídos uma vez na figura inteira e repartidos em células de uma grade; cada dupla de células diferentes é casada
-como se fossem duas imagens. Duas grades (2x2 e 4x4) para a cópia dentro de uma célula grande cair em células
-diferentes da grade fina. A cópia espelhada casa a figura inteira com ela mesma virada.
-Extratores e pesos oficiais (github.com/cvg/LightGlue): "sift" (SIFT do OpenCV) ou "aliked" (ALIKED n16). Congelados.
-"""
+"""Ligações por LightGlue no lugar do casamento por vizinho mais próximo (só testado no treino; fora do fluxo final)."""
 from __future__ import annotations
 
 import cv2
@@ -20,7 +13,7 @@ MAX_ALIKED = 2048
 
 
 def _modelos(kind: str, cfg=None):
-    """Extrator + LightGlue. O SIFT usa os mesmos limiares do fluxo (cfg), limitado aos 4096 mais fortes."""
+    """Extrator + LightGlue."""
     key = (kind, getattr(cfg, "contrast_threshold", None), getattr(cfg, "edge_threshold", None))
     if key not in _M:
         import torch

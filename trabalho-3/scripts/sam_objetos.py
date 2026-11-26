@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""Objetos de dentro das fotos (células, manchas, bandas) pelo SAM 3.1 congelado, pesos públicos.
-
-Servem ao seletor de máscara: a máscara de um objeto inteiro pode substituir o pedaço achado pela comparação de
-pixels. A ideia de recortar o conteúdo com o SAM vem de soluções públicas da competição (3º e 15º lugares). Para cada
-imagem e cada frase, guarda cada objeto: nota, caixa e máscara (empacotada dentro da caixa), no tamanho da imagem
-(lado maior limitado a --lado). O codificador de visão roda uma vez por imagem; cada frase só refaz a parte leve.
-Saída: <out>/<nome>.pkl = dict(hw=(h, w) da máscara, HW=(H, W) da imagem, objs=[dict(frase, nota, caixa=(y0, y1, x0, x1), bits)]).
-Uso: python scripts/sam_objetos.py --root <raiz> --list <arquivo de caminhos> --model <pesos> --out <dir> [--parte i/n]
-"""
+"""Objetos de dentro das fotos (células, manchas, bandas) pelo SAM 3.1 congelado, pesos públicos."""
 import argparse
 import os
 import pickle

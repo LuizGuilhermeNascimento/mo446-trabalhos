@@ -1,8 +1,4 @@
-"""Guarda, para uso SEM internet, os pesos públicos do SAM 3.1 (cópia unsloth/sam3.1) em /kaggle/working/sam31 e os
-pacotes do transformers em /kaggle/working/wheels.
-
-Não toca em dados da competição nem faz submissão. No fim, recarrega do disco em fp16 e roda numa imagem sintética.
-"""
+"""Guarda, para uso SEM internet, os pesos públicos do SAM 3.1."""
 import os
 import subprocess
 import sys

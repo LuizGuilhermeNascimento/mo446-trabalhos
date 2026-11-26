@@ -1,14 +1,4 @@
-"""Caderno da submissão ao Kaggle (late submission): o fluxo de cmfd/fluxo.py nas imagens de test_images.
-
-SAM 3.1 congelado (fotos, texto e objetos) + comparação entre fotos + SIFT em 3 ampliações (Kornia, na GPU) +
-verificador (árvores, corte 0,9) + seletor de máscara. O verificador e o seletor são treinados aqui mesmo, no começo,
-a partir das tabelas da partição de treino (tabelas/candidatos.csv e tabelas/pedacos.csv, geradas pelo train.sh).
-Toda imagem roda do mesmo jeito, sem atalho por tempo. Qualquer erro derruba o caderno: não existe resposta-padrão.
-CRONOMETRO = N > 0: roda igual em N imagens de treino de uma lista fixa, só para medir o tempo, e não gera submission.csv.
-
-Entradas: um Dataset com o código deste repositório (cmfd/, kaggle/, scripts/, tabelas/) e a saída do caderno
-kaggle/sam_pesos (pesos do SAM 3.1 e pacotes para instalar sem internet).
-"""
+"""Caderno da submissão ao Kaggle (late submission): o fluxo de cmfd/fluxo.py nas imagens de test_images."""
 import os
 import platform
 import subprocess

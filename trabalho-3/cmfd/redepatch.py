@@ -1,11 +1,4 @@
-"""Recortes de um candidato para a rede pequena que compara origem e cópia (só testado no treino; fora do fluxo final).
-
-Para cada candidato (região de origem + movimento origem -> cópia), 6 canais de 64 x 64:
-  0, 1  contexto: a caixa da origem com folga, reduzida ou ampliada para 64 x 64, e o trecho da cópia alinhado a ela
-  2, 3  detalhe: 64 x 64 pixels da imagem no tamanho original, centrados na origem, e o trecho alinhado da cópia
-  4, 5  ruído fino (imagem menos ela mesma borrada) dos dois recortes de detalhe
-As medidas do verificador resumem a região em números; aqui a rede vê os pixels dos dois lados.
-"""
+"""Recortes de um candidato para a rede pequena que compara origem e cópia (só testado no treino; fora do fluxo final)."""
 from __future__ import annotations
 
 import cv2

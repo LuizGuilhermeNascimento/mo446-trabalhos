@@ -1,12 +1,4 @@
-"""Adaptador para a métrica OFICIAL (metric/recodai_f1.py, sem modificações).
-
-metric/recodai_f1.py é a célula de código do notebook https://www.kaggle.com/code/metric/recodai-f1
-copiada byte a byte (os doctests do próprio arquivo passam). Aqui só montamos
-os DataFrames no formato que ela espera e chamamos rle_encode/score.
-
-Atenção: score() alinha previsão e gabarito pela POSIÇÃO da linha (não pelo id),
-então solution_frame e submission_frame devem receber as chaves na mesma ordem.
-"""
+"""Adaptador para a métrica OFICIAL (metric/recodai_f1.py, sem modificações)."""
 from __future__ import annotations
 
 import json

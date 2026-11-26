@@ -1,9 +1,4 @@
-"""Separação simples de painéis por fundo claro (usada na ablação da ideia 1).
-
-Mesma receita do 6º lugar do Kaggle: o que não é quase branco vira primeiro
-plano; um fechamento morfológico une o conteúdo de cada painel; cada contorno
-externo grande é um painel. Uma figura de painel único devolve um só painel.
-"""
+"""Separação simples de painéis por fundo claro (usada na ablação da ideia 1)."""
 from __future__ import annotations
 
 import cv2
@@ -32,9 +27,7 @@ def panel_map(gray: np.ndarray, white: int = 240, close_frac: float = 0.01,
 
 
 def caixas_classicas(gray: np.ndarray, white: int = 240, close_frac: float = 0.004, min_area_frac: float = 0.0005) -> np.ndarray:
-    """Caixas (x0, y0, x1, y1 em frações da figura) dos blocos não brancos: fotos, faixas de blot, gráficos.
-    Mesma receita de panel_map, com fechamento menor e área mínima menor, para faixas finas não se juntarem nem
-    sumirem. Serve de alternativa quando o SAM não devolve fotos (figuras de blot). Só testado no treino."""
+    """Caixas (x0, y0, x1, y1 em frações da figura) dos blocos não brancos: fotos, faixas de blot, gráficos."""
     h, w = gray.shape
     fg = (gray < white).astype(np.uint8)
     k = max(3, int(round(close_frac * max(h, w))) | 1)

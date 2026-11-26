@@ -1,19 +1,4 @@
-"""Detector clássico de copy-move: SIFT auto-casado + espelho + RANSAC + máscara densa.
-
-Fluxo para uma imagem em tons de cinza:
-  1. pontos-chave SIFT (RootSIFT) na imagem e na imagem espelhada (ideia 2);
-  2. cada descritor da imagem é casado com TODOS os outros da mesma imagem
-     (e com os do espelho) pelo critério g2NN de Amerini et al. (2011),
-     descartando pares próximos demais: cobre cópias dentro do mesmo painel e
-     entre painéis (ideia 1);
-  3. RANSAC afim iterativo extrai um movimento por cópia (multi-modelo);
-  4. cada movimento vira um par de máscaras (origem, cópia): por retângulo,
-     casco convexo ou sobreposição densa com ZNCC local (ideia 3).
-
-`detect_candidates` faz a parte cara (1-3) e devolve todos os movimentos com
-as estatísticas; `select` aplica os limiares baratos, para que a busca de
-hiperparâmetros na validação não precise refazer os passos caros.
-"""
+"""Detector clássico de copy-move: SIFT auto-casado + espelho + RANSAC + máscara densa."""
 from __future__ import annotations
 
 import time
@@ -132,10 +117,7 @@ def _prepare(gray: np.ndarray, cfg: Config) -> tuple[np.ndarray, float]:
 
 
 def _outro_detector(gray: np.ndarray, cfg: Config):
-    """KAZE, AKAZE ou ORB no lugar do SIFT (fora do fluxo final; ligam origem e cópia em mais do dobro das
-    imagens em que o SIFT não liga, sobretudo cópias de até 16 px). Devolve pontos e descritores de norma 1, para o
-    resto do fluxo (vizinho mais parecido por distância euclidiana, teste de razão) valer igual. Nos binários (AKAZE,
-    ORB) cada bit vira +-1: a distância euclidiana ao quadrado fica proporcional à de Hamming."""
+    """KAZE, AKAZE ou ORB no lugar do SIFT (fora do fluxo final)."""
     if cfg.sift_impl == "kaze":
         det = cv2.KAZE_create(threshold=1e-4)
     elif cfg.sift_impl == "akaze":
@@ -255,13 +237,7 @@ def self_matches(gray: np.ndarray, cfg: Config, panels: np.ndarray | None = None
 
 def verify_pairs(gray_full: np.ndarray, P: np.ndarray, Q: np.ndarray, M: np.ndarray, radius: int = 8,
                  search: float = 1.0, sigma: float = 1.0) -> np.ndarray:
-    """NCC do resíduo passa-alta entre patches em P e em Q (coordenadas nativas), por par.
-
-    Translação pura (ou espelho horizontal quando M); procura sub-pixel em ±`search` px.
-    Mesma medida de verify_pairs_ref, calculada com uma amostragem só em torno de Q: os recortes dos 25 deslocamentos
-    de meio pixel são fatias de uma grade de meio em meio pixel. A resposta difere da original na 3ª casa (o cv2.remap
-    arredonda as coordenadas em 1/32 px).
-    """
+    """NCC do resíduo passa-alta entre patches em P e em Q (coordenadas nativas), por par."""
     if len(P) == 0:
         return np.zeros(0, np.float32)
     steps = np.arange(-search, search + 1e-6, 0.5)
@@ -308,10 +284,7 @@ def verify_pairs(gray_full: np.ndarray, P: np.ndarray, Q: np.ndarray, M: np.ndar
 
 def verify_pairs_ref(gray_full: np.ndarray, P: np.ndarray, Q: np.ndarray, M: np.ndarray, radius: int = 8,
                  search: float = 1.0, sigma: float = 1.0) -> np.ndarray:
-    """Versão original (uma amostragem por deslocamento), guardada para conferir a rápida. NCC do resíduo passa-alta entre patches em P e em Q (coordenadas nativas), por par.
-
-    Translação pura (ou espelho horizontal quando M); procura sub-pixel em ±`search` px.
-    """
+    """Versão original (uma amostragem por deslocamento), guardada para conferir a rápida."""
     if len(P) == 0:
         return np.zeros(0, np.float32)
     G = gray_full.astype(np.float32)
@@ -342,10 +315,7 @@ def verify_pairs_ref(gray_full: np.ndarray, P: np.ndarray, Q: np.ndarray, M: np.
 
 def seed_models(gray_full: np.ndarray, s: float, P: np.ndarray, Q: np.ndarray, M: np.ndarray, models: list,
                 cfg: "Config") -> list[dict]:
-    """Movimentos de translação (ou espelho) a partir de pares isolados com ruído correlacionado.
-
-    P, Q na escala de trabalho; devolve modelos na escala de trabalho (formato de fit_models).
-    """
+    """Movimentos de translação (ou espelho) a partir de pares isolados com ruído correlacionado."""
     if len(P) == 0:
         return []
     explained = np.zeros(len(P), bool)
@@ -399,12 +369,7 @@ def _valid_affine(A: np.ndarray, cfg: Config) -> tuple[bool, dict]:
 
 
 def snap_affine(A: np.ndarray, S: np.ndarray, T: np.ndarray, thresh: float, keep: float = 0.9) -> tuple[np.ndarray, int]:
-    """Navalha de Occam na geometria: troca o afim (6 graus de liberdade) pelo modelo mais simples
-    que ainda explica `keep` dos inliers dentro de `thresh` px: translação (0) ⊂ semelhança (1) ⊂ afim (2).
-
-    Com poucos pares, o afim ajusta ruído (esticamento falso, escala de 1-2%) e desalinha a cópia
-    longe dos pontos; o modelo simples alinha melhor a região inteira. A semelhança mantém o
-    espelhamento do afim (det < 0)."""
+    """Navalha de Occam na geometria: troca o afim (6 graus de liberdade) pelo modelo mais simples que ainda explica `keep` dos inliers dentro de `thresh` px."""
     if len(S) < 3:
         return A, 2
     S, T = S.astype(np.float64), T.astype(np.float64)
@@ -490,8 +455,7 @@ def _hull_mask(pts: np.ndarray, shape, dilate: int) -> np.ndarray:
 
 
 def fill_holes(m: np.ndarray) -> np.ndarray:
-    """= scipy.ndimage.binary_fill_holes(m) (estrutura padrão: fundo em vizinhança-4), mas só no
-    retângulo da máscara: o fundo que não alcança a moldura (fundo virtual de 1 px) é buraco."""
+    """Preenche os buracos da máscara, como scipy.ndimage.binary_fill_holes, só no retângulo dela."""
     m = np.asarray(m).astype(bool)
     rows, cols = np.flatnonzero(m.any(1)), np.flatnonzero(m.any(0))
     if len(rows) == 0:
@@ -544,11 +508,7 @@ def _geodesic_grow(core: np.ndarray, allowed: np.ndarray, radius: int) -> np.nda
 
 
 def dense_masks(gray: np.ndarray, model: dict, cfg: Config) -> tuple[np.ndarray, np.ndarray]:
-    """Máscaras (origem, cópia) pela sobreposição: ZNCC local entre I(x) e I(A x).
-
-    Com dense_fill="holes" e sem crescimento, a conta é feita só num recorte em volta da região de
-    busca (fora dela a máscara é zero de qualquer jeito), com folga para as janelas e a morfologia.
-    O resultado é o mesmo da imagem inteira (_dense_masks_full), bem mais rápido em imagens grandes."""
+    """Máscaras (origem, cópia) pela sobreposição: ZNCC local entre I(x) e I(A x)."""
     if cfg.dense_fill != "holes" or cfg.grow_frac > 0 or len(model["S"]) == 0:
         return _dense_masks_full(gray, model, cfg)
     h, w = gray.shape
@@ -639,13 +599,7 @@ def _dense_masks_full(gray: np.ndarray, model: dict, cfg: Config) -> tuple[np.nd
 
 def residual_ncc(gray: np.ndarray, A: np.ndarray, src: np.ndarray, sigma: float = 1.0, search: float = 1.0,
                  max_pts: int = 20000, return_offset: bool = False, r: np.ndarray | None = None):
-    """Correlação do RUÍDO entre origem e cópia: NCC do resíduo passa-alta em x e em A x, x na máscara de origem.
-
-    Uma cópia leva junto o ruído/granulação da origem; dois objetos parecidos mas
-    distintos (núcleos vizinhos, rótulos impressos) têm ruído independente (~0).
-    O movimento estimado tem erro sub-pixel: procura o máximo numa grade de ±`search` px.
-    `gray`, `A` e `src` na MESMA escala (de preferência a nativa).
-    """
+    """Correlação do RUÍDO entre origem e cópia: NCC do resíduo passa-alta em x e em A x, x na máscara de origem."""
     if src.shape != gray.shape:
         raise ValueError(f"máscara {src.shape} e imagem {gray.shape} com formas diferentes")
     ys, xs = np.nonzero(src)
@@ -687,15 +641,7 @@ def noise_residual(gray: np.ndarray, sigma: float = 1.0) -> np.ndarray:
 def noise_refine(gray: np.ndarray, A: np.ndarray, src: np.ndarray, win: int = 9, thr: float = 0.4,
                  low: float = 0.1, min_std: float = 0.5, grow_frac: float = 0.5, sigma: float = 1.0,
                  iters: int = 3, gate: float = 0.3, r: np.ndarray | None = None, pre=None) -> np.ndarray:
-    """Refina a máscara de origem pelo mapa LOCAL de correlação do ruído entre x e A x (resolução nativa).
-
-    Dentro da área colada o ruído foi copiado junto (correlação alta), inclusive no fundo liso,
-    onde a ZNCC de intensidade não decide; fora dela o ruído é independente. Por isso:
-      - entram os pixels vizinhos com ruído correlacionado (> thr): o retângulo colado inteiro;
-      - saem os pixels com ruído medido e descorrelacionado (< low): a franja que a janela da ZNCC deixa.
-    Pixels sem ruído mensurável (saturados, lisos demais) ficam como estavam.
-    Tudo é feito num recorte em volta da máscara (o crescimento é limitado), e `r` (resíduo da
-    imagem inteira) pode vir pronto para ser reaproveitado entre candidatos."""
+    """Refina a máscara de origem pelo mapa LOCAL de correlação do ruído entre x e A x (resolução nativa)."""
     H, W = gray.shape
     src = src.astype(bool)
     if src.sum() < 16:
@@ -763,12 +709,7 @@ def model_masks(gray: np.ndarray, model: dict, cfg: Config) -> tuple[np.ndarray,
 
 # ------------------------------------------------------------ pipeline
 def detect_candidates(gray_full: np.ndarray, cfg: Config, masks: bool = True) -> dict:
-    """Parte cara: pontos, casamentos, modelos e máscaras de TODOS os modelos candidatos.
-
-    As máscaras voltam na resolução original da imagem. masks=False pula as máscaras e as
-    estatísticas que dependem delas (áreas, sobreposição, resid_ncc); serve para quem as refaz
-    em seguida (cmfd.pipeline.remask), e o resultado final é o mesmo.
-    """
+    """Parte cara: pontos, casamentos, modelos e máscaras de TODOS os modelos candidatos."""
     t0 = time.time()
     H, W = gray_full.shape
     gray, s = _prepare(gray_full, cfg)
@@ -865,11 +806,7 @@ def detect_candidates(gray_full: np.ndarray, cfg: Config, masks: bool = True) ->
 
 
 def refine_ecc(gray: np.ndarray, md: dict, max_side: int = 640) -> None:
-    """Refina o movimento afim (origem -> cópia) por alinhamento ECC na região da origem.
-
-    Roda numa cópia reduzida (lado máximo max_side): a parte linear do movimento não
-    muda com a escala e a translação escala junto (x' = s x  =>  t' = s t).
-    """
+    """Refina o movimento afim (origem -> cópia) por alinhamento ECC na região da origem."""
     h, w = gray.shape
     s = min(1.0, max_side / max(h, w))
     g = cv2.resize(gray, (max(1, int(w * s)), max(1, int(h * s))), interpolation=cv2.INTER_AREA) if s < 1 else gray
@@ -895,13 +832,7 @@ def refine_ecc(gray: np.ndarray, md: dict, max_side: int = 640) -> None:
 
 @dataclass
 class Selection:
-    """Limiares baratos aplicados aos movimentos candidatos.
-
-    Os três filtros de "repetição honesta" (ver teste sintético authentic_hard):
-      - max_src_dst_iou: origem e cópia não se sobrepõem (sobreposição = textura/padrão periódico);
-      - max_aniso: a cópia é uma semelhança (giro, zoom uniforme, espelho), não um esticamento;
-      - min_inlier_ratio: o movimento explica boa parte dos pares que restavam.
-    """
+    """Limiares baratos aplicados aos movimentos candidatos."""
     min_inliers: int = 12
     min_inlier_ratio: float = 0.0
     min_shift_frac: float = 0.03     # deslocamento mínimo (× diagonal)
@@ -1051,13 +982,7 @@ def select(res: dict, sel: Selection) -> list[np.ndarray]:
 
 
 def compose(res: dict, idxs: tuple[int, ...], sel: Selection) -> list[np.ndarray]:
-    """Monta as máscaras finais a partir dos candidatos escolhidos.
-
-    merge_iou > 0: junta uma máscara à primeira com IoU acima do limiar (guloso).
-    merge_iou = 0: junta TRANSITIVAMENTE tudo que se sobrepõe (origem copiada para
-    vários lugares = um evento só no gabarito: origem ∪ todas as cópias); com
-    merge_frac > 0, só junta se a interseção passa dessa fração da menor máscara.
-    """
+    """Monta as máscaras finais a partir dos candidatos escolhidos."""
     chosen = [res["cands"][i] for i in idxs]
     parts = []
     for c in chosen:

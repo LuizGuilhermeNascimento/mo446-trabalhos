@@ -1,13 +1,6 @@
 #!/usr/bin/env bash
-# Predições do fluxo final para uma partição (padrão: teste), no formato de submissão.
-#
-# Uso:  DATA=<pasta dos dados da competição> ./predict.sh [particao] [saida]
-#       particao = train, val ou test (padrão test); saida padrão = predicoes_teste.csv
-# Opcionais: SAM (pasta ou nome dos pesos do SAM 3.1; padrão unsloth/sam3.1), WORK (padrão work), WORKERS (padrão 4),
-#            PYTHON (padrão python).
-# Precisa de GPU e das tabelas de treino (tabelas/, geradas pelo train.sh). São os mesmos passos do caderno do Kaggle
-# (kaggle/submissao/run_submission.py). Saída: csv com case_id, annotation e path (o mesmo case_id aparece como
-# imagem autêntica e como forjada; o path desfaz a ambiguidade). Qualquer erro interrompe o script.
+# Predições de uma partição. Uso: DATA=<dados da competição> ./predict.sh [train|val|test] [saida.csv]
+# Opcionais: SAM, WORK, WORKERS, PYTHON. Precisa de GPU e de tabelas/ (saída do train.sh).
 set -euo pipefail
 cd "$(dirname "$0")"
 : "${DATA:?defina DATA com a pasta dos dados da competição}"

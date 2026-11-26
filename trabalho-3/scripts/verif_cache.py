@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Tabela de candidatos para o verificador: roda a procura de cópias com os cortes ABERTOS nas imagens de uma partição
-(--split) e guarda, por imagem, todos os candidatos com as medidas, as máscaras (recortadas) e o quanto cada um
-acerta a fraude marcada. Quando a comparação entre fotos responde, a figura fica com essa resposta (como no fluxo)
-e não entra na tabela de candidatos. Retomável: pula as imagens já gravadas.
-Uso: python scripts/verif_cache.py --data <raiz> --sam <dir> --sam-b <dir> --split splits/train.csv --sift kornia --out <dir>
-"""
+"""Tabela de candidatos para o verificador: roda a procura de cópias com os cortes ABERTOS nas imagens de uma partição."""
 import argparse
 import os
 import pickle

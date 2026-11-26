@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""Verificador de candidatos: árvores com gradient boosting sobre as medidas de cada candidato (scripts/verif_cache.py),
-para decidir se ele é cópia de verdade. Só a partição de treino.
-Validação cruzada em 5 partes agrupadas por case_id: cada candidato recebe a probabilidade de um modelo que não viu
-nenhuma imagem do seu caso. Com essas probabilidades, para cada corte, monta-se a resposta de cada figura (os
-candidatos acima do corte, do mais provável ao menos, juntados como no fluxo) e mede-se a nota oficial.
-Comparação: regras fixas aplicadas à MESMA tabela de candidatos.
-Saída: <out>/candidatos.csv (medidas, rótulo y e probabilidade de fora da parte, p) e <out>/notas.csv.
-Uso: python scripts/verif_treina.py --cache <dir de verif_cache.py> --sam-b <dir> --cortes 0.9 --out <dir>
-"""
+"""Verificador de candidatos: árvores com gradient boosting sobre as medidas de cada candidato."""
 import argparse
 import glob
 import os

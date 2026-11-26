@@ -1,19 +1,5 @@
 #!/usr/bin/env python3
-"""Seletor de máscara: para cada pedaço de cada máscara que o fluxo entrega, fica a máscara atual (onde os pixels
-coincidem) ou troca-se pelo objeto que o SAM recortou ali (scripts/sam_objetos.py)?
-
-Trocar sempre piora; escolher caso a caso ajuda. A escolha é aprendida, só com a partição de treino:
-  1. monta as máscaras finais como o fluxo (verificador com corte);
-  2. cada pedaço (componente conexo) de cada máscara ganha duas alternativas: U = união dos objetos do SAM que ele toca
-     de verdade; B = o objeto de maior IoU com ele;
-  3. árvores (regressão) estimam quanto o IoU com a fraude marcada muda se trocar por U ou por B, a partir de medidas
-     que não usam o gabarito (tamanhos, coincidência entre pedaço e objeto, nota do SAM, se os dois lados da cópia
-     concordam...); validação em 5 partes por caso;
-  4. troca quando o ganho estimado passa de um limiar; mede a nota oficial da imagem.
-Com --aplica-*: o seletor treinado em todo o treino é aplicado à validação.
-Saída: <out>/pedacos.csv (medidas de cada pedaço e ganho real de cada alternativa).
-Uso: python scripts/mascara_seletor.py --sem-regras --corte 0.9 --data <raiz> --cache <dir> --notas <candidatos.csv> --obj <dir> --sam-b <dir> --out <dir>
-"""
+"""Seletor de máscara: mantém cada pedaço da máscara ou troca pelo objeto que o SAM recortou ali."""
 import argparse
 import glob
 import os

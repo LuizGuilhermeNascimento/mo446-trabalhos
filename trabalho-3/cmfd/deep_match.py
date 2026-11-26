@@ -1,11 +1,4 @@
-"""Candidatos de copy-move a partir de atributos densos de um ViT pré-treinado e CONGELADO.
-
-Nada é treinado: o DINOv2 (pesos públicos, auto-supervisionados em imagens naturais)
-descreve cada patch da imagem; a auto-similaridade entre patches (excluindo a
-vizinhança) com teste de razão gera pares (p, q) que seguem para o MESMO RANSAC
-afim e a MESMA máscara densa por ZNCC do detector clássico. Serve para regiões
-pequenas/lisas onde o SIFT não acha pontos-chave.
-"""
+"""Candidatos de copy-move a partir de atributos densos de um ViT pré-treinado e CONGELADO."""
 from __future__ import annotations
 
 import numpy as np
@@ -31,11 +24,7 @@ def _load(name: str):
 
 
 def patch_features(gray: np.ndarray, name: str = "facebook/dinov2-small", target: int = 672, patch: int | None = None):
-    """Atributos L2-normalizados (gh, gw, D) e o tamanho do patch em pixels da imagem de entrada.
-
-    Serve para DINOv2 (patch 14, só o token CLS antes dos patches) e DINOv3 (patch 16, CLS + tokens
-    de registro): tamanho do patch e nº de tokens extras vêm da config.
-    """
+    """Atributos L2-normalizados (gh, gw, D) e o tamanho do patch em pixels da imagem de entrada."""
     import cv2
     import torch
     model = _load(name)

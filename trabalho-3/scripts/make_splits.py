@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
-"""Recria as partições de splits/ (70/15/15, semente 42) a partir dos dados da competição.
-
-Todas as imagens de um mesmo case_id (a autêntica e a forjada) ficam na mesma partição, e o sorteio é feito dentro de
-cada tipo de caso (só autêntica, só forjada, as duas; treino ou suplementar), para as três partições terem a mesma
-composição. Os caminhos ficam relativos à raiz dos dados.
-Uso: python scripts/make_splits.py --data <raiz dos dados> [--out splits]
-"""
+"""Recria as partições de splits/ (70/15/15, semente 42) a partir dos dados da competição."""
 import argparse
 import os
 from pathlib import Path

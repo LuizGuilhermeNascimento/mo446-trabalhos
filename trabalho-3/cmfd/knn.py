@@ -1,14 +1,4 @@
-"""k vizinhos mais próximos EXATOS para o g2NN, no lugar de cv2.BFMatcher.knnMatch.
-
-Na escala 2048 (até 32 mil descritores), o knnMatch par a par era 85% do tempo de detecção.
-Aqui, em dois passos:
-  1. candidatos: os k + margem mais próximos por |d|² − 2 q·d, uma multiplicação de matrizes
-     (numpy/BLAS na CPU, ou torch na GPU quando houver);
-  2. reordenação exata: a distância L2 dos candidatos é recalculada em float64, e empates
-     ficam pelo menor índice.
-O resultado só depende do passo 2. CPU e GPU dão a mesma resposta, a menos que um vizinho
-verdadeiro caia fora da margem por erro de arredondamento do passo 1, o que é raríssimo.
-"""
+"""k vizinhos mais próximos EXATOS para o g2NN, no lugar de cv2.BFMatcher.knnMatch."""
 from __future__ import annotations
 
 import os
@@ -55,9 +45,7 @@ def _candidates(q: np.ndarray, d: np.ndarray, m: int, chunk: int = 1024) -> np.n
 
 
 def _knn_gpu(q, d, k, m, torch, dev, chunk: int = 4096):
-    """Os dois passos de knn() na GPU: os mesmos candidatos de _candidates e a mesma reordenação exata em
-    float64, sem trazer os candidatos para a CPU. Na CPU, a reordenação (índices avulsos em float64) era quase todo
-    o tempo de knn(). CMFD_KNN_EXATO=cpu força o caminho da CPU (para conferir)."""
+    """Os dois passos de knn() na GPU: os mesmos candidatos de _candidates e a mesma reordenação exata em float64, sem trazer os candidatos para a CPU."""
     D = torch.from_numpy(np.ascontiguousarray(d, np.float32)).to(dev)
     dn = (D * D).sum(1)
     D64 = torch.from_numpy(np.ascontiguousarray(d)).to(dev).double()

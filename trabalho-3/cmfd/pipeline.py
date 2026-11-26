@@ -1,6 +1,4 @@
-"""Procura de cópias dentro de UMA figura, de ponta a ponta: detecção em 3 ampliações, máscara densa (ZNCC 7 + 21),
-refino pelo ruído e seleção dos candidatos.
-"""
+"""Procura de cópias dentro de UMA figura, de ponta a ponta."""
 from __future__ import annotations
 
 import time
@@ -33,8 +31,7 @@ def _clean(stats: dict) -> dict:
 
 
 def _could_pass(st: dict, shape, sel: Selection, **override) -> bool:
-    """O candidato ainda pode passar na seleção? Usa os MESMOS filtros de passing(), com as
-    estatísticas que dependem da máscara trocadas por valores que sempre passam (ou por override)."""
+    """O candidato ainda pode passar na seleção?"""
     st2 = dict(st, src_area=1.0, dst_area=1.0, src_dst_iou=0.0, resid_ncc=1.0)
     st2.update(override)
     return bool(passing(dict(cands=[dict(stats=st2)], shape=shape), sel))
@@ -42,15 +39,7 @@ def _could_pass(st: dict, shape, sel: Selection, **override) -> bool:
 
 def remask(full: np.ndarray, res: dict, variant: str, rfull: np.ndarray | None,
            sel: Selection | None = None, text: np.ndarray | None = None, panels: np.ndarray | None = None):
-    """Máscara densa (ZNCC 7 + 21) e borda pelo ruído, candidato a candidato.
-
-    sel dado: o candidato que já falhou num filtro que não depende da máscara (pares, geometria,
-    deslocamento) ou na correlação do ruído é descartado aqui, sem desenhar a máscara. passing()
-    o descartaria de qualquer jeito, e a ordem dos que ficam se mantém, então a anotação final é a mesma.
-
-    text dado (máscara de texto, cmfd.textfilter): o candidato com os pontos casados em cima de texto sai.
-    panels dado (máscara de painéis, cmfd.panelfilter): o candidato com os pontos casados fora dos painéis sai.
-    """
+    """Máscara densa (ZNCC 7 + 21) e borda pelo ruído, candidato a candidato."""
     H, W = full.shape
     cfg = replace(VARIANTS[variant], mask_mode="dense", zncc_win2=21)
     gray, sc = _prepare(full, cfg)
@@ -134,9 +123,7 @@ MATCHER = "exact"  # cmfd/knn.py; "bf" = cv2.BFMatcher, o da avaliação por cac
 
 
 def detecta(full: np.ndarray, scales=SCALES, prune: bool = True, matcher: str = MATCHER) -> dict:
-    """Só a detecção de candidatos de cada escala (não usa texto nem painéis), para adiantar trabalho enquanto um
-    modelo auxiliar ainda carrega. O resultado entra em predict(..., pre=...), que dá a mesma resposta de sempre.
-    Qualquer erro sobe (como predict com strict=True)."""
+    """Só a detecção de candidatos de cada escala (não usa texto nem painéis), para adiantar trabalho enquanto um modelo auxiliar ainda carrega."""
     _det.TEMPOS.clear()
     pre = {}
     for v in scales:
@@ -148,14 +135,7 @@ def detecta(full: np.ndarray, scales=SCALES, prune: bool = True, matcher: str = 
 def predict(full: np.ndarray, scales=SCALES, sel: Selection = SELECTION, prune: bool = True,
             matcher: str = MATCHER, text=None, strict: bool = False, panels=None, return_masks: bool = False,
             pre: dict | None = None):
-    """Imagem em tons de cinza (cmfd.data.load_gray) -> (anotação no formato de submissão, tempos por etapa).
-
-    text: máscara de texto (H, W) booleana, None (filtro desligado) ou uma função sem argumentos que a
-    devolve; a função só é chamada depois da primeira detecção, para o OCR poder rodar em paralelo.
-    panels: máscara reduzida de painéis (cmfd.panelfilter.load_panels), None ou função, como text.
-    strict: qualquer erro numa escala derruba a execução, em vez de a escala ser pulada (uso na submissão).
-    return_masks: devolve a lista de máscaras no lugar da anotação (uso em testes por recorte).
-    """
+    """Imagem em tons de cinza (cmfd.data.load_gray) -> (anotação no formato de submissão, tempos por etapa)."""
     H, W = full.shape
     if pre is None:  # com a detecção adiantada (detecta), os cronômetros dela continuam valendo
         _det.TEMPOS.clear()

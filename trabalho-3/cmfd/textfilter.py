@@ -1,11 +1,4 @@
-"""Filtro de texto: descarta o candidato cujos pontos casados caem em cima de letras e números.
-
-As caixas de texto vêm do Florence-2 congelado (<OCR_WITH_REGION>), pesos públicos, sem ajuste; ou, no lugar
-dele, do SAM 3.1 congelado (load_sam_text), na mesma passada que acha os painéis.
-Configuração escolhida no treino:
-só caixas com rótulo ASCII e ao menos uma letra ou dígito, caixas maiores que 3% da imagem ignoradas,
-4 px de folga, e sai o candidato com 50% ou mais dos pontos (origem ou cópia) dentro de texto.
-"""
+"""Filtro de texto: descarta o candidato cujos pontos casados caem em cima de letras e números."""
 from __future__ import annotations
 
 import cv2
@@ -48,10 +41,7 @@ def frac(m: np.ndarray, pts: np.ndarray) -> float:
 
 
 def on_text(m: np.ndarray | None, S: np.ndarray, T: np.ndarray, scale: float, thr: float = THR, shape=None) -> bool:
-    """S, T: pontos casados na escala de trabalho (scale = trabalho / original).
-
-    shape = (H, W) original: só é preciso quando m é uma máscara REDUZIDA (texto do SAM, load_sam_text).
-    """
+    """S, T: pontos casados na escala de trabalho (scale = trabalho / original)."""
     if m is None:
         return False
     k = np.float32([1.0, 1.0]) if shape is None or m.shape == tuple(shape) else np.float32([m.shape[1] / shape[1], m.shape[0] / shape[0]])
@@ -59,12 +49,7 @@ def on_text(m: np.ndarray | None, S: np.ndarray, T: np.ndarray, scale: float, th
 
 
 def load_sam_text(path: str, pad: int = PAD) -> np.ndarray | None:
-    """Texto achado pelo SAM 3.1 (kaggle/sam_paineis.py --texto) -> máscara booleana REDUZIDA já com a folga, ou None.
-
-    É a união das instâncias pequenas (caixa <= 3% da imagem, nota >= 0,3) das frases "text", "letters", "words"
-    e "numbers". A folga de `pad` px da imagem original vira max(1, round(pad x redução)) px na máscara.
-    Medido no treino: com o filtro de painéis, dá a mesma nota do Florence.
-    """
+    """Texto achado pelo SAM 3.1 (kaggle/sam_paineis.py --texto) -> máscara booleana REDUZIDA já com a folga, ou None."""
     z = np.load(path)
     if int(z["tn"]) == 0:
         return None
