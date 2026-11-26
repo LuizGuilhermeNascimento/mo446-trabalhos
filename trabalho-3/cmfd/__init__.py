@@ -1,1 +1,1 @@
-"""Detecção de copy-move por auto-correspondência de pontos-chave (MO446 - T3)."""
+"""Detecção de cópia e colagem em figuras científicas (MO446 - T3)."""

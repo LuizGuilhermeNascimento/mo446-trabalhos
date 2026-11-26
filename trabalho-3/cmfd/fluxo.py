@@ -2,15 +2,14 @@
 from __future__ import annotations
 
 import pickle
-from dataclasses import replace
 
 import cv2
 import numpy as np
 
-from . import pipeline
 from .detector import compose, detect_candidates
-from .pairs import PairConfig, caixas, pair_masks
+from .pairs import caixas, pair_masks
 from .panelfilter import load_panels
+from .pipeline import ESCALAS, remask
 from .textfilter import load_sam_text
 
 MEDIDAS = ["inliers", "inlier_ratio", "n_alive", "shift_rel", "spread_rel", "scale", "aniso", "reflect", "mirror_frac", "valid_geom",
@@ -20,60 +19,53 @@ MEDIDAS = ["inliers", "inlier_ratio", "n_alive", "shift_rel", "spread_rel", "sca
 COMUNS = ["q_area", "q_lado", "q_cheio", "q_frac", "n_pecas", "n_inst", "mp", "n_obj", "par_q", "regras"]
 DO_ALT = ["n_toc", "rel", "iou", "cob_q", "cob_alt", "cheio", "nota", "frase", "par"]
 CORTE, LIMIAR, MAX_FRAC, TOCA = 0.9, 0.02, 0.25, 0.5
-PARES = PairConfig(lado_min=0, sem_auto=True)
-ABERTO = replace(pipeline.SELECTION, min_resid_ncc=-1.0, max_aniso=2.0, max_src_dst_iou=0.3, min_rel_inliers=0.0,
-                 vseed_min_inliers=2, vseed_min_margin=-1.0, tile_min_inliers=0, tile_min_margin=-1.0, pico_todos=True, dedup_iou=1.0)
 
 
-def _prepara(sift: str) -> None:
-    """Os mesmos ajustes globais de verif_cache.py: work, feitos antes da comparação entre fotos (ela lê pipeline.VARIANTS)."""
-    for v in pipeline.SCALES:
-        pipeline.VARIANTS[v] = replace(pipeline.VARIANTS[v], clahe=2.0, mirror=True, vlinks_k=2, vlinks_thr=0.8, vlinks_max=8, vlinks_radius=4,
-                                       tiles=True, tile_ratio=0.75, tile_min_pairs=4, tile_max=16, sift_impl=sift)
-
-
-def candidatos(full: np.ndarray, sam_npz: str, sift: str = "kornia") -> dict:
-    """Comparação entre fotos e, se ela não responde, os candidatos das 3 ampliações com as medidas (= verif_cache.py: work)."""
-    _prepara(sift)
+def candidatos(full: np.ndarray, sam_npz: str) -> dict:
+    """Comparação entre fotos e, se ela não responde, os candidatos das 3 ampliações com máscara e medidas."""
     H, W = full.shape
     P, T = load_panels(sam_npz), load_sam_text(sam_npz)
     B = np.load(sam_npz)["B"]
-    out = dict(shape=(H, W), pares=[], cands=[], n_fotos=0 if P is None else 1, tem_texto=T is not None,
-               n_caixas=len(caixas(B, H, W, PARES)))
-    ms = pair_masks(full, B, PARES)[0]
+    out = dict(shape=(H, W), pares=[], cands=[], n_fotos=0 if P is None else 1, tem_texto=T is not None, n_caixas=len(caixas(B, H, W)))
+    ms = pair_masks(full, B)
     if ms:
         out["pares"] = [np.asarray(m).astype(bool) for m in ms]
         return out
     rfull = None
-    for vi, v in enumerate(pipeline.SCALES):
-        res = detect_candidates(full, replace(pipeline.VARIANTS[v], matcher=pipeline.MATCHER, sift_impl=sift), masks=False)
-        part, rfull = pipeline.remask(full, res, v, rfull, ABERTO, T, P)
+    for vi, cfg in enumerate(ESCALAS):
+        part, rfull = remask(full, detect_candidates(full, cfg), cfg, rfull, T, P)
         for c in part:
-            if not (c["src"] | c["dst"]).any():
-                continue
-            out["cands"].append(dict(stats=dict(c["stats"], origem=float(vi)), src=c["src"], dst=c["dst"]))
+            if (c["src"] | c["dst"]).any():
+                out["cands"].append(dict(stats=dict(c["stats"], origem=float(vi)), src=c["src"], dst=c["dst"]))
     return out
 
 
-def medidas(d: dict) -> np.ndarray:
-    """As 37 medidas de cada candidato, na ordem de MEDIDAS (= verif_treina.py)."""
+def linhas(d: dict) -> list[dict]:
+    """As 37 medidas de cada candidato (MEDIDAS)."""
     H, W = d["shape"]
     ins = sorted((c["stats"]["inliers"] for c in d["cands"]), reverse=True)
-    X = np.zeros((len(d["cands"]), len(MEDIDAS)), np.float32)
-    for i, c in enumerate(d["cands"]):
+    rows = []
+    for c in d["cands"]:
         st = c["stats"]
         r = {m: float(st.get(m, np.nan)) for m in MEDIDAS}
         r.update(shift_rel=st["shift"] / np.hypot(H, W), spread_rel=st.get("spread", 0.0) / np.hypot(H, W), mp=H * W / 1e6, n_cands=len(d["cands"]),
                  pos_inliers=ins.index(st["inliers"]), rel_inliers=st["inliers"] / max(ins[0], 1), tem_fotos=d["n_fotos"], tem_texto=float(d["tem_texto"]))
-        X[i] = [r[m] for m in MEDIDAS]
-    return X
+        rows.append(r)
+    return rows
+
+
+def medidas(d: dict) -> np.ndarray:
+    return np.array([[r[m] for m in MEDIDAS] for r in linhas(d)], np.float32).reshape(len(d["cands"]), len(MEDIDAS))
+
+
+def verificador():
+    from sklearn.ensemble import HistGradientBoostingClassifier
+    return HistGradientBoostingClassifier(max_iter=400, learning_rate=0.05, max_leaf_nodes=15, l2_regularization=1.0, random_state=0)
 
 
 def treina_verificador(T):
-    """T: tabela candidatos.csv do treino (scripts/verif_treina.py)."""
-    from sklearn.ensemble import HistGradientBoostingClassifier
-    m = HistGradientBoostingClassifier(max_iter=400, learning_rate=0.05, max_leaf_nodes=15, l2_regularization=1.0, random_state=0)
-    return m.fit(T[MEDIDAS].to_numpy(np.float32), T.y.to_numpy(), sample_weight=np.ones(len(T)))
+    """T: tabelas/candidatos.csv (medidas e rótulo y de cada candidato do treino)."""
+    return verificador().fit(T[MEDIDAS].to_numpy(np.float32), T.y.to_numpy(), sample_weight=np.ones(len(T)))
 
 
 def _feats(P, nm):
@@ -81,19 +73,18 @@ def _feats(P, nm):
 
 
 def treina_seletor(P):
-    """P: tabela pedacos.csv do treino (scripts/mascara_seletor.py)."""
+    """P: tabelas/pedacos.csv. Devolve os dois regressores do ganho de IoU (alternativas U e B)."""
     from sklearn.ensemble import HistGradientBoostingRegressor
     f = lambda: HistGradientBoostingRegressor(max_iter=300, learning_rate=0.05, max_leaf_nodes=15, l2_regularization=1.0, random_state=0)
     return f().fit(_feats(P, "u"), (P.g_u - P.g_q).to_numpy()), f().fit(_feats(P, "b"), (P.g_b - P.g_q).to_numpy())
 
 
 def aceitos(d: dict, probs: np.ndarray) -> list:
-    """Máscaras depois do verificador (corte 0,9, sem regras fixas) e da junção."""
+    """Máscaras dos candidatos com probabilidade >= CORTE, do mais provável ao menos, já juntadas."""
     if not len(d["cands"]):
         return []
     idx = [int(i) for i in np.argsort(-probs) if probs[i] >= CORTE]
-    base = compose(dict(cands=d["cands"], shape=d["shape"]), tuple(idx), pipeline.SELECTION)
-    return [np.asarray(m).astype(bool) for m in base if np.asarray(m).any()]
+    return [np.asarray(m).astype(bool) for m in compose(d["cands"], idx)]
 
 
 def _peq(m, hw):
@@ -110,7 +101,7 @@ def _caixa(m):
 
 
 def pedacos(base: list, shape: tuple, obj_pkl: str, n_caixas: int):
-    """Cada pedaço de cada máscara com as duas alternativas (U, B) e as medidas (= mascara_seletor.py: work, sem gabarito)."""
+    """Cada pedaço de cada máscara com as duas alternativas (U = objetos do SAM que ele toca, B = o de maior IoU) e as medidas."""
     z = pickle.load(open(obj_pkl, "rb"))
     hw = tuple(z["hw"])
     objs = []
@@ -174,7 +165,7 @@ def pedacos(base: list, shape: tuple, obj_pkl: str, n_caixas: int):
 
 
 def seleciona(base: list, shape: tuple, obj_pkl: str, n_caixas: int, mu, mb) -> list:
-    """Troca cada pedaço pela alternativa de maior ganho estimado, se ele passa de LIMIAR (= planos_de + work)."""
+    """Troca cada pedaço pela alternativa de maior ganho estimado, se ele passa de LIMIAR."""
     import pandas as pd
     rows, alts = pedacos(base, shape, obj_pkl, n_caixas)
     if not rows:

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Respostas do fluxo (cmfd/fluxo.py) para uma lista de imagens: csv com path, case_id e annotation."""
+"""Respostas do fluxo (cmfd/fluxo.py) para uma lista de imagens: csv com path, case_id e annotation.
+
+Ajusta o verificador e o seletor nas tabelas do treino e responde imagem a imagem. Os arquivos do SAM podem estar
+sendo gravados por outros processos: cada imagem espera o dela até --espera segundos. Qualquer erro derruba tudo.
+"""
 import argparse
 import os
 import pickle
@@ -19,14 +23,12 @@ ap.add_argument("--sam", required=True)
 ap.add_argument("--obj", required=True)
 ap.add_argument("--tab-ver", required=True)
 ap.add_argument("--tab-sel", required=True)
-ap.add_argument("--sift", default="kornia", choices=["kornia", "opencv"])
 ap.add_argument("--workers", type=int, default=4)
 ap.add_argument("--espera", type=float, default=0.0, help="segundos que cada imagem espera pelos arquivos do SAM (0 = já têm de existir)")
-ap.add_argument("--modelos", default=None, help="onde guardar os modelos treinados (padrão: ao lado de --out)")
 ap.add_argument("--out", required=True)
 a = ap.parse_args()
 nome = lambda p: os.path.splitext(p)[0].replace("/", "__")
-MOD = a.modelos or (a.out + ".modelos.pkl")
+MOD = a.out + ".modelos.pkl"
 _M = None
 
 
@@ -49,7 +51,7 @@ def work(rel):
         _M = pickle.load(open(MOD, "rb"))
     t0 = time.time()
     full = load_gray(os.path.join(a.root, rel))
-    d = fluxo.candidatos(full, espera(os.path.join(a.sam, nome(rel) + ".npz")), a.sift)
+    d = fluxo.candidatos(full, espera(os.path.join(a.sam, nome(rel) + ".npz")))
     info = dict(path=rel, case_id=os.path.splitext(os.path.basename(rel))[0], pares=bool(d["pares"]), n_cands=len(d["cands"]), n_aceitos=0, trocou=False)
     if d["pares"]:
         ms = d["pares"]
@@ -72,13 +74,12 @@ if __name__ == "__main__":
     rel = [l.strip() for l in open(a.list) if l.strip()]
     assert len(set(rel)) == len(rel), "imagens repetidas na lista"
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
-    os.makedirs(os.path.dirname(os.path.abspath(MOD)), exist_ok=True)
     T, P = pd.read_csv(a.tab_ver), pd.read_csv(a.tab_sel)
     ver = fluxo.treina_verificador(T)
     mu, mb = fluxo.treina_seletor(P)
     pickle.dump(dict(ver=ver, mu=mu, mb=mb), open(MOD, "wb"))
     print(f"[fluxo] scikit-learn {sklearn.__version__} | verificador: {len(T)} candidatos de treino, {int(T.y.sum())} verdadeiros | seletor: {len(P)} pedaços | {time.time() - t0:.0f} s", flush=True)
-    ordem = sorted(rel, key=lambda r: -os.path.getsize(os.path.join(a.root, r)))  # as maiores primeiro, como o SAM
+    ordem = sorted(rel, key=lambda r: -os.path.getsize(os.path.join(a.root, r)))
     res = []
     with ProcessPoolExecutor(a.workers) as ex:
         for k, r in enumerate(ex.map(work, ordem)):
@@ -86,7 +87,6 @@ if __name__ == "__main__":
             if (k + 1) % 50 == 0 or k + 1 == len(ordem):
                 print(f"[fluxo] {k + 1}/{len(ordem)}  {(time.time() - t0) / (k + 1):.2f} s por imagem de relógio", flush=True)
     R = pd.DataFrame(res).set_index("path").loc[rel].reset_index()
-    os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     R[["path", "case_id", "annotation"]].to_csv(a.out, index=False)
     R.drop(columns="annotation").to_csv(a.out + ".info.csv", index=False)
     print(f"[fluxo] {len(R)} imagens | com fraude: {int((R.annotation != 'authentic').sum())} | pelas fotos: {int(R.pares.sum())} | seletor trocou em {int(R.trocou.sum())} | "

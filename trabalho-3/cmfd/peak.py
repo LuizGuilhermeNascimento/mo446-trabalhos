@@ -6,14 +6,14 @@ import numpy as np
 
 
 def peak_sharpness(r: np.ndarray, An: np.ndarray, src: np.ndarray, W: int = 12, guard: int = 3) -> dict:
-    """r = resíduo de ruído (detector.noise_residual), An = movimento origem -> cópia em pixels da imagem, src = máscara da origem."""
+    """Correlação de r entre a origem (máscara src) e a cópia (An x) no pico e nos deslocamentos vizinhos."""
     H, Wd = r.shape
     ys, xs = np.nonzero(src)
     out = dict(pico=0.0, lado_max=0.0, lado_med=0.0, lado_std=0.0, n=int(len(ys)))
     if len(ys) < 16:
         return out
     w = cv2.warpAffine(r, np.asarray(An, np.float64), (Wd, H), flags=cv2.INTER_LINEAR | cv2.WARP_INVERSE_MAP,
-                       borderMode=cv2.BORDER_CONSTANT, borderValue=0)  # w(x) = r(An x)
+                       borderMode=cv2.BORDER_CONSTANT, borderValue=0)
     wp = np.pad(w, W)
     a = r[ys, xs].astype(np.float64)
     a -= a.mean()
@@ -33,40 +33,23 @@ def peak_sharpness(r: np.ndarray, An: np.ndarray, src: np.ndarray, W: int = 12, 
     return out
 
 
-def sign_peak(r: np.ndarray, An: np.ndarray, src: np.ndarray, W: int = 12, guard: int = 3, max_px: int = 0,
-              rapido: bool = True) -> dict:
-    """Como peak_sharpness, mas com a concordância de SINAL do ruído fino, pixel a pixel."""
+def sign_peak(r: np.ndarray, An: np.ndarray, src: np.ndarray, W: int = 12, guard: int = 3) -> dict:
+    """Como peak_sharpness, mas com a concordância de sinal do ruído fino, pixel a pixel."""
     H, Wd = r.shape
     ys, xs = np.nonzero(src)
     out = dict(s_pico=0.0, s_lado_max=0.0, s_lado_med=0.0, s_lado_std=0.0, s_n=0, s_frac=0.0)
     if len(ys) < 16:
         return out
-    if max_px and len(ys) > max_px:  # região grande: amostra fixa de pixels (mesma resposta a cada execução)
-        k = np.random.default_rng(0).choice(len(ys), max_px, replace=False)
-        ys, xs = ys[k], xs[k]
     sg = np.sign(np.round(r, 3)).astype(np.float32)
     w = cv2.warpAffine(r, np.asarray(An, np.float64), (Wd, H), flags=cv2.INTER_LINEAR | cv2.WARP_INVERSE_MAP,
                        borderMode=cv2.BORDER_CONSTANT, borderValue=0)
     wp = np.pad(np.sign(np.round(w, 3)).astype(np.float32), W)
-    if rapido and not (max_px and int(src.sum()) > max_px):
-        # mesma conta do laço abaixo, de uma vez: correlação cruzada (cv2.matchTemplate) do recorte da origem, zerado
-        # fora da região, com a cópia; os sinais valem -1, 0 ou 1, então as somas são inteiros exatos em float32
-        y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
-        t = np.where(src[y0:y1, x0:x1], sg[y0:y1, x0:x1], 0).astype(np.float32)
-        im = np.ascontiguousarray(wp[y0:y1 + 2 * W, x0:x1 + 2 * W])
-        S = cv2.matchTemplate(im, t, cv2.TM_CCORR).astype(np.float64)
-        N = np.rint(cv2.matchTemplate(np.abs(im), np.abs(t), cv2.TM_CCORR).astype(np.float64))
-        C = np.where(N >= 16, np.rint(S) / np.maximum(N, 1), 0.0)
-    else:
-        a = sg[ys, xs]
-        C = np.zeros((2 * W + 1, 2 * W + 1))
-        N = np.zeros((2 * W + 1, 2 * W + 1))
-        for dy in range(-W, W + 1):
-            for dx in range(-W, W + 1):
-                p = a * wp[ys + W + dy, xs + W + dx]
-                n = np.count_nonzero(p)
-                N[dy + W, dx + W] = n
-                C[dy + W, dx + W] = p.sum() / n if n >= 16 else 0.0
+    y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+    t = np.where(src[y0:y1, x0:x1], sg[y0:y1, x0:x1], 0).astype(np.float32)
+    im = np.ascontiguousarray(wp[y0:y1 + 2 * W, x0:x1 + 2 * W])
+    S = cv2.matchTemplate(im, t, cv2.TM_CCORR).astype(np.float64)
+    N = np.rint(cv2.matchTemplate(np.abs(im), np.abs(t), cv2.TM_CCORR).astype(np.float64))
+    C = np.where(N >= 16, np.rint(S) / np.maximum(N, 1), 0.0)
     d = np.maximum(np.abs(np.arange(-W, W + 1))[:, None], np.abs(np.arange(-W, W + 1))[None])
     lado = C[d >= guard]
     k = np.argmax(np.where(d <= 1, C, -2))

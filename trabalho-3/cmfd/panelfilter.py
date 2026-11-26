@@ -3,9 +3,6 @@ from __future__ import annotations
 
 import numpy as np
 
-MIN_FRAC = 0.5
-
-
 def load_panels(path: str) -> np.ndarray | None:
     """Arquivo de kaggle/sam_paineis.py -> máscara booleana reduzida (h, w), ou None se não há painel."""
     z = np.load(path)
@@ -23,7 +20,7 @@ def _frac(P: np.ndarray, pts: np.ndarray, sx: float, sy: float) -> float:
     return float(P[y, x].mean())
 
 
-def off_panels(P: np.ndarray | None, S: np.ndarray, T: np.ndarray, scale: float, shape, min_frac: float = MIN_FRAC) -> bool:
+def off_panels(P: np.ndarray | None, S: np.ndarray, T: np.ndarray, scale: float, shape, min_frac: float = 0.5) -> bool:
     """S, T: pontos casados na escala de trabalho (scale = trabalho / original); shape = (H, W) original."""
     if P is None:
         return False

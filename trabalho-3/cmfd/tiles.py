@@ -4,14 +4,15 @@ from __future__ import annotations
 import cv2
 import numpy as np
 
+from .detector import valid_affine
 from .knn import knn
 
 CORTES = (
-    ((0, 0, .5, 1), (.5, 0, 1, 1)),                                        # metades lado a lado
-    ((0, 0, 1, .5), (0, .5, 1, 1)),                                        # metades uma sobre a outra
-    ((0, 0, 1 / 3, 1), (1 / 3, 0, 2 / 3, 1), (2 / 3, 0, 1, 1)),            # terços lado a lado
-    ((0, 0, 1, 1 / 3), (0, 1 / 3, 1, 2 / 3), (0, 2 / 3, 1, 1)),            # terços empilhados
-    ((0, 0, .5, .5), (.5, 0, 1, .5), (0, .5, .5, 1), (.5, .5, 1, 1)),      # quadrantes
+    ((0, 0, .5, 1), (.5, 0, 1, 1)),
+    ((0, 0, 1, .5), (0, .5, 1, 1)),
+    ((0, 0, 1 / 3, 1), (1 / 3, 0, 2 / 3, 1), (2 / 3, 0, 1, 1)),
+    ((0, 0, 1, 1 / 3), (0, 1 / 3, 1, 2 / 3), (0, 2 / 3, 1, 1)),
+    ((0, 0, .5, .5), (.5, 0, 1, .5), (0, .5, .5, 1), (.5, .5, 1, 1)),
 )
 
 
@@ -20,8 +21,7 @@ def _dentro(p: np.ndarray, t: tuple, h: int, w: int) -> np.ndarray:
 
 
 def tile_models(p0: np.ndarray, d0: np.ndarray, pm: np.ndarray, dm: np.ndarray, shape, cfg) -> list[dict]:
-    """p0, d0: pontos e descritores da figura (escala de trabalho); pm, dm: os da figura espelhada, com pm já nas coordenadas da figura (podem vir vazios)."""
-    from .detector import _valid_affine
+    """Movimentos entre pedaços fixos da figura; p0, d0 = pontos e descritores; pm, dm = os da figura espelhada."""
     h, w = shape
     if len(p0) < 6:
         return []
@@ -37,14 +37,14 @@ def tile_models(p0: np.ndarray, d0: np.ndarray, pm: np.ndarray, dm: np.ndarray, 
                     continue
                 for espelho in (False, True):
                     if not espelho and b < a:
-                        continue  # sem espelho, o par (a, b) e o (b, a) são o mesmo: fica um sentido
+                        continue
                     pb, db = (pm[idm[b]], dm[idm[b]]) if espelho else (p0[ids[b]], d0[ids[b]])
                     if len(pb) < 3:
                         continue
                     I, D = knn(d0[ids[a]], db, 2)
                     ok = D[:, 0] < cfg.tile_ratio * D[:, 1]
                     S, T = p0[ids[a]][ok], pb[I[ok, 0]]
-                    longe = np.hypot(*(S - T).T) >= min_d  # um trecho não é cópia de si mesmo
+                    longe = np.hypot(*(S - T).T) >= min_d
                     S, T = S[longe], T[longe]
                     if len(S) < cfg.tile_min_pairs:
                         continue
@@ -62,7 +62,7 @@ def tile_models(p0: np.ndarray, d0: np.ndarray, pm: np.ndarray, dm: np.ndarray, 
                     achados.append((n, int(len(S)), espelho, A, S[k], T[k]))
     achados.sort(key=lambda x: -x[0])
     fica = []
-    for x in achados:  # o mesmo movimento com os mesmos pontos aparece em vários cortes: fica o de mais ligações
+    for x in achados:
         chave = {(int(q[0]), int(q[1])) for q in np.round(x[4])}
         rep = False
         for y in fica:
@@ -78,7 +78,7 @@ def tile_models(p0: np.ndarray, d0: np.ndarray, pm: np.ndarray, dm: np.ndarray, 
             break
     models = []
     for n, tot, espelho, A, S, T, _ in fica:
-        ok, geo = _valid_affine(A, cfg)
+        ok, geo = valid_affine(A, cfg)
         models.append(dict(A=A, S=S.astype(np.float32), T=T.astype(np.float32), inliers=2 * n, n_alive=2 * tot, inlier_ratio=n / max(tot, 1),
                            valid_geom=bool(ok), shift=float(np.median(np.hypot(*(T - S).T))),
                            spread=float(np.sqrt(np.prod(S.std(0) + 1e-6))), mirror_frac=float(espelho), tile=1.0, **geo))
