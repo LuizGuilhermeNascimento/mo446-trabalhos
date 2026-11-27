@@ -1,0 +1,12 @@
+# Versões usadas nas medições. O torch precisa ser o de GPU (CUDA) para o SAM e o SIFT do Kornia.
+numpy==2.5.4
+pandas==3.1.1
+scipy==1.18.1
+numba==0.68.1
+pillow==13.0.0
+opencv-python-headless==4.14.0.94
+scikit-learn==1.6.1
+torch==2.15.0
+torchvision==0.29.2
+kornia==0.9.2
+transformers==5.22.2
