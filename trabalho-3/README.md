@@ -55,7 +55,7 @@ forjada) e pela origem (principal ou suplementar).
 | Validação | 777 | 357 | 7 | 413 |
 | Teste | 775 | 356 | 7 | 412 |
 
-## Resultados no teste (rodado uma única vez)
+## Resultados no teste
 
 | Método | S | Acurácia | Precisão | Revocação | F1 | oF1 nas forjadas detectadas |
 |---|---:|---:|---:|---:|---:|---:|
