@@ -46,7 +46,8 @@ Só os itens 5 e 6 são treinados, e só com a partição de treino.
 
 ## Partições
 
-70/15/15, semente 42, estratificado pela classe e agrupado por `case_id`.
+70/15/15, semente 42, agrupado por `case_id` e estratificado pela composição de cada caso (só forjada, ou autêntica e
+forjada) e pela origem (principal ou suplementar).
 
 | Partição | Imagens | Sem fraude | Várias fotos | Únicas com fraude |
 |---|---:|---:|---:|---:|
@@ -72,7 +73,8 @@ Só os itens 5 e 6 são treinados, e só com a partição de treino.
 | Com fraude (419) | 342 | 77 | 217 | 202 |
 | Sem fraude (356) | 1 | 355 | 12 | 344 |
 
-Kaggle (mesmo código e mesmas tabelas): 0,35340 público e 0,46550 privado.
+Kaggle (mesmo código e mesmas tabelas): 0,35340 público e 0,46550 privado, no
+[notebook de submissão](https://www.kaggle.com/code/thiagolaitz/mo446-t3-submissao-fluxo).
 
 Baseline clássico: SIFT casado com a própria imagem, teste de razão 0,6, RANSAC e máscara pelo contorno dos pontos
 concordantes; responde fraude com 8 ou mais pares (mínimo escolhido na validação).
